@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBRIY</title>
+    <meta name="description" content="Un nouvel horizon pour les Ukrainiens au Canada. Bien-être, intégration et cohésion communautaire.">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --obriy-white: #ffffff;
+            --obriy-bg: #f7f8fa;
+            --obriy-dark: #1a2744;
+            --obriy-accent: #2563eb;
+            --obriy-yellow: #f59e0b;
+            --obriy-teal: #0d9488;
+            --obriy-text: #2d3748;
+            --obriy-text-light: #64748b;
+            --obriy-border: #e2e8f0;
+            /* Ukrainian flag colors */
+            --ukraine-blue: #0057b7;
+            --ukraine-yellow: #ffd700;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            /* Optional snap scrolling - uncomment to enable */
+            /* scroll-snap-type: y mandatory; */
+        }
+
+        body {
+            font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--obriy-dark);
+            color: var(--obriy-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Language System */
+        .lang-fr, .lang-en, .lang-ua { display: none; }
+        body.show-fr .lang-fr { display: block; }
+        body.show-en .lang-en { display: block; }
+        body.show-ua .lang-ua { display: block; }
+        span.lang-fr, span.lang-en, span.lang-ua { display: none; }
+        body.show-fr span.lang-fr { display: inline; }
+        body.show-en span.lang-en { display: inline; }
+        body.show-ua span.lang-ua { display: inline; }
+
+        /* ================================
+           FULL-BLEED SECTION BASE
+           ================================ */
+        .full-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+            scroll-snap-align: start;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-narrow {
+            max-width: 900px;
+        }
+
+        /* ================================
+           HEADER
+           ================================ */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(180deg, rgba(26, 39, 68, 0.95) 0%, transparent 100%);
+            transition: background 0.3s ease;
+        }
+
+        .site-header.scrolled {
+            background: rgba(26, 39, 68, 0.98);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--obriy-white);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            opacity: 0.9;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 0.15rem;
+        }
+
+        .lang-btn {
+            padding: 0.35rem 0.5rem;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .lang-btn.active {
+            color: var(--obriy-white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .presentation-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            color: rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .presentation-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--obriy-white);
+        }
+
+        .presentation-link i {
+            font-size: 1.1rem;
+        }
+
+        /* ================================
+           HERO - FULL SCREEN WITH HORIZON LINE
+           ================================ */
+        .hero {
+            background: var(--obriy-dark);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(0, 87, 183, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(13, 148, 136, 0.1) 0%, transparent 60%);
+        }
+
+        /* Animated horizon line */
+        .horizon-line {
+            position: absolute;
+            bottom: 30%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            overflow: hidden;
+        }
+
+        .horizon-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--ukraine-yellow) 15%,
+                var(--ukraine-yellow) 50%,
+                var(--ukraine-yellow) 85%,
+                transparent 100%);
+            transform: scaleX(0);
+            animation: drawHorizon 2s ease-out 0.5s forwards;
+        }
+
+        @keyframes drawHorizon {
+            0% { transform: scaleX(0); }
+            100% { transform: scaleX(1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-meaning {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: 500;
+            color: var(--ukraine-yellow);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+
+        .hero-logo {
+            font-size: clamp(5rem, 18vw, 12rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(135deg, var(--obriy-white) 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero-message {
+            font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.7s;
+        }
+
+        .hero-message strong {
+            color: var(--ukraine-yellow);
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .scroll-indicator i {
+            font-size: 1.75rem;
+            animation: bounceDown 2s ease-in-out infinite;
+        }
+
+        @keyframes bounceDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* ================================
+           STATS SECTION - GIANT NUMBERS
+           ================================ */
+        .stats-section {
+            background: var(--obriy-white);
+            color: var(--obriy-text);
+        }
+
+        .stats-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .stats-intro h2 {
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: var(--obriy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .stats-intro h2 .highlight {
+            color: var(--ukraine-blue);
+        }
+
+        .stats-intro p {
+            font-size: 1.2rem;
+            color: var(--obriy-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .giant-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .giant-stats {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .giant-stat {
+            text-align: center;
+        }
+
+        .giant-stat .number {
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 800;
+            color: var(--ukraine-blue);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .giant-stat.visible .number {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .giant-stat:nth-child(2) .number { transition-delay: 0.1s; }
+        .giant-stat:nth-child(3) .number { transition-delay: 0.2s; }
+        .giant-stat:nth-child(4) .number { transition-delay: 0.3s; }
+
+        .giant-stat .label {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--obriy-text-light);
+            line-height: 1.4;
+        }
+
+        /* ================================
+           STORY SECTION - DARK
+           ================================ */
+        .story-section {
+            background: var(--obriy-dark);
+            color: var(--obriy-white);
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-lead {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 2.5rem;
+        }
+
+        .story-lead .highlight {
+            color: var(--ukraine-yellow);
+            font-weight: 600;
+        }
+
+        .story-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-text strong {
+            color: var(--obriy-white);
+            font-weight: 600;
+        }
+
+        /* ================================
+           CHALLENGES SECTION - YELLOW ACCENT
+           ================================ */
+        .challenges-section {
+            background: var(--ukraine-yellow);
+            color: var(--obriy-dark);
+        }
+
+        .challenges-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .challenges-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .challenges-header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .challenges-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .challenge-card {
+            background: rgba(26, 39, 68, 0.95);
+            color: var(--obriy-white);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .challenge-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--ukraine-yellow);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .challenge-card h3 i {
+            font-size: 1.5rem;
+        }
+
+        .challenge-card p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .challenge-card .stat-highlight {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--obriy-white);
+        }
+
+        /* ================================
+           PILLARS SECTION - FULL WIDTH BANDS
+           ================================ */
+        .pillars-section {
+            padding: 0;
+            min-height: auto;
+        }
+
+        .pillars-intro {
+            background: var(--obriy-bg);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .pillars-intro h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--obriy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .pillars-intro p {
+            font-size: 1.2rem;
+            color: var(--obriy-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pillar-band {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 2rem;
+            scroll-snap-align: start;
+        }
+
+        .pillar-band-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .pillar-band-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .pillar-band.blue {
+            background: var(--ukraine-blue);
+            color: var(--obriy-white);
+        }
+
+        .pillar-band.yellow {
+            background: var(--ukraine-yellow);
+            color: var(--obriy-dark);
+        }
+
+        .pillar-band.teal {
+            background: var(--obriy-teal);
+            color: var(--obriy-white);
+        }
+
+        .pillar-icon-large {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            margin-bottom: 2rem;
+        }
+
+        .pillar-band.blue .pillar-icon-large {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .pillar-band.yellow .pillar-icon-large {
+            background: rgba(26, 39, 68, 0.1);
+        }
+
+        .pillar-band.teal .pillar-icon-large {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .pillar-icon-large i {
+            font-size: 3.5rem;
+        }
+
+        .pillar-band.blue .pillar-icon-large i {
+            color: var(--obriy-white);
+        }
+
+        .pillar-band.yellow .pillar-icon-large i {
+            color: var(--obriy-dark);
+        }
+
+        .pillar-band.teal .pillar-icon-large i {
+            color: var(--obriy-white);
+        }
+
+        .pillar-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .pillar-description {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .pillar-features {
+            list-style: none;
+        }
+
+        .pillar-features li {
+            font-size: 1.1rem;
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .pillar-band.yellow .pillar-features li {
+            border-bottom-color: rgba(26, 39, 68, 0.2);
+        }
+
+        .pillar-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pillar-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1.1rem;
+            width: 10px;
+            height: 10px;
+            background: currentColor;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        /* ================================
+           PILOT SECTION - BLUE ACCENT
+           ================================ */
+        .pilot-section {
+            background: var(--ukraine-blue);
+            color: var(--obriy-white);
+        }
+
+        .pilot-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .pilot-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .pilot-text h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .pilot-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .pilot-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .pilot-stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .pilot-stat-card .value {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .pilot-stat-card .label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ================================
+           TESTIMONIALS - FULL SCREEN QUOTES
+           ================================ */
+        .testimonials-section {
+            background: var(--obriy-dark);
+            color: var(--obriy-white);
+            position: relative;
+        }
+
+        .testimonial-bg-quote {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(15rem, 40vw, 30rem);
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.03);
+            line-height: 1;
+            pointer-events: none;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--ukraine-yellow);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .testimonial-carousel {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-slides {
+            position: relative;
+            min-height: 300px;
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-slides {
+                min-height: 450px;
+            }
+        }
+
+        .testimonial-slide {
+            text-align: center;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .testimonial-quote {
+            font-size: clamp(1.35rem, 3vw, 1.75rem);
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            position: absolute;
+            top: -0.5em;
+            left: -0.5em;
+            font-size: 4rem;
+            color: var(--ukraine-yellow);
+            opacity: 0.5;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .testimonial-author strong {
+            color: var(--obriy-white);
+            font-weight: 600;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-nav button {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--obriy-white);
+        }
+
+        .testimonial-nav button:hover {
+            background: var(--ukraine-yellow);
+            border-color: var(--ukraine-yellow);
+            color: var(--obriy-dark);
+        }
+
+        .testimonial-nav button i {
+            font-size: 1.5rem;
+        }
+
+        .testimonial-dots {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--ukraine-yellow);
+            transform: scale(1.2);
+        }
+
+        /* ================================
+           ACTION SECTION - WHITE
+           ================================ */
+        .action-section {
+            background: var(--obriy-white);
+            color: var(--obriy-text);
+        }
+
+        .action-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .action-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--obriy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .action-header p {
+            font-size: 1.2rem;
+            color: var(--obriy-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .action-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .action-card {
+            background: var(--obriy-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .action-card:hover {
+            border-color: var(--ukraine-blue);
+            transform: translateY(-4px);
+        }
+
+        .action-card .action-icon {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--obriy-white);
+            border-radius: 16px;
+        }
+
+        .action-card .action-icon i {
+            font-size: 1.75rem;
+            color: var(--ukraine-blue);
+        }
+
+        .action-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--obriy-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .action-card p {
+            font-size: 1rem;
+            color: var(--obriy-text-light);
+            line-height: 1.6;
+        }
+
+        /* ================================
+           TEAM SECTION - DARK
+           ================================ */
+        .team-section {
+            background: var(--obriy-dark);
+            color: var(--obriy-white);
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .team-header h2 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .team-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .team-card .avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--ukraine-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .team-card.yellow .avatar {
+            background: var(--ukraine-yellow);
+            color: var(--obriy-dark);
+        }
+
+        .team-card.teal .avatar {
+            background: var(--obriy-teal);
+        }
+
+        .team-card .name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .team-card .bio {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
+        }
+
+        /* ================================
+           FOOTER
+           ================================ */
+        .site-footer {
+            background: var(--obriy-dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--obriy-white);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-status {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 100px;
+            font-size: 0.9rem;
+            color: var(--ukraine-yellow);
+            margin-bottom: 2rem;
+        }
+
+        .footer-contact {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-contact a {
+            color: var(--obriy-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            color: var(--ukraine-yellow);
+        }
+
+        /* ================================
+           SCROLL ANIMATIONS
+           ================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Staggered children */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stagger-children.visible > *:nth-child(1) { transition-delay: 0s; }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.1s; }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.15s; }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.2s; }
+
+        .stagger-children.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================
+           ACCESSIBILITY
+           ================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-snap-type: none;
+            }
+
+            .reveal, .reveal-left, .reveal-right,
+            .stagger-children > *,
+            .giant-stat .number {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* ================================
+           RESPONSIVE
+           ================================ */
+        @media (max-width: 768px) {
+            .full-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .pillar-band {
+                padding: 4rem 1.5rem;
+            }
+
+            .pillar-band-content {
+                text-align: center;
+            }
+
+            .pillar-icon-large {
+                margin: 0 auto 2rem;
+            }
+
+            .pillar-features li {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body class="show-fr">
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="#" class="header-logo">OBRIY</a>
+            <div class="header-right">
+                <div class="lang-switcher">
+                    <button type="button" class="lang-btn active" data-lang="fr">FR</button>
+                    <button type="button" class="lang-btn" data-lang="en">EN</button>
+                    <button type="button" class="lang-btn" data-lang="ua">UA</button>
+                </div>
+                <a href="../2026-01-05_OBRIY.html" class="presentation-link" title="Presentation">
+                    <i class="ph ph-presentation-chart"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="full-section hero" id="accueil">
+        <div class="horizon-line"></div>
+        <div class="hero-content">
+            <div class="hero-meaning">
+                <span class="lang-fr">OBRIY signifie « horizon » en ukrainien</span>
+                <span class="lang-en">OBRIY means "horizon" in Ukrainian</span>
+                <span class="lang-ua">OBRIY - ce « obriĭ » - горизонт</span>
+            </div>
+            <div class="hero-logo">OBRIY</div>
+            <p class="hero-message">
+                <span class="lang-fr">Pour des milliers d'Ukrainiens au Canada, l'horizon semblait perdu. <strong>Ensemble, nous le reconstruisons.</strong></span>
+                <span class="lang-en">For thousands of Ukrainians in Canada, the horizon seemed lost. <strong>Together, we're rebuilding it.</strong></span>
+                <span class="lang-ua">Для тисяч українців у Канаді горизонт здавався втраченим. <strong>Разом ми його відбудовуємо.</strong></span>
+            </p>
+        </div>
+        <div class="scroll-indicator" onclick="document.getElementById('stats').scrollIntoView({behavior: 'smooth'})">
+            <span class="lang-fr">Descendre</span>
+            <span class="lang-en">Scroll</span>
+            <span class="lang-ua">Гортати</span>
+            <i class="ph ph-caret-double-down"></i>
+        </div>
+    </section>
+
+    <!-- Giant Stats Section -->
+    <section class="full-section stats-section" id="stats">
+        <div class="section-content">
+            <div class="stats-intro reveal">
+                <h2>
+                    <span class="lang-fr">Depuis 2022, le Canada est le <span class="highlight">principal refuge hors d'Europe</span></span>
+                    <span class="lang-en">Since 2022, Canada is the <span class="highlight">main refuge outside Europe</span></span>
+                    <span class="lang-ua">З 2022 року Канада - <span class="highlight">головний притулок за межами Європи</span></span>
+                </h2>
+                <p>
+                    <span class="lang-fr">Pour les Ukrainiens fuyant la guerre.</span>
+                    <span class="lang-en">For Ukrainians fleeing war.</span>
+                    <span class="lang-ua">Для українців, що тікають від війни.</span>
+                </p>
+            </div>
+
+            <div class="giant-stats">
+                <div class="giant-stat">
+                    <div class="number">~5,7M</div>
+                    <div class="label">
+                        <span class="lang-fr">refugies dans le monde</span>
+                        <span class="lang-en">refugees worldwide</span>
+                        <span class="lang-ua">біженців у світі</span>
+                    </div>
+                </div>
+                <div class="giant-stat">
+                    <div class="number">304K+</div>
+                    <div class="label">
+                        <span class="lang-fr">arrivees au Canada</span>
+                        <span class="lang-en">arrivals in Canada</span>
+                        <span class="lang-ua">прибуттів до Канади</span>
+                    </div>
+                </div>
+                <div class="giant-stat">
+                    <div class="number">90%+</div>
+                    <div class="label">
+                        <span class="lang-fr">veulent rester</span>
+                        <span class="lang-en">want to stay</span>
+                        <span class="lang-ua">хочуть залишитися</span>
+                    </div>
+                </div>
+                <div class="giant-stat">
+                    <div class="number">37%</div>
+                    <div class="label">
+                        <span class="lang-fr">ont des enfants</span>
+                        <span class="lang-en">have children</span>
+                        <span class="lang-ua">мають дітей</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="full-section story-section" id="story">
+        <div class="section-content section-narrow">
+            <div class="story-content">
+                <p class="story-lead reveal">
+                    <span class="lang-fr">Derriere les chiffres, il y a des familles separees, des reperes perdus, et une vie reconstruite dans l'incertitude. Pour des millions d'Ukrainiens, ce qui devait etre une <span class="highlight">fuite temporaire</span> est devenu un exil prolonge.</span>
+                    <span class="lang-en">Behind the numbers are separated families, lost bearings, and lives rebuilt in uncertainty. For millions of Ukrainians, what was supposed to be a <span class="highlight">temporary escape</span> has become prolonged exile.</span>
+                    <span class="lang-ua">За цифрами - розлучені родини, втрачені орієнтири та життя, відбудоване в невизначеності. Для мільйонів українців те, що мало бути <span class="highlight">тимчасовою втечею</span>, стало тривалим вигнанням.</span>
+                </p>
+
+                <p class="story-text reveal">
+                    <span class="lang-fr"><strong>Mais accueillir n'est pas integrer.</strong> Des parents qui cherchent du travail a la hauteur de leurs competences. Des enfants qui jonglent entre deux systemes scolaires. Des personnes qui portent le poids du trauma, de la perte, et de l'eloignement des proches restes en Ukraine.</span>
+                    <span class="lang-en"><strong>But welcoming is not integrating.</strong> Parents looking for work that matches their skills. Children juggling between two school systems. People carrying the weight of trauma, loss, and distance from loved ones still in Ukraine.</span>
+                    <span class="lang-ua"><strong>Але прийняти - це не інтегрувати.</strong> Батьки, які шукають роботу відповідно до своїх навичок. Діти, що балансують між двома шкільними системами. Люди, що несуть тягар травми, втрати та відстані від близьких, які залишилися в Україні.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section class="full-section challenges-section" id="challenges">
+        <div class="section-content">
+            <div class="challenges-header reveal">
+                <h2>
+                    <span class="lang-fr">Les defis de l'integration</span>
+                    <span class="lang-en">Integration challenges</span>
+                    <span class="lang-ua">Виклики інтеграції</span>
+                </h2>
+                <p>
+                    <span class="lang-fr">Ce qui existe au Canada ne repond pas toujours aux besoins specifiques de cette communaute.</span>
+                    <span class="lang-en">What exists in Canada doesn't always meet the specific needs of this community.</span>
+                    <span class="lang-ua">Те, що існує в Канаді, не завжди відповідає специфічним потребам цієї громади.</span>
+                </p>
+            </div>
+
+            <div class="challenges-grid stagger-children">
+                <div class="challenge-card">
+                    <h3>
+                        <i class="ph ph-heart"></i>
+                        <span class="lang-fr">Bien-etre mental</span>
+                        <span class="lang-en">Mental well-being</span>
+                        <span class="lang-ua">Психічне здоров'я</span>
+                    </h3>
+                    <p>
+                        <span class="lang-fr">Aucun service de soutien psychosocial non clinique en ukrainien. Les barrieres linguistiques et culturelles limitent l'acces aux soins.</span>
+                        <span class="lang-en">No non-clinical psychosocial support services in Ukrainian. Language and cultural barriers limit access to care.</span>
+                        <span class="lang-ua">Немає неклінічних психосоціальних послуг українською. Мовні та культурні бар'єри обмежують доступ до допомоги.</span>
+                    </p>
+                    <div class="stat-highlight">
+                        <span class="lang-fr">15-44% touches par le TSPT</span>
+                        <span class="lang-en">15-44% affected by PTSD</span>
+                        <span class="lang-ua">15-44% страждають від ПТСР</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <h3>
+                        <i class="ph ph-briefcase"></i>
+                        <span class="lang-fr">Emploi qualifie</span>
+                        <span class="lang-en">Skilled employment</span>
+                        <span class="lang-ua">Кваліфікована робота</span>
+                    </h3>
+                    <p>
+                        <span class="lang-fr">Des ingenieurs livreurs, des medecins caissieres. La reconnaissance des diplomes est couteuse et longue.</span>
+                        <span class="lang-en">Engineers delivering food, doctors working as cashiers. Credential recognition is expensive and slow.</span>
+                        <span class="lang-ua">Інженери-кур'єри, лікарі-касири. Визнання дипломів дороге та повільне.</span>
+                    </p>
+                    <div class="stat-highlight">
+                        <span class="lang-fr">44% en sous-emploi</span>
+                        <span class="lang-en">44% underemployed</span>
+                        <span class="lang-ua">44% недозайняті</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <h3>
+                        <i class="ph ph-book-open"></i>
+                        <span class="lang-fr">Reussite scolaire</span>
+                        <span class="lang-en">Academic success</span>
+                        <span class="lang-ua">Навчальний успіх</span>
+                    </h3>
+                    <p>
+                        <span class="lang-fr">Les enfants jonglent entre l'ecole canadienne et l'ecole ukrainienne en ligne, souvent sans aide adaptee.</span>
+                        <span class="lang-en">Children juggle between Canadian school and online Ukrainian school, often without adapted support.</span>
+                        <span class="lang-ua">Діти балансують між канадською школою та українською онлайн-школою, часто без адаптованої підтримки.</span>
+                    </p>
+                    <div class="stat-highlight">
+                        <span class="lang-fr">~2 ans de retard en lecture</span>
+                        <span class="lang-en">~2 years behind in reading</span>
+                        <span class="lang-ua">~2 роки відставання в читанні</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <h3>
+                        <i class="ph ph-translate"></i>
+                        <span class="lang-fr">Barriere linguistique</span>
+                        <span class="lang-en">Language barrier</span>
+                        <span class="lang-ua">Мовний бар'єр</span>
+                    </h3>
+                    <p>
+                        <span class="lang-fr">Au Quebec, la francisation est essentielle mais lente. La maitrise du francais reste un obstacle majeur.</span>
+                        <span class="lang-en">In Quebec, francization is essential but slow. French proficiency remains a major obstacle.</span>
+                        <span class="lang-ua">У Квебеку франсизація необхідна, але повільна. Володіння французькою залишається основною перешкодою.</span>
+                    </p>
+                    <div class="stat-highlight">
+                        <span class="lang-fr">5% parlent francais</span>
+                        <span class="lang-en">5% speak French</span>
+                        <span class="lang-ua">5% володіють французькою</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pillars Section -->
+    <section class="pillars-section" id="piliers">
+        <div class="pillars-intro">
+            <h2 class="reveal">
+                <span class="lang-fr">OBRIY : trois piliers pour un nouvel horizon</span>
+                <span class="lang-en">OBRIY: three pillars for a new horizon</span>
+                <span class="lang-ua">OBRIY: три напрями для нового горизонту</span>
+            </h2>
+            <p class="reveal">
+                <span class="lang-fr">Un modele integre, construit par et pour la communaute ukrainienne au Canada.</span>
+                <span class="lang-en">An integrated model, built by and for the Ukrainian community in Canada.</span>
+                <span class="lang-ua">Інтегрована модель, створена для української громади в Канаді та разом з нею.</span>
+            </p>
+        </div>
+
+        <!-- Pillar 1: Balance / Equilibre -->
+        <div class="pillar-band blue">
+            <div class="pillar-band-content">
+                <div class="reveal-left">
+                    <div class="pillar-icon-large">
+                        <i class="ph ph-scales"></i>
+                    </div>
+                    <h3 class="pillar-title">
+                        <span class="lang-fr">Equilibre</span>
+                        <span class="lang-en">Balance</span>
+                        <span class="lang-ua">Рівновага</span>
+                    </h3>
+                    <p class="pillar-description">
+                        <span class="lang-fr">Soutien psychosocial non clinique en ukrainien. Groupes d'entraide et ateliers pour retrouver la stabilite emotionnelle.</span>
+                        <span class="lang-en">Non-clinical psychosocial support in Ukrainian. Support groups and workshops to regain emotional stability.</span>
+                        <span class="lang-ua">Неклінічна психосоціальна підтримка українською. Групи взаємодопомоги та майстерні для відновлення емоційної стабільності.</span>
+                    </p>
+                </div>
+                <div class="reveal-right">
+                    <ul class="pillar-features">
+                        <li>
+                            <span class="lang-fr">Cohortes de 10 seances</span>
+                            <span class="lang-en">10-session cohorts</span>
+                            <span class="lang-ua">Когорти з 10 сесій</span>
+                        </li>
+                        <li>
+                            <span class="lang-fr">Adultes, ados et enfants</span>
+                            <span class="lang-en">Adults, teens, and children</span>
+                            <span class="lang-ua">Дорослі, підлітки та діти</span>
+                        </li>
+                        <li>
+                            <span class="lang-fr">Anime par des pairs formes</span>
+                            <span class="lang-en">Led by trained peers</span>
+                            <span class="lang-ua">Ведуть навчені однолітки</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pillar 2: Network / Reseau -->
+        <div class="pillar-band yellow">
+            <div class="pillar-band-content">
+                <div class="reveal-left">
+                    <div class="pillar-icon-large">
+                        <i class="ph ph-users"></i>
+                    </div>
+                    <h3 class="pillar-title">
+                        <span class="lang-fr">Reseau</span>
+                        <span class="lang-en">Network</span>
+                        <span class="lang-ua">Мережа</span>
+                    </h3>
+                    <p class="pillar-description">
+                        <span class="lang-fr">Entraide communautaire. Connecter les talents, les besoins et les ressources de la diaspora ukrainienne.</span>
+                        <span class="lang-en">Community mutual aid. Connecting talents, needs, and resources within the Ukrainian diaspora.</span>
+                        <span class="lang-ua">Громадська взаємодопомога. Поєднання талантів, потреб і ресурсів української діаспори.</span>
+                    </p>
+                </div>
+                <div class="reveal-right">
+                    <ul class="pillar-features">
+                        <li>
+                            <span class="lang-fr">Annuaire de services verifie</span>
+                            <span class="lang-en">Verified service directory</span>
+                            <span class="lang-ua">Верифікований довідник послуг</span>
+                        </li>
+                        <li>
+                            <span class="lang-fr">Offres et demandes</span>
+                            <span class="lang-en">Offers and requests</span>
+                            <span class="lang-ua">Пропозиції та запити</span>
+                        </li>
+                        <li>
+                            <span class="lang-fr">Gratuit, sans publicite</span>
+                            <span class="lang-en">Free, no advertising</span>
+                            <span class="lang-ua">Безкоштовно, без реклами</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pillar 3: Youth / Jeunesse -->
+        <div class="pillar-band teal">
+            <div class="pillar-band-content">
+                <div class="reveal-left">
+                    <div class="pillar-icon-large">
+                        <i class="ph ph-graduation-cap"></i>
+                    </div>
+                    <h3 class="pillar-title">
+                        <span class="lang-fr">Jeunesse</span>
+                        <span class="lang-en">Youth</span>
+                        <span class="lang-ua">Молодь</span>
+                    </h3>
+                    <p class="pillar-description">
+                        <span class="lang-fr">Tutorat et accompagnement scolaire pour les jeunes 4-17 ans, par des tuteurs qui comprennent leur parcours.</span>
+                        <span class="lang-en">Tutoring and academic support for youth 4-17, by tutors who understand their journey.</span>
+                        <span class="lang-ua">Репетиторство та навчальна підтримка для молоді 4-17 років від тих, хто розуміє їхній шлях.</span>
+                    </p>
+                </div>
+                <div class="reveal-right">
+                    <ul class="pillar-features">
+                        <li>
+                            <span class="lang-fr">Tutorat 1:1 personnalise</span>
+                            <span class="lang-en">Personalized 1:1 tutoring</span>
+                            <span class="lang-ua">Персоналізоване репетиторство 1:1</span>
+                        </li>
+                        <li>
+                            <span class="lang-fr">Math, francais, sciences</span>
+                            <span class="lang-en">Math, French, sciences</span>
+                            <span class="lang-ua">Математика, французька, науки</span>
+                        </li>
+                        <li>
+                            <span class="lang-fr">Tuteurs ukrainophones</span>
+                            <span class="lang-en">Ukrainian-speaking tutors</span>
+                            <span class="lang-ua">Україномовні репетитори</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pilot Section -->
+    <section class="full-section pilot-section" id="pilot">
+        <div class="section-content">
+            <div class="pilot-content">
+                <div class="pilot-text reveal-left">
+                    <h2>
+                        <span class="lang-fr">Deja en action</span>
+                        <span class="lang-en">Already in action</span>
+                        <span class="lang-ua">Вже в дії</span>
+                    </h2>
+                    <p>
+                        <span class="lang-fr">Depuis octobre 2025, le pilier Equilibre est actif a Montreal. Deux groupes par semaine, animes en ukrainien, accompagnent des adultes dans leur parcours d'adaptation.</span>
+                        <span class="lang-en">Since October 2025, the Balance pillar has been active in Montreal. Two groups per week, facilitated in Ukrainian, support adults in their adaptation journey.</span>
+                        <span class="lang-ua">З жовтня 2025 року напрям Рівновага активний у Монреалі. Дві групи на тиждень, які ведуться українською, підтримують дорослих у їхньому шляху адаптації.</span>
+                    </p>
+                    <p>
+                        <span class="lang-fr">Les premiers resultats sont encourageants : reduction de l'isolement, creation de liens, et un espace securitaire pour partager et avancer.</span>
+                        <span class="lang-en">Early results are encouraging: reduced isolation, new connections, and a safe space to share and move forward.</span>
+                        <span class="lang-ua">Перші результати обнадійливі: зменшення ізоляції, нові зв'язки та безпечний простір для обміну та руху вперед.</span>
+                    </p>
+                </div>
+                <div class="pilot-stats-grid reveal-right stagger-children">
+                    <div class="pilot-stat-card">
+                        <div class="value">2</div>
+                        <div class="label">
+                            <span class="lang-fr">groupes/semaine</span>
+                            <span class="lang-en">groups/week</span>
+                            <span class="lang-ua">групи/тиждень</span>
+                        </div>
+                    </div>
+                    <div class="pilot-stat-card">
+                        <div class="value">18</div>
+                        <div class="label">
+                            <span class="lang-fr">participants actifs</span>
+                            <span class="lang-en">active participants</span>
+                            <span class="lang-ua">активних учасників</span>
+                        </div>
+                    </div>
+                    <div class="pilot-stat-card">
+                        <div class="value">10</div>
+                        <div class="label">
+                            <span class="lang-fr">seances/cohorte</span>
+                            <span class="lang-en">sessions/cohort</span>
+                            <span class="lang-ua">сесій/когорта</span>
+                        </div>
+                    </div>
+                    <div class="pilot-stat-card">
+                        <div class="value">2h30</div>
+                        <div class="label">
+                            <span class="lang-fr">par rencontre</span>
+                            <span class="lang-en">per session</span>
+                            <span class="lang-ua">за зустріч</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="full-section testimonials-section" id="testimonials">
+        <div class="testimonial-bg-quote">"</div>
+        <div class="section-content section-narrow">
+            <div class="testimonial-label">
+                <span class="lang-fr">Temoignages</span>
+                <span class="lang-en">Testimonials</span>
+                <span class="lang-ua">Свідчення</span>
+            </div>
+
+            <div class="testimonial-carousel">
+                <div class="testimonial-slides">
+                    <!-- Testimonial 1: Andriy L. -->
+                    <div class="testimonial-slide active">
+                        <p class="testimonial-quote">
+                            <span class="lang-fr">La participation au groupe m'a donne un sentiment d'unite. J'ai cesse de me sentir isole dans mes problemes d'adaptation. Les peurs et l'anxiete ont diminue, et j'ai de nouveau envie de vivre, les forces et l'inspiration reviennent.</span>
+                            <span class="lang-en">Participating in the group gave me a sense of unity. I stopped feeling isolated in my adaptation problems. Fears and anxiety decreased, and I want to live again, strength and inspiration are returning.</span>
+                            <span class="lang-ua">Участь у групі дала мені відчуття єдності. Я перестав почуватися ізольованим у своїх проблемах адаптації. Страхи та тривога зменшилися, і я знову хочу жити, сили та натхнення повертаються.</span>
+                        </p>
+                        <p class="testimonial-author">
+                            <strong>Andriy L.</strong> -
+                            <span class="lang-fr">participant, Equilibre</span>
+                            <span class="lang-en">participant, Balance</span>
+                            <span class="lang-ua">учасник, Рівновага</span>
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 2: Nadiya D. -->
+                    <div class="testimonial-slide">
+                        <p class="testimonial-quote">
+                            <span class="lang-fr">Je suis tres reconnaissante pour votre projet et ce que vous faites. Au cours de nos rencontres, j'ai compris que tout ce que je ressens et vis a sa place et c'est normal. C'etait important pour moi d'etre entendue et acceptee. Yuliia est tres delicate, douce, sincere dans ce qu'elle fait. Un grand merci a Yuliia et a tous les participants pour l'atmosphere chaleureuse.</span>
+                            <span class="lang-en">I am very grateful for your project and what you do. During our meetings, I understood that everything I feel and experience has its place and it's normal. It was important for me to be heard and accepted. Yuliia is very tactful, gentle, sincere in what she does. Great gratitude to Yuliia and all group participants for the warm atmosphere.</span>
+                            <span class="lang-ua">Дуже вдячна за ваш проект i що робите. За час наших зустрiчей я зрозумiла, що все те, що я вiдчуваю та переживаю, має мicце бути i це нормально. Для мене важливо було бути почутою та прийнятою. Юлія дуже тактовна, м'яка, щира в тому, що вона робить. Велика вдячнiсть Юлії, та всiм учасникам груп за теплу атмосферу.</span>
+                        </p>
+                        <p class="testimonial-author">
+                            <strong>Nadiya D.</strong> -
+                            <span class="lang-fr">participante, Equilibre</span>
+                            <span class="lang-en">participant, Balance</span>
+                            <span class="lang-ua">учасниця, Рівновага</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="testimonial-nav">
+                    <button type="button" class="testimonial-prev" aria-label="Previous testimonial">
+                        <i class="ph ph-caret-left"></i>
+                    </button>
+                    <div class="testimonial-dots">
+                        <div class="testimonial-dot active" data-index="0"></div>
+                        <div class="testimonial-dot" data-index="1"></div>
+                    </div>
+                    <button type="button" class="testimonial-next" aria-label="Next testimonial">
+                        <i class="ph ph-caret-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Section -->
+    <section class="full-section action-section" id="action">
+        <div class="section-content">
+            <div class="action-header reveal">
+                <h2>
+                    <span class="lang-fr">Comment s'impliquer</span>
+                    <span class="lang-en">How to get involved</span>
+                    <span class="lang-ua">Як долучитися</span>
+                </h2>
+                <p>
+                    <span class="lang-fr">OBRIY se construit avec la communaute. Voici comment vous pouvez contribuer.</span>
+                    <span class="lang-en">OBRIY is built with the community. Here's how you can contribute.</span>
+                    <span class="lang-ua">OBRIY будується разом з громадою. Ось як ви можете долучитися.</span>
+                </p>
+            </div>
+
+            <div class="action-grid stagger-children">
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-hand-heart"></i>
+                    </div>
+                    <div>
+                        <h3>
+                            <span class="lang-fr">Devenir tuteur ou facilitateur</span>
+                            <span class="lang-en">Become a tutor or facilitator</span>
+                            <span class="lang-ua">Стати репетитором або фасилітатором</span>
+                        </h3>
+                        <p>
+                            <span class="lang-fr">Vous parlez ukrainien et voulez aider? Rejoignez l'equipe de tuteurs ou de facilitateurs de groupes.</span>
+                            <span class="lang-en">You speak Ukrainian and want to help? Join the team of tutors or group facilitators.</span>
+                            <span class="lang-ua">Ви говорите українською і хочете допомогти? Приєднуйтесь до команди репетиторів або фасилітаторів груп.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-users-three"></i>
+                    </div>
+                    <div>
+                        <h3>
+                            <span class="lang-fr">Rejoindre un groupe Equilibre</span>
+                            <span class="lang-en">Join a Balance group</span>
+                            <span class="lang-ua">Приєднатися до групи Рівновага</span>
+                        </h3>
+                        <p>
+                            <span class="lang-fr">Vous etes ukrainien et cherchez un espace de soutien? Les inscriptions sont ouvertes pour les prochaines cohortes.</span>
+                            <span class="lang-en">You're Ukrainian and looking for a support space? Registration is open for upcoming cohorts.</span>
+                            <span class="lang-ua">Ви українець і шукаєте простір підтримки? Реєстрація відкрита для наступних когорт.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-buildings"></i>
+                    </div>
+                    <div>
+                        <h3>
+                            <span class="lang-fr">Partenariats organisationnels</span>
+                            <span class="lang-en">Organizational partnerships</span>
+                            <span class="lang-ua">Організаційне партнерство</span>
+                        </h3>
+                        <p>
+                            <span class="lang-fr">Vous travaillez avec des nouveaux arrivants? Nous cherchons des partenaires pour etendre notre impact.</span>
+                            <span class="lang-en">You work with newcomers? We're looking for partners to extend our impact.</span>
+                            <span class="lang-ua">Ви працюєте з новоприбулими? Ми шукаємо партнерів для розширення нашого впливу.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-megaphone"></i>
+                    </div>
+                    <div>
+                        <h3>
+                            <span class="lang-fr">Faire connaitre OBRIY</span>
+                            <span class="lang-en">Spread the word about OBRIY</span>
+                            <span class="lang-ua">Розповісти про OBRIY</span>
+                        </h3>
+                        <p>
+                            <span class="lang-fr">Partagez notre mission avec votre reseau. Chaque voix compte pour rejoindre ceux qui ont besoin de soutien.</span>
+                            <span class="lang-en">Share our mission with your network. Every voice matters to reach those who need support.</span>
+                            <span class="lang-ua">Поділіться нашою місією зі своєю мережею. Кожен голос важливий, щоб досягти тих, хто потребує підтримки.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="full-section team-section" id="equipe">
+        <div class="section-content">
+            <div class="team-header reveal">
+                <h2>
+                    <span class="lang-fr">L'equipe</span>
+                    <span class="lang-en">The team</span>
+                    <span class="lang-ua">Команда</span>
+                </h2>
+            </div>
+            <div class="team-grid stagger-children">
+                <div class="team-card">
+                    <div class="avatar">YM</div>
+                    <div class="name">Yuliia Mikhaylets</div>
+                    <div class="bio">
+                        <span class="lang-fr">Psychologue, formation jungienne</span>
+                        <span class="lang-en">Psychologist, Jungian training</span>
+                        <span class="lang-ua">Психологиня, юнгіанська підготовка</span>
+                    </div>
+                </div>
+
+                <div class="team-card yellow">
+                    <div class="avatar">RK</div>
+                    <div class="name">Rymma Klopova</div>
+                    <div class="bio">
+                        <span class="lang-fr">20+ ans en coordination</span>
+                        <span class="lang-en">20+ years in coordination</span>
+                        <span class="lang-ua">20+ років у координації</span>
+                    </div>
+                </div>
+
+                <div class="team-card teal">
+                    <div class="avatar">GB</div>
+                    <div class="name">Gabriel Boutin</div>
+                    <div class="bio">
+                        <span class="lang-fr">Entrepreneur tech & design</span>
+                        <span class="lang-en">Tech & design entrepreneur</span>
+                        <span class="lang-ua">Техпідприємець і дизайн</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-logo">OBRIY</div>
+        <div class="footer-status">
+            <span class="lang-fr">En developpement - Montreal</span>
+            <span class="lang-en">In development - Montreal</span>
+            <span class="lang-ua">В розробці - Монреаль</span>
+        </div>
+        <div class="footer-contact">
+            <a href="mailto:info@obriy.ca">info@obriy.ca</a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Language switcher
+            const langBtns = document.querySelectorAll('.lang-btn');
+
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+
+                    document.body.classList.remove('show-fr', 'show-en', 'show-ua');
+                    document.body.classList.add('show-' + lang);
+
+                    langBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+                    localStorage.setItem('obriy-lang', lang);
+                });
+            });
+
+            const savedLang = localStorage.getItem('obriy-lang');
+            if (savedLang) {
+                const btn = document.querySelector(`[data-lang="${savedLang}"]`);
+                if (btn) btn.click();
+            }
+
+            // Header scroll effect
+            const header = document.querySelector('.site-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Scroll reveal animations
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger-children, .giant-stat');
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // Testimonial carousel
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            const prevBtn = document.querySelector('.testimonial-prev');
+            const nextBtn = document.querySelector('.testimonial-next');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach(s => s.classList.remove('active'));
+                dots.forEach(d => d.classList.remove('active'));
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                const newIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+                showSlide(newIndex);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+                showSlide(newIndex);
+            });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    showSlide(parseInt(dot.dataset.index));
+                });
+            });
+
+            // Auto-advance every 8 seconds
+            setInterval(() => {
+                const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+                showSlide(newIndex);
+            }, 8000);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBRIY</title>
+    <meta name="description" content="Un nouvel horizon pour les Ukrainiens au Canada. Bien-etre, integration et cohesion communautaire.">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --obriy-white: #ffffff;
+            --obriy-bg: #f7f8fa;
+            --obriy-dark: #1a2744;
+            --obriy-accent: #2563eb;
+            --obriy-yellow: #f59e0b;
+            --obriy-teal: #0d9488;
+            --obriy-text: #2d3748;
+            --obriy-text-light: #64748b;
+            --obriy-border: #e2e8f0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--obriy-bg);
+            color: var(--obriy-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Language System */
+        .lang-fr, .lang-en, .lang-ua { display: none; }
+        body.show-fr .lang-fr { display: block; }
+        body.show-en .lang-en { display: block; }
+        body.show-ua .lang-ua { display: block; }
+        span.lang-fr, span.lang-en, span.lang-ua { display: none; }
+        body.show-fr span.lang-fr { display: inline; }
+        body.show-en span.lang-en { display: inline; }
+        body.show-ua span.lang-ua { display: inline; }
+
+        /* ================================
+           HEADER
+           ================================ */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--obriy-border);
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--obriy-dark);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 0.15rem;
+            background: var(--obriy-bg);
+            padding: 0.25rem;
+            border-radius: 8px;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 0.6rem;
+            border: none;
+            background: transparent;
+            color: var(--obriy-text-light);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            color: var(--obriy-text);
+        }
+
+        .lang-btn.active {
+            color: var(--obriy-white);
+            background: var(--obriy-dark);
+        }
+
+        .presentation-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            color: var(--obriy-text-light);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            background: var(--obriy-bg);
+        }
+
+        .presentation-link:hover {
+            background: var(--obriy-dark);
+            color: var(--obriy-white);
+        }
+
+        .presentation-link i {
+            font-size: 1.1rem;
+        }
+
+        /* ================================
+           HERO - SPLIT SCREEN BENTO
+           ================================ */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            background: var(--obriy-white);
+        }
+
+        @media (max-width: 968px) {
+            .hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+                padding-top: 8rem;
+                padding-bottom: 4rem;
+            }
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            max-width: 700px;
+        }
+
+        @media (max-width: 968px) {
+            .hero-left {
+                padding: 2rem;
+                text-align: center;
+                align-items: center;
+            }
+        }
+
+        .hero-meaning {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--obriy-accent);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.2s;
+        }
+
+        .hero-logo {
+            font-size: clamp(4rem, 12vw, 7rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            color: var(--obriy-dark);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.4s;
+        }
+
+        .hero-message {
+            font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+            font-weight: 400;
+            color: var(--obriy-text-light);
+            max-width: 500px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.6s;
+        }
+
+        .hero-message strong {
+            color: var(--obriy-dark);
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--obriy-dark);
+            border-radius: 32px;
+            margin: 2rem;
+        }
+
+        @media (max-width: 968px) {
+            .hero-right {
+                min-height: 350px;
+                margin: 1rem;
+            }
+        }
+
+        .gradient-orb {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.8;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            background: var(--obriy-accent);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            background: var(--obriy-yellow);
+            top: 40%;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            animation-delay: -2s;
+        }
+
+        .orb-3 {
+            background: var(--obriy-teal);
+            bottom: 10%;
+            left: 30%;
+            width: 250px;
+            height: 250px;
+            animation-delay: -4s;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        .hero-visual-text {
+            position: relative;
+            z-index: 2;
+            font-size: 6rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.1);
+            letter-spacing: -0.04em;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        @media (max-width: 968px) {
+            .hero-visual-text {
+                font-size: 4rem;
+                writing-mode: horizontal-tb;
+            }
+        }
+
+        .scroll-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--obriy-text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards 0.8s;
+            transition: color 0.2s ease;
+        }
+
+        .scroll-hint:hover {
+            color: var(--obriy-accent);
+        }
+
+        .scroll-hint i {
+            font-size: 1.25rem;
+            animation: bounceRight 1.5s ease infinite;
+        }
+
+        @keyframes bounceRight {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        /* ================================
+           BENTO GRID SECTIONS
+           ================================ */
+        .bento-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--obriy-text-light);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--obriy-dark);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--obriy-text-light);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        /* ================================
+           STATS BENTO GRID
+           ================================ */
+        .stats-bento {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 180px);
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 968px) {
+            .stats-bento {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(4, 160px);
+            }
+        }
+
+        @media (max-width: 568px) {
+            .stats-bento {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+        }
+
+        .bento-card {
+            background: var(--obriy-white);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid var(--obriy-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .bento-card.large {
+            grid-column: span 2;
+            grid-row: span 2;
+            padding: 2rem;
+        }
+
+        @media (max-width: 568px) {
+            .bento-card.large {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        .bento-card.accent {
+            background: var(--obriy-accent);
+            border: none;
+        }
+
+        .bento-card.accent .bento-value,
+        .bento-card.accent .bento-label {
+            color: var(--obriy-white);
+        }
+
+        .bento-card.accent .bento-label {
+            opacity: 0.85;
+        }
+
+        .bento-card.dark {
+            background: var(--obriy-dark);
+            border: none;
+        }
+
+        .bento-card.dark .bento-value,
+        .bento-card.dark .bento-label {
+            color: var(--obriy-white);
+        }
+
+        .bento-card.dark .bento-label {
+            opacity: 0.7;
+        }
+
+        .bento-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--obriy-bg);
+            border-radius: 12px;
+            margin-bottom: auto;
+        }
+
+        .bento-icon i {
+            font-size: 1.5rem;
+            color: var(--obriy-accent);
+        }
+
+        .bento-card.accent .bento-icon {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .bento-card.accent .bento-icon i {
+            color: var(--obriy-white);
+        }
+
+        .bento-card.dark .bento-icon {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .bento-card.dark .bento-icon i {
+            color: var(--obriy-white);
+        }
+
+        .bento-value {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--obriy-dark);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .bento-card.large .bento-value {
+            font-size: clamp(3rem, 8vw, 5rem);
+        }
+
+        .bento-label {
+            font-size: 0.95rem;
+            color: var(--obriy-text-light);
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        /* ================================
+           STORY SECTION - EDITORIAL
+           ================================ */
+        .story-section {
+            background: var(--obriy-white);
+            padding: 6rem 0;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        @media (max-width: 868px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .story-lead {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            color: var(--obriy-dark);
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+
+        .story-lead .highlight {
+            color: var(--obriy-accent);
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            color: var(--obriy-text-light);
+            line-height: 1.8;
+        }
+
+        .story-text strong {
+            color: var(--obriy-dark);
+            font-weight: 600;
+        }
+
+        .story-text + .story-text {
+            margin-top: 1.5rem;
+        }
+
+        /* ================================
+           CHALLENGE SECTION - MAGAZINE STYLE
+           ================================ */
+        .challenge-section {
+            background: var(--obriy-dark);
+            color: var(--obriy-white);
+            padding: 6rem 0;
+        }
+
+        .challenge-section .section-label {
+            color: var(--obriy-yellow);
+        }
+
+        .challenge-section .section-title {
+            color: var(--obriy-white);
+        }
+
+        .challenge-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .challenge-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 968px) {
+            .challenge-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        .pull-quote {
+            position: sticky;
+            top: 8rem;
+        }
+
+        .pull-quote-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--obriy-yellow);
+            border-left: 4px solid var(--obriy-yellow);
+            padding-left: 1.5rem;
+        }
+
+        .challenge-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .challenge-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: start;
+            transition: all 0.3s ease;
+        }
+
+        .challenge-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 668px) {
+            .challenge-card {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .challenge-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(245, 158, 11, 0.15);
+            border-radius: 14px;
+        }
+
+        .challenge-icon i {
+            font-size: 1.5rem;
+            color: var(--obriy-yellow);
+        }
+
+        .challenge-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--obriy-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .challenge-content p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .challenge-stat {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--obriy-yellow);
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .challenge-stat-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: right;
+        }
+
+        /* ================================
+           PILLARS - HORIZONTAL EDITORIAL CARDS
+           ================================ */
+        .pillars-section {
+            background: var(--obriy-bg);
+            padding: 6rem 0;
+        }
+
+        .pillars-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .pillars-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .pillars-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .pillar-card {
+            background: var(--obriy-white);
+            border-radius: 24px;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: 80px 1fr 280px;
+            gap: 2rem;
+            align-items: start;
+            border: 1px solid var(--obriy-border);
+            transition: all 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        @media (max-width: 968px) {
+            .pillar-card {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .pillar-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: rgba(37, 99, 235, 0.08);
+        }
+
+        .pillar-icon i {
+            font-size: 2rem;
+            color: var(--obriy-accent);
+        }
+
+        .pillar-card.yellow .pillar-icon {
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .pillar-card.yellow .pillar-icon i {
+            color: var(--obriy-yellow);
+        }
+
+        .pillar-card.teal .pillar-icon {
+            background: rgba(13, 148, 136, 0.1);
+        }
+
+        .pillar-card.teal .pillar-icon i {
+            color: var(--obriy-teal);
+        }
+
+        .pillar-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--obriy-dark);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .pillar-content > p {
+            font-size: 1.05rem;
+            color: var(--obriy-text-light);
+            line-height: 1.7;
+        }
+
+        .pillar-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding-left: 1.5rem;
+            border-left: 2px solid var(--obriy-border);
+        }
+
+        .pillar-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--obriy-text-light);
+        }
+
+        .pillar-feature::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--obriy-accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .pillar-card.yellow .pillar-feature::before {
+            background: var(--obriy-yellow);
+        }
+
+        .pillar-card.teal .pillar-feature::before {
+            background: var(--obriy-teal);
+        }
+
+        /* ================================
+           PILOT SECTION - BENTO STYLE
+           ================================ */
+        .pilot-section {
+            background: var(--obriy-accent);
+            padding: 6rem 0;
+        }
+
+        .pilot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 868px) {
+            .pilot-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pilot-text h2 {
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 700;
+            color: var(--obriy-white);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .pilot-text p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .pilot-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .pilot-stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pilot-stat-card .value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--obriy-white);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .pilot-stat-card .label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ================================
+           TESTIMONIAL SECTION
+           ================================ */
+        .testimonial-section {
+            background: var(--obriy-white);
+            padding: 6rem 0;
+            border-top: 1px solid var(--obriy-border);
+        }
+
+        .testimonial-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--obriy-accent);
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-slides {
+            position: relative;
+            min-height: 240px;
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-slides {
+                min-height: 360px;
+            }
+        }
+
+        .testimonial-slide {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .testimonial-quote {
+            font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+            font-style: italic;
+            font-weight: 400;
+            color: var(--obriy-dark);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-author {
+            font-size: 1rem;
+            color: var(--obriy-text-light);
+        }
+
+        .testimonial-author strong {
+            color: var(--obriy-dark);
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .testimonial-nav button {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--obriy-border);
+            background: var(--obriy-white);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: var(--obriy-text-light);
+        }
+
+        .testimonial-nav button:hover {
+            background: var(--obriy-dark);
+            border-color: var(--obriy-dark);
+            color: var(--obriy-white);
+        }
+
+        .testimonial-nav button i {
+            font-size: 1.25rem;
+        }
+
+        .testimonial-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--obriy-border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--obriy-accent);
+            transform: scale(1.2);
+        }
+
+        /* ================================
+           ACTION SECTION - BENTO
+           ================================ */
+        .action-section {
+            background: var(--obriy-bg);
+            padding: 6rem 0;
+        }
+
+        .action-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .action-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .action-bento {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .action-bento {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .action-card {
+            background: var(--obriy-white);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--obriy-border);
+            transition: all 0.3s ease;
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+            border-color: var(--obriy-accent);
+        }
+
+        .action-icon {
+            width: 56px;
+            height: 56px;
+            min-width: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--obriy-bg);
+            border-radius: 14px;
+        }
+
+        .action-icon i {
+            font-size: 1.5rem;
+            color: var(--obriy-accent);
+        }
+
+        .action-content h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--obriy-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .action-content p {
+            font-size: 0.95rem;
+            color: var(--obriy-text-light);
+            line-height: 1.6;
+        }
+
+        /* ================================
+           TEAM SECTION
+           ================================ */
+        .team-section {
+            background: var(--obriy-dark);
+            color: var(--obriy-white);
+            padding: 6rem 0;
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .team-header h2 {
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .team-card .avatar {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 1.25rem;
+            background: var(--obriy-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--obriy-white);
+        }
+
+        .team-card.yellow .avatar {
+            background: var(--obriy-yellow);
+        }
+
+        .team-card.teal .avatar {
+            background: var(--obriy-teal);
+        }
+
+        .team-card .name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card .bio {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
+        }
+
+        /* ================================
+           FOOTER
+           ================================ */
+        .site-footer {
+            background: var(--obriy-dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--obriy-white);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-status {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--obriy-yellow);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-contact {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-contact a {
+            color: var(--obriy-white);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-contact a:hover {
+            color: var(--obriy-accent);
+        }
+
+        /* ================================
+           SCROLL ANIMATIONS
+           ================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .stagger-children.visible > *:nth-child(1) { transition-delay: 0s; }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.08s; }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.16s; }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.24s; }
+        .stagger-children.visible > *:nth-child(5) { transition-delay: 0.32s; }
+        .stagger-children.visible > *:nth-child(6) { transition-delay: 0.40s; }
+
+        .stagger-children.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================
+           ACCESSIBILITY
+           ================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .reveal, .reveal-left, .reveal-right, .reveal-scale,
+            .stagger-children > * {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body class="show-fr">
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="#" class="header-logo">OBRIY</a>
+            <div class="header-right">
+                <div class="lang-switcher">
+                    <button type="button" class="lang-btn active" data-lang="fr">FR</button>
+                    <button type="button" class="lang-btn" data-lang="en">EN</button>
+                    <button type="button" class="lang-btn" data-lang="ua">UA</button>
+                </div>
+                <a href="../2026-01-05_OBRIY.html" class="presentation-link" title="Presentation">
+                    <i class="ph ph-presentation-chart"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero - Split Screen -->
+    <section class="hero" id="accueil">
+        <div class="hero-left">
+            <div class="hero-meaning">
+                <span class="lang-fr">OBRIY signifie "horizon" en ukrainien</span>
+                <span class="lang-en">OBRIY means "horizon" in Ukrainian</span>
+                <span class="lang-ua">OBRIY - tse horyzont</span>
+            </div>
+            <div class="hero-logo">OBRIY</div>
+            <p class="hero-message">
+                <span class="lang-fr">Pour des milliers d'Ukrainiens au Canada, l'horizon semblait perdu. <strong>Ensemble, nous le reconstruisons.</strong></span>
+                <span class="lang-en">For thousands of Ukrainians in Canada, the horizon seemed lost. <strong>Together, we're rebuilding it.</strong></span>
+                <span class="lang-ua">Dlia tysiach ukraintsiv u Kanadi horyzont zdavavsia vtrachenym. <strong>Razom my yoho vidbudovuiemo.</strong></span>
+            </p>
+            <div class="scroll-hint" onclick="document.getElementById('stats').scrollIntoView({behavior: 'smooth'})">
+                <span class="lang-fr">Decouvrir notre mission</span>
+                <span class="lang-en">Discover our mission</span>
+                <span class="lang-ua">Diznatysia pro nashu misiiu</span>
+                <i class="ph ph-arrow-right"></i>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+            <div class="hero-visual-text">OBRIY</div>
+        </div>
+    </section>
+
+    <!-- Stats Bento Section -->
+    <section class="bento-container" id="stats">
+        <div class="section-label reveal">
+            <span class="lang-fr">Le contexte</span>
+            <span class="lang-en">The context</span>
+            <span class="lang-ua">Kontekst</span>
+        </div>
+        <h2 class="section-title reveal">
+            <span class="lang-fr">Une crise humanitaire sans precedent</span>
+            <span class="lang-en">An unprecedented humanitarian crisis</span>
+            <span class="lang-ua">Bezpretsedentna humanitarna kryza</span>
+        </h2>
+        <p class="section-subtitle reveal">
+            <span class="lang-fr">Depuis 2022, le Canada est devenu le principal refuge hors d'Europe pour les Ukrainiens fuyant la guerre.</span>
+            <span class="lang-en">Since 2022, Canada has become the main refuge outside Europe for Ukrainians fleeing war.</span>
+            <span class="lang-ua">Z 2022 roku Kanada stala holovnym prytulkom za mezhamy Yevropy dlia ukraintsiv, shcho tikaiut vid viiny.</span>
+        </p>
+
+        <div class="stats-bento stagger-children">
+            <!-- Large card - Main stat -->
+            <div class="bento-card large accent">
+                <div class="bento-icon">
+                    <i class="ph ph-globe-hemisphere-west"></i>
+                </div>
+                <div>
+                    <div class="bento-value">304K+</div>
+                    <div class="bento-label">
+                        <span class="lang-fr">Ukrainiens arrives au Canada depuis 2022</span>
+                        <span class="lang-en">Ukrainians arrived in Canada since 2022</span>
+                        <span class="lang-ua">Ukraintsiv prybulo do Kanady z 2022 roku</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regular cards -->
+            <div class="bento-card">
+                <div class="bento-icon">
+                    <i class="ph ph-users"></i>
+                </div>
+                <div>
+                    <div class="bento-value">~5,7M</div>
+                    <div class="bento-label">
+                        <span class="lang-fr">refugies dans le monde</span>
+                        <span class="lang-en">refugees worldwide</span>
+                        <span class="lang-ua">bizhentsiv u sviti</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-card dark">
+                <div class="bento-icon">
+                    <i class="ph ph-house-line"></i>
+                </div>
+                <div>
+                    <div class="bento-value">90%+</div>
+                    <div class="bento-label">
+                        <span class="lang-fr">veulent rester au Canada</span>
+                        <span class="lang-en">want to stay in Canada</span>
+                        <span class="lang-ua">khochut zalyshytysia v Kanadi</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-card">
+                <div class="bento-icon">
+                    <i class="ph ph-baby"></i>
+                </div>
+                <div>
+                    <div class="bento-value">37%</div>
+                    <div class="bento-label">
+                        <span class="lang-fr">ont des enfants</span>
+                        <span class="lang-en">have children</span>
+                        <span class="lang-ua">maiut ditei</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-card">
+                <div class="bento-icon">
+                    <i class="ph ph-gender-female"></i>
+                </div>
+                <div>
+                    <div class="bento-value">71%</div>
+                    <div class="bento-label">
+                        <span class="lang-fr">sont des femmes</span>
+                        <span class="lang-en">are women</span>
+                        <span class="lang-ua">zhinkyi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section - Editorial -->
+    <section class="story-section">
+        <div class="bento-container">
+            <div class="story-grid">
+                <div class="story-lead reveal-left">
+                    <span class="lang-fr">Derriere les chiffres, il y a des familles <span class="highlight">separees</span>, des reperes <span class="highlight">perdus</span>, et une vie reconstruite dans l'<span class="highlight">incertitude</span>.</span>
+                    <span class="lang-en">Behind the numbers are <span class="highlight">separated</span> families, <span class="highlight">lost</span> bearings, and lives rebuilt in <span class="highlight">uncertainty</span>.</span>
+                    <span class="lang-ua">Za tsyframy - <span class="highlight">rozlucheni</span> rodyny, <span class="highlight">vtracheni</span> oriientyry ta zhyttia, vidbudovane v <span class="highlight">nevyznachenosti</span>.</span>
+                </div>
+                <div class="reveal-right">
+                    <p class="story-text">
+                        <span class="lang-fr">Pour des millions d'Ukrainiens, ce qui devait etre une fuite temporaire est devenu un exil prolonge. <strong>Mais accueillir n'est pas integrer.</strong></span>
+                        <span class="lang-en">For millions of Ukrainians, what was supposed to be a temporary escape has become prolonged exile. <strong>But welcoming is not integrating.</strong></span>
+                        <span class="lang-ua">Dlia milioniv ukraintsiv te, shcho malo buty tymchasovoiu vtecheiu, stalo tryvalym vyhnaniam. <strong>Ale pryiniaty - tse ne intehruvaty.</strong></span>
+                    </p>
+                    <p class="story-text">
+                        <span class="lang-fr">Des parents qui cherchent du travail a la hauteur de leurs competences. Des enfants qui jonglent entre deux systemes scolaires. Des personnes qui portent le poids du trauma, de la perte, et de l'eloignement des proches restes en Ukraine.</span>
+                        <span class="lang-en">Parents looking for work that matches their skills. Children juggling between two school systems. People carrying the weight of trauma, loss, and distance from loved ones still in Ukraine.</span>
+                        <span class="lang-ua">Batky, yaki shukaiut robotu vidpovidno do svoikh navychok. Dity, shcho balansuiut mizh dvoma shkilnymy systemamy. Liudy, shcho nesut tiagar travmy, vtraty ta vidstani vid blyzkykh, yaki zalyshylysia v Ukraini.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenge Section - Magazine Style -->
+    <section class="challenge-section">
+        <div class="bento-container">
+            <div class="section-label reveal">
+                <span class="lang-fr">Les defis</span>
+                <span class="lang-en">Challenges</span>
+                <span class="lang-ua">Vyklyky</span>
+            </div>
+            <h2 class="section-title reveal">
+                <span class="lang-fr">Les obstacles a l'integration</span>
+                <span class="lang-en">Integration obstacles</span>
+                <span class="lang-ua">Pereshkody dlia intehratsii</span>
+            </h2>
+            <p class="section-subtitle reveal">
+                <span class="lang-fr">Ce qui existe au Canada ne repond pas toujours aux besoins specifiques de cette communaute.</span>
+                <span class="lang-en">What exists in Canada doesn't always meet the specific needs of this community.</span>
+                <span class="lang-ua">Te, shcho isnuie v Kanadi, ne zavzhdy vidpovidaie spetsyfichnym potrebam tsiiei hromady.</span>
+            </p>
+
+            <div class="challenge-layout">
+                <div class="pull-quote reveal-left">
+                    <p class="pull-quote-text">
+                        <span class="lang-fr">"Des ingenieurs livreurs, des medecins caissieres."</span>
+                        <span class="lang-en">"Engineers delivering food, doctors working as cashiers."</span>
+                        <span class="lang-ua">"Inzhenery-kuriery, likari-kasyry."</span>
+                    </p>
+                </div>
+
+                <div class="challenge-cards stagger-children">
+                    <div class="challenge-card">
+                        <div class="challenge-icon">
+                            <i class="ph ph-heart"></i>
+                        </div>
+                        <div class="challenge-content">
+                            <h3>
+                                <span class="lang-fr">Bien-etre mental</span>
+                                <span class="lang-en">Mental well-being</span>
+                                <span class="lang-ua">Psykhichne zdorovia</span>
+                            </h3>
+                            <p>
+                                <span class="lang-fr">Aucun service de soutien psychosocial non clinique en ukrainien. Les barrieres linguistiques et culturelles limitent l'acces aux soins.</span>
+                                <span class="lang-en">No non-clinical psychosocial support services in Ukrainian. Language and cultural barriers limit access to care.</span>
+                                <span class="lang-ua">Nemaie neklinichnykh psykhosotsialnykh posluh ukrainskoiu. Movni ta kulturni bariery obmezhiuiut dostup do dopomohy.</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="challenge-stat">15-44%</div>
+                            <div class="challenge-stat-label">
+                                <span class="lang-fr">touches par le TSPT</span>
+                                <span class="lang-en">affected by PTSD</span>
+                                <span class="lang-ua">strazhdaiut vid PTSR</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-card">
+                        <div class="challenge-icon">
+                            <i class="ph ph-briefcase"></i>
+                        </div>
+                        <div class="challenge-content">
+                            <h3>
+                                <span class="lang-fr">Emploi qualifie</span>
+                                <span class="lang-en">Skilled employment</span>
+                                <span class="lang-ua">Kvalifikovana robota</span>
+                            </h3>
+                            <p>
+                                <span class="lang-fr">La reconnaissance des diplomes est couteuse et longue. Des professionnels qualifies acceptent des emplois bien en-dessous de leurs competences.</span>
+                                <span class="lang-en">Credential recognition is expensive and slow. Qualified professionals accept jobs well below their skill level.</span>
+                                <span class="lang-ua">Vyznannia dyplomiv dorohe ta povilne. Kvalifikovani profesionaly pryimaiut robotu znachno nyzhche yikhnoho rivnia.</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="challenge-stat">44%</div>
+                            <div class="challenge-stat-label">
+                                <span class="lang-fr">en sous-emploi</span>
+                                <span class="lang-en">underemployed</span>
+                                <span class="lang-ua">nedozainiati</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-card">
+                        <div class="challenge-icon">
+                            <i class="ph ph-book-open"></i>
+                        </div>
+                        <div class="challenge-content">
+                            <h3>
+                                <span class="lang-fr">Reussite scolaire</span>
+                                <span class="lang-en">Academic success</span>
+                                <span class="lang-ua">Navchalnyi uspikh</span>
+                            </h3>
+                            <p>
+                                <span class="lang-fr">Les enfants jonglent entre l'ecole canadienne et l'ecole ukrainienne en ligne, souvent sans aide adaptee.</span>
+                                <span class="lang-en">Children juggle between Canadian school and online Ukrainian school, often without adapted support.</span>
+                                <span class="lang-ua">Dity balansuiut mizh kanadskoiu shkoloiu ta ukrainskoiu onlain-shkoloiu, chasto bez adaptovanoi pidtrymky.</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="challenge-stat">~2 ans</div>
+                            <div class="challenge-stat-label">
+                                <span class="lang-fr">de retard en lecture</span>
+                                <span class="lang-en">behind in reading</span>
+                                <span class="lang-ua">vidstavannia v chytanni</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-card">
+                        <div class="challenge-icon">
+                            <i class="ph ph-translate"></i>
+                        </div>
+                        <div class="challenge-content">
+                            <h3>
+                                <span class="lang-fr">Barriere linguistique</span>
+                                <span class="lang-en">Language barrier</span>
+                                <span class="lang-ua">Movnyi barier</span>
+                            </h3>
+                            <p>
+                                <span class="lang-fr">Au Quebec, la francisation est essentielle mais lente. La maitrise du francais reste un obstacle majeur.</span>
+                                <span class="lang-en">In Quebec, francization is essential but slow. French proficiency remains a major obstacle.</span>
+                                <span class="lang-ua">U Kvebeku fransyzatsiia neobkhidna, ale povilna. Volodinnia frantsuzskoiu zalyshaietsiai osnovnoiu pereshkodoiu.</span>
+                            </p>
+                        </div>
+                        <div>
+                            <div class="challenge-stat">5%</div>
+                            <div class="challenge-stat-label">
+                                <span class="lang-fr">parlent francais</span>
+                                <span class="lang-en">speak French</span>
+                                <span class="lang-ua">volodiiut frantsuzskoiu</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pillars Section - Horizontal Editorial -->
+    <section class="pillars-section" id="piliers">
+        <div class="bento-container">
+            <div class="pillars-header">
+                <div class="section-label reveal">
+                    <span class="lang-fr">Notre approche</span>
+                    <span class="lang-en">Our approach</span>
+                    <span class="lang-ua">Nash pidkhid</span>
+                </div>
+                <h2 class="section-title reveal">
+                    <span class="lang-fr">Trois piliers pour un nouvel horizon</span>
+                    <span class="lang-en">Three pillars for a new horizon</span>
+                    <span class="lang-ua">Try napriamy dlia novoho horyzontu</span>
+                </h2>
+                <p class="section-subtitle reveal">
+                    <span class="lang-fr">Un modele integre, construit par et pour la communaute ukrainienne au Canada.</span>
+                    <span class="lang-en">An integrated model, built by and for the Ukrainian community in Canada.</span>
+                    <span class="lang-ua">Intehrovana model, stvorena dlia ukrainskoi hromady v Kanadi ta razom z neiu.</span>
+                </p>
+            </div>
+
+            <div class="pillars-grid stagger-children">
+                <!-- Pillar 1: Equilibre -->
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <i class="ph ph-scales"></i>
+                    </div>
+                    <div class="pillar-content">
+                        <h3>
+                            <span class="lang-fr">Equilibre</span>
+                            <span class="lang-en">Balance</span>
+                            <span class="lang-ua">Rivnovaha</span>
+                        </h3>
+                        <p>
+                            <span class="lang-fr">Soutien psychosocial non clinique en ukrainien. Groupes d'entraide et ateliers pour retrouver la stabilite emotionnelle.</span>
+                            <span class="lang-en">Non-clinical psychosocial support in Ukrainian. Support groups and workshops to regain emotional stability.</span>
+                            <span class="lang-ua">Neklinichna psykhosotsialna pidtrymka ukrainskoiu. Hrupy vzaiemodopomohy ta maisterni dlia vidnovlennia emotsiinoi stabilnosti.</span>
+                        </p>
+                    </div>
+                    <div class="pillar-features">
+                        <div class="pillar-feature">
+                            <span class="lang-fr">Cohortes de 10 seances</span>
+                            <span class="lang-en">10-session cohorts</span>
+                            <span class="lang-ua">Kohorty z 10 sesii</span>
+                        </div>
+                        <div class="pillar-feature">
+                            <span class="lang-fr">Adultes, ados et enfants</span>
+                            <span class="lang-en">Adults, teens, and children</span>
+                            <span class="lang-ua">Dorosli, pidlitky ta dity</span>
+                        </div>
+                        <div class="pillar-feature">
+                            <span class="lang-fr">Anime par des pairs formes</span>
+                            <span class="lang-en">Led by trained peers</span>
+                            <span class="lang-ua">Vedut navcheni odnolitky</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 2: Reseau -->
+                <div class="pillar-card yellow">
+                    <div class="pillar-icon">
+                        <i class="ph ph-users"></i>
+                    </div>
+                    <div class="pillar-content">
+                        <h3>
+                            <span class="lang-fr">Reseau</span>
+                            <span class="lang-en">Network</span>
+                            <span class="lang-ua">Merezha</span>
+                        </h3>
+                        <p>
+                            <span class="lang-fr">Entraide communautaire. Connecter les talents, les besoins et les ressources de la diaspora ukrainienne.</span>
+                            <span class="lang-en">Community mutual aid. Connecting talents, needs, and resources within the Ukrainian diaspora.</span>
+                            <span class="lang-ua">Hromadska vzaiemodopomoha. Poiednannia talantiv, potreb i resursiv ukrainskoi diaspory.</span>
+                        </p>
+                    </div>
+                    <div class="pillar-features">
+                        <div class="pillar-feature">
+                            <span class="lang-fr">Annuaire de services verifie</span>
+                            <span class="lang-en">Verified service directory</span>
+                            <span class="lang-ua">Veryfikovanyi dovidnyk posluh</span>
+                        </div>
+                        <div class="pillar-feature">
+                            <span class="lang-fr">Offres et demandes</span>
+                            <span class="lang-en">Offers and requests</span>
+                            <span class="lang-ua">Propozytsii ta zapyty</span>
+                        </div>
+                        <div class="pillar-feature">
+                            <span class="lang-fr">Gratuit, sans publicite</span>
+                            <span class="lang-en">Free, no advertising</span>
+                            <span class="lang-ua">Bezkoshtovno, bez reklamy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 3: Jeunesse -->
+                <div class="pillar-card teal">
+                    <div class="pillar-icon">
+                        <i class="ph ph-graduation-cap"></i>
+                    </div>
+                    <div class="pillar-content">
+                        <h3>
+                            <span class="lang-fr">Jeunesse</span>
+                            <span class="lang-en">Youth</span>
+                            <span class="lang-ua">Molod</span>
+                        </h3>
+                        <p>
+                            <span class="lang-fr">Tutorat et accompagnement scolaire pour les jeunes 4-17 ans, par des tuteurs qui comprennent leur parcours.</span>
+                            <span class="lang-en">Tutoring and academic support for youth 4-17, by tutors who understand their journey.</span>
+                            <span class="lang-ua">Repetytorstvo ta navchalna pidtrymka dlia molodi 4-17 rokiv vid tykh, khto rozumiie yikhnii shliakh.</span>
+                        </p>
+                    </div>
+                    <div class="pillar-features">
+                        <div class="pillar-feature">
+                            <span class="lang-fr">Tutorat 1:1 personnalise</span>
+                            <span class="lang-en">Personalized 1:1 tutoring</span>
+                            <span class="lang-ua">Personalizovane repetytorstvo 1:1</span>
+                        </div>
+                        <div class="pillar-feature">
+                            <span class="lang-fr">Math, francais, sciences</span>
+                            <span class="lang-en">Math, French, sciences</span>
+                            <span class="lang-ua">Matematyka, frantsuzka, nauky</span>
+                        </div>
+                        <div class="pillar-feature">
+                            <span class="lang-fr">Tuteurs ukrainophones</span>
+                            <span class="lang-en">Ukrainian-speaking tutors</span>
+                            <span class="lang-ua">Ukrainomovni repetytory</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pilot Section - Bento Style -->
+    <section class="pilot-section">
+        <div class="bento-container">
+            <div class="pilot-grid">
+                <div class="pilot-text reveal-left">
+                    <h2>
+                        <span class="lang-fr">Deja en action</span>
+                        <span class="lang-en">Already in action</span>
+                        <span class="lang-ua">Vzhe v dii</span>
+                    </h2>
+                    <p>
+                        <span class="lang-fr">Depuis octobre 2025, le pilier Equilibre est actif a Montreal. Deux groupes par semaine, animes en ukrainien, accompagnent des adultes dans leur parcours d'adaptation.</span>
+                        <span class="lang-en">Since October 2025, the Balance pillar has been active in Montreal. Two groups per week, facilitated in Ukrainian, support adults in their adaptation journey.</span>
+                        <span class="lang-ua">Z zhovtnia 2025 roku napriam Rivnovaha aktyvnyi u Monreali. Dvi hrupy na tyzhden, yaki vedutsia ukrainskoiu, pidtrymuiut doroslykh u yikhnomu shliakhu adaptatsii.</span>
+                    </p>
+                    <p>
+                        <span class="lang-fr">Les premiers resultats sont encourageants : reduction de l'isolement, creation de liens, et un espace securitaire pour partager et avancer.</span>
+                        <span class="lang-en">Early results are encouraging: reduced isolation, new connections, and a safe space to share and move forward.</span>
+                        <span class="lang-ua">Pershi rezultaty obnadiilyvi: zmenshennia izoliatsii, novi zviazky ta bezpechnyi prostir dlia obminu ta rukhu vpered.</span>
+                    </p>
+                </div>
+                <div class="pilot-stats-grid reveal-right stagger-children">
+                    <div class="pilot-stat-card">
+                        <div class="value">2</div>
+                        <div class="label">
+                            <span class="lang-fr">groupes/semaine</span>
+                            <span class="lang-en">groups/week</span>
+                            <span class="lang-ua">hrupy/tyzhden</span>
+                        </div>
+                    </div>
+                    <div class="pilot-stat-card">
+                        <div class="value">18</div>
+                        <div class="label">
+                            <span class="lang-fr">participants actifs</span>
+                            <span class="lang-en">active participants</span>
+                            <span class="lang-ua">aktyvnykh uchasnykiv</span>
+                        </div>
+                    </div>
+                    <div class="pilot-stat-card">
+                        <div class="value">10</div>
+                        <div class="label">
+                            <span class="lang-fr">seances/cohorte</span>
+                            <span class="lang-en">sessions/cohort</span>
+                            <span class="lang-ua">sesii/kohorta</span>
+                        </div>
+                    </div>
+                    <div class="pilot-stat-card">
+                        <div class="value">2h30</div>
+                        <div class="label">
+                            <span class="lang-fr">par rencontre</span>
+                            <span class="lang-en">per session</span>
+                            <span class="lang-ua">za zustrich</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial-section">
+        <div class="bento-container">
+            <div class="testimonial-carousel reveal-scale">
+                <div class="testimonial-label">
+                    <span class="lang-fr">Temoignages</span>
+                    <span class="lang-en">Testimonials</span>
+                    <span class="lang-ua">Svidchennia</span>
+                </div>
+
+                <div class="testimonial-slides">
+                    <!-- Temoignage 1: Andriy L. -->
+                    <div class="testimonial-slide active">
+                        <p class="testimonial-quote">
+                            <span class="lang-fr">" La participation au groupe m'a donne un sentiment d'unite. J'ai cesse de me sentir isole dans mes problemes d'adaptation. Les peurs et l'anxiete ont diminue, et j'ai de nouveau envie de vivre, les forces et l'inspiration reviennent. "</span>
+                            <span class="lang-en">"Participating in the group gave me a sense of unity. I stopped feeling isolated in my adaptation problems. Fears and anxiety decreased, and I want to live again, strength and inspiration are returning."</span>
+                            <span class="lang-ua">"Uchast u hrupi dala meni vidchuttia yednosti. Ya perestav pochuvatysia izolovanym u svoikh problemakh adaptatsii. Strakhy ta tryvoka zmenshylysia, i ya znovu khochu zhyty, syly ta natkhnennia povertaiutsia."</span>
+                        </p>
+                        <p class="testimonial-author">
+                            <strong>Andriy L.</strong> -
+                            <span class="lang-fr">participant, Equilibre</span>
+                            <span class="lang-en">participant, Balance</span>
+                            <span class="lang-ua">uchasnyk, Rivnovaha</span>
+                        </p>
+                    </div>
+
+                    <!-- Temoignage 2: Nadiya D. -->
+                    <div class="testimonial-slide">
+                        <p class="testimonial-quote">
+                            <span class="lang-fr">" Je suis tres reconnaissante pour votre projet et ce que vous faites. Au cours de nos rencontres, j'ai compris que tout ce que je ressens et vis a sa place et c'est normal. C'etait important pour moi d'etre entendue et acceptee. Yuliia est tres delicate, douce, sincere dans ce qu'elle fait. Un grand merci a Yuliia et a tous les participants pour l'atmosphere chaleureuse. "</span>
+                            <span class="lang-en">"I am very grateful for your project and what you do. During our meetings, I understood that everything I feel and experience has its place and it's normal. It was important for me to be heard and accepted. Yuliia is very tactful, gentle, sincere in what she does. Great gratitude to Yuliia and all group participants for the warm atmosphere."</span>
+                            <span class="lang-ua">"Duzhe vdiachna za vash proekt i shcho robyte. Za chas nashykh zustrichei ya zrozumila, shcho vse te, shcho ya vidchuvaiu ta perezhyvaiu, maie mistse buty i tse normalno. Dlia mene vazhlyvo bulo buty pochutoiu ta pryiniatoiu. Yuliia duzhe taktovna, miaka, shchyra v tomu, shcho vona robyt. Velyka vdiachnist Yulii, ta vsim uchasnykam hrup za teplu atmosferu."</span>
+                        </p>
+                        <p class="testimonial-author">
+                            <strong>Nadiya D.</strong> -
+                            <span class="lang-fr">participante, Equilibre</span>
+                            <span class="lang-en">participant, Balance</span>
+                            <span class="lang-ua">uchasnytsia, Rivnovaha</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="testimonial-nav">
+                    <button type="button" class="testimonial-prev" aria-label="Previous testimonial">
+                        <i class="ph ph-caret-left"></i>
+                    </button>
+                    <div class="testimonial-dots">
+                        <div class="testimonial-dot active" data-index="0"></div>
+                        <div class="testimonial-dot" data-index="1"></div>
+                    </div>
+                    <button type="button" class="testimonial-next" aria-label="Next testimonial">
+                        <i class="ph ph-caret-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Section - Bento -->
+    <section class="action-section">
+        <div class="bento-container">
+            <div class="action-header">
+                <div class="section-label reveal">
+                    <span class="lang-fr">Passez a l'action</span>
+                    <span class="lang-en">Take action</span>
+                    <span class="lang-ua">Diite</span>
+                </div>
+                <h2 class="section-title reveal">
+                    <span class="lang-fr">Comment s'impliquer</span>
+                    <span class="lang-en">How to get involved</span>
+                    <span class="lang-ua">Yak doluchytysia</span>
+                </h2>
+                <p class="section-subtitle reveal">
+                    <span class="lang-fr">OBRIY se construit avec la communaute. Voici comment vous pouvez contribuer.</span>
+                    <span class="lang-en">OBRIY is built with the community. Here's how you can contribute.</span>
+                    <span class="lang-ua">OBRIY buduietsia razom z hromadoiu. Os yak vy mozhete doluchytysia.</span>
+                </p>
+            </div>
+
+            <div class="action-bento stagger-children">
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-hand-heart"></i>
+                    </div>
+                    <div class="action-content">
+                        <h3>
+                            <span class="lang-fr">Devenir tuteur ou facilitateur</span>
+                            <span class="lang-en">Become a tutor or facilitator</span>
+                            <span class="lang-ua">Staty repetitorom abo fasylitatorom</span>
+                        </h3>
+                        <p>
+                            <span class="lang-fr">Vous parlez ukrainien et voulez aider? Rejoignez l'equipe de tuteurs ou de facilitateurs de groupes.</span>
+                            <span class="lang-en">You speak Ukrainian and want to help? Join the team of tutors or group facilitators.</span>
+                            <span class="lang-ua">Vy hovoryte ukrainskoiu i khochete dopomohty? Pryiednuites do komandy repetytoriv abo fasylitatoriv hrup.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-users-three"></i>
+                    </div>
+                    <div class="action-content">
+                        <h3>
+                            <span class="lang-fr">Rejoindre un groupe Equilibre</span>
+                            <span class="lang-en">Join a Balance group</span>
+                            <span class="lang-ua">Pryiednatysia do hrupy Rivnovaha</span>
+                        </h3>
+                        <p>
+                            <span class="lang-fr">Vous etes ukrainien et cherchez un espace de soutien? Les inscriptions sont ouvertes pour les prochaines cohortes.</span>
+                            <span class="lang-en">You're Ukrainian and looking for a support space? Registration is open for upcoming cohorts.</span>
+                            <span class="lang-ua">Vy ukrainets i shukaiete prostir pidtrymky? Reiestratsiia vidkryta dlia nastupnykh kohort.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-buildings"></i>
+                    </div>
+                    <div class="action-content">
+                        <h3>
+                            <span class="lang-fr">Partenariats organisationnels</span>
+                            <span class="lang-en">Organizational partnerships</span>
+                            <span class="lang-ua">Orhanizatsiine partnerstvo</span>
+                        </h3>
+                        <p>
+                            <span class="lang-fr">Vous travaillez avec des nouveaux arrivants? Nous cherchons des partenaires pour etendre notre impact.</span>
+                            <span class="lang-en">You work with newcomers? We're looking for partners to extend our impact.</span>
+                            <span class="lang-ua">Vy pratsiuiete z novoprybulymy? My shukaiemo partneriv dlia rozshyrennia nashoho vplyvu.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-megaphone"></i>
+                    </div>
+                    <div class="action-content">
+                        <h3>
+                            <span class="lang-fr">Faire connaitre OBRIY</span>
+                            <span class="lang-en">Spread the word about OBRIY</span>
+                            <span class="lang-ua">Rozpovesty pro OBRIY</span>
+                        </h3>
+                        <p>
+                            <span class="lang-fr">Partagez notre mission avec votre reseau. Chaque voix compte pour rejoindre ceux qui ont besoin de soutien.</span>
+                            <span class="lang-en">Share our mission with your network. Every voice matters to reach those who need support.</span>
+                            <span class="lang-ua">Podilitsia nashoiu misiieiu zi svoieiu merezheiu. Kozhen holos vazhlyvyi, shchob dosahty tykh, khto potrebuie pidtrymky.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="equipe">
+        <div class="bento-container">
+            <div class="team-header reveal">
+                <h2>
+                    <span class="lang-fr">L'equipe</span>
+                    <span class="lang-en">The team</span>
+                    <span class="lang-ua">Komanda</span>
+                </h2>
+            </div>
+            <div class="team-grid stagger-children">
+                <div class="team-card">
+                    <div class="avatar">YM</div>
+                    <div class="name">Yuliia Mikhaylets</div>
+                    <div class="bio">
+                        <span class="lang-fr">Psychologue, formation jungienne</span>
+                        <span class="lang-en">Psychologist, Jungian training</span>
+                        <span class="lang-ua">Psykholohynia, yunhianska pidhotovka</span>
+                    </div>
+                </div>
+
+                <div class="team-card yellow">
+                    <div class="avatar">RK</div>
+                    <div class="name">Rymma Klopova</div>
+                    <div class="bio">
+                        <span class="lang-fr">20+ ans en coordination</span>
+                        <span class="lang-en">20+ years in coordination</span>
+                        <span class="lang-ua">20+ rokiv u koordynatsii</span>
+                    </div>
+                </div>
+
+                <div class="team-card teal">
+                    <div class="avatar">GB</div>
+                    <div class="name">Gabriel Boutin</div>
+                    <div class="bio">
+                        <span class="lang-fr">Entrepreneur tech & design</span>
+                        <span class="lang-en">Tech & design entrepreneur</span>
+                        <span class="lang-ua">Tekhpidpryiemets i dyzain</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-logo">OBRIY</div>
+            <div class="footer-status">
+                <span class="lang-fr">En developpement - Montreal</span>
+                <span class="lang-en">In development - Montreal</span>
+                <span class="lang-ua">V rozrobtsi - Monreal</span>
+            </div>
+            <div class="footer-contact">
+                <a href="mailto:info@obriy.ca">info@obriy.ca</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const langBtns = document.querySelectorAll('.lang-btn');
+
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+
+                    document.body.classList.remove('show-fr', 'show-en', 'show-ua');
+                    document.body.classList.add('show-' + lang);
+
+                    langBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+                    localStorage.setItem('obriy-lang', lang);
+                });
+            });
+
+            const savedLang = localStorage.getItem('obriy-lang');
+            if (savedLang) {
+                const btn = document.querySelector(`[data-lang="${savedLang}"]`);
+                if (btn) btn.click();
+            }
+
+            // Scroll reveal animations
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-children');
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // Testimonial carousel
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            const prevBtn = document.querySelector('.testimonial-prev');
+            const nextBtn = document.querySelector('.testimonial-next');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach(s => s.classList.remove('active'));
+                dots.forEach(d => d.classList.remove('active'));
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                const newIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+                showSlide(newIndex);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+                showSlide(newIndex);
+            });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    showSlide(parseInt(dot.dataset.index));
+                });
+            });
+
+            // Auto-advance every 8 seconds
+            setInterval(() => {
+                const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+                showSlide(newIndex);
+            }, 8000);
+        });
+    </script>
+
+</body>
+</html>

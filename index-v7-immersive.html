@@ -1,0 +1,2461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a2744">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>OBRIY</title>
+    <meta name="description" content="Un nouvel horizon pour les Ukrainiens au Canada. Bien-être, intégration et cohésion communautaire.">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --obriy-white: #ffffff;
+            --obriy-bg: #f7f8fa;
+            --obriy-cream: #faf9f7;
+            --obriy-dark: #1a2744;
+            --obriy-dark-light: #243656;
+            --obriy-accent: #2563eb;
+            --obriy-yellow: #f59e0b;
+            --obriy-teal: #0d9488;
+            --obriy-text: #2d3748;
+            --obriy-text-light: #64748b;
+            --obriy-border: #e2e8f0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            /* Safari iOS - utiliser toute la hauteur disponible */
+            height: -webkit-fill-available;
+            /* Même couleur que le hero pour la zone du notch */
+            background: var(--obriy-dark);
+        }
+
+        html::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        /* Mobile: hauteurs adaptatives pour Safari iOS */
+        @media (max-width: 768px) {
+            .full-section,
+            .pillars-intro,
+            .pillar-band {
+                min-height: -webkit-fill-available;
+                min-height: 100vh;
+            }
+        }
+
+        body {
+            font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--obriy-dark);
+            color: var(--obriy-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            /* Safari iOS - hauteur dynamique sans sauts */
+            min-height: -webkit-fill-available;
+            min-height: 100vh;
+            /* Safe area - étendre le contenu jusqu'aux bords */
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Background fixe qui couvre toute la zone visible incluant safe-area */
+        body::before {
+            content: '';
+            position: fixed;
+            top: calc(-1 * env(safe-area-inset-top, 0));
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--obriy-dark);
+            z-index: -1000;
+            pointer-events: none;
+        }
+
+        /* Language System */
+        .lang-fr, .lang-en, .lang-ua { display: none; }
+        body.show-fr .lang-fr { display: block; }
+        body.show-en .lang-en { display: block; }
+        body.show-ua .lang-ua { display: block; }
+        span.lang-fr, span.lang-en, span.lang-ua { display: none; }
+        body.show-fr span.lang-fr { display: inline; }
+        body.show-en span.lang-en { display: inline; }
+        body.show-ua span.lang-ua { display: inline; }
+
+        /* Responsive Text - Desktop vs Mobile */
+        .text-mobile { display: none; }
+        @media (max-width: 768px) {
+            .text-desktop { display: none; }
+            .text-mobile { display: block; }
+        }
+
+        /* ================================
+           FULL-BLEED SECTION BASE (V3)
+           ================================ */
+        .full-section {
+            min-height: 100vh; /* Fallback */
+            min-height: 100dvh; /* Dynamic viewport height - meilleur sur mobile */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-narrow {
+            max-width: 900px;
+        }
+
+        /* ================================
+           HEADER
+           ================================ */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            /* Safe area - padding-top pour le notch + padding normal */
+            padding: calc(env(safe-area-inset-top) + 0.5rem) calc(env(safe-area-inset-right) + 1.5rem) 1rem calc(env(safe-area-inset-left) + 1.5rem);
+            /* Gradient symétrique - transparent → foncé au centre → transparent */
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(26, 39, 68, 0.4) 50%,
+                transparent 100%
+            );
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--obriy-white);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            opacity: 0.9;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 0.15rem;
+        }
+
+        .lang-btn {
+            padding: 0.35rem 0.5rem;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .lang-btn.active {
+            color: var(--obriy-white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .presentation-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            color: rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .presentation-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--obriy-white);
+        }
+
+        .presentation-link i {
+            font-size: 1.1rem;
+        }
+
+        /* ================================
+           HERO - FULL SCREEN WITH HORIZON LINE
+           ================================ */
+        .hero {
+            background: var(--obriy-dark);
+            position: relative;
+            /* Étendre visuellement vers le haut pour couvrir safe-area */
+            margin-top: calc(-1 * env(safe-area-inset-top, 0));
+            padding-top: env(safe-area-inset-top, 0) !important;
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            /* Étendre le gradient vers le haut aussi */
+            top: calc(-1 * env(safe-area-inset-top, 0));
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(245, 158, 11, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(13, 148, 136, 0.08) 0%, transparent 60%);
+        }
+
+        /* Animated horizon line */
+        .horizon-line {
+            position: absolute;
+            bottom: 30%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            overflow: hidden;
+        }
+
+        .horizon-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--obriy-yellow) 15%,
+                var(--obriy-yellow) 50%,
+                var(--obriy-yellow) 85%,
+                transparent 100%);
+            transform: scaleX(0);
+            animation: drawHorizon 2s ease-out 0.5s forwards;
+        }
+
+        @keyframes drawHorizon {
+            0% { transform: scaleX(0); }
+            100% { transform: scaleX(1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            /* Décaler le contenu texte pour ne pas être sous le notch/header */
+            padding-top: calc(env(safe-area-inset-top) + 4rem);
+        }
+
+        .hero-meaning {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: 500;
+            color: var(--obriy-yellow);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+
+        .hero-logo {
+            font-size: clamp(5rem, 18vw, 12rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(135deg, var(--obriy-white) 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero-message {
+            font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.7s;
+        }
+
+        .hero-message strong {
+            color: var(--obriy-yellow);
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .scroll-indicator i {
+            font-size: 1.75rem;
+            animation: bounceDown 2s ease-in-out infinite;
+        }
+
+        @keyframes bounceDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* ================================
+           STATS SECTION - GIANT NUMBERS
+           ================================ */
+        .stats-section {
+            background: var(--obriy-white);
+            color: var(--obriy-text);
+        }
+
+        .stats-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .stats-intro h2 {
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: var(--obriy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .stats-intro h2 .highlight {
+            color: var(--obriy-accent);
+        }
+
+        .stats-intro p {
+            font-size: 1.2rem;
+            color: var(--obriy-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .giant-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .giant-stats {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .giant-stat {
+            text-align: center;
+        }
+
+        .giant-stat .number {
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 800;
+            color: var(--obriy-accent);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .giant-stat.visible .number {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .giant-stat:nth-child(2) .number { transition-delay: 0.1s; }
+        .giant-stat:nth-child(3) .number { transition-delay: 0.2s; }
+        .giant-stat:nth-child(4) .number { transition-delay: 0.3s; }
+
+        .giant-stat .label {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--obriy-text-light);
+            line-height: 1.4;
+        }
+
+        /* ================================
+           STORY SECTION - DARK
+           ================================ */
+        .story-section {
+            background: var(--obriy-dark);
+            color: var(--obriy-white);
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-lead {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 2.5rem;
+        }
+
+        .story-lead .highlight {
+            color: var(--obriy-yellow);
+            font-weight: 600;
+        }
+
+        .story-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-text strong {
+            color: var(--obriy-white);
+            font-weight: 600;
+        }
+
+        /* ================================
+           CHALLENGES SECTION - DARK avec accents jaunes
+           ================================ */
+        .challenges-section {
+            background: var(--obriy-dark-light);
+            color: var(--obriy-white);
+        }
+
+        .challenges-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .challenges-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .challenges-header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .challenges-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .challenge-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--obriy-white);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .challenge-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--obriy-yellow);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .challenge-card h3 i {
+            font-size: 1.5rem;
+        }
+
+        .challenge-card p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .challenge-card .stat-highlight {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--obriy-white);
+        }
+
+        /* ================================
+           PILLARS SECTION - FULL WIDTH BANDS
+           ================================ */
+        .pillars-section {
+            padding: 0;
+            min-height: auto;
+        }
+
+        .pillars-intro {
+            background: var(--obriy-bg);
+            padding: 6rem 2rem;
+            text-align: center;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pillars-intro-content {
+            max-width: 800px;
+        }
+
+        .pillars-statement {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--obriy-text);
+            max-width: 800px;
+            margin-bottom: 3rem;
+        }
+
+        .pillars-statement strong {
+            color: var(--obriy-accent);
+            font-weight: 700;
+        }
+
+        .pillars-intro h2 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            color: var(--obriy-dark);
+            margin-bottom: 0;
+        }
+
+        .pillars-intro p {
+            font-size: 1.2rem;
+            color: var(--obriy-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pillars-icons {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2.5rem 0;
+        }
+
+        .pillar-icon-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .pillar-icon-preview i {
+            font-size: 3rem;
+            padding: 1.25rem;
+            border-radius: 20px;
+        }
+
+        .pillar-icon-preview.blue i {
+            color: var(--obriy-accent);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .pillar-icon-preview.yellow i {
+            color: var(--obriy-yellow);
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .pillar-icon-preview.teal i {
+            color: var(--obriy-teal);
+            background: rgba(13, 148, 136, 0.1);
+        }
+
+        .pillar-icon-preview span {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--obriy-text);
+        }
+
+        .pillar-band {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 2rem;
+        }
+
+        .pillar-band-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .pillar-band-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Pilier Équilibre - Fond dark avec accent bleu subtil */
+        .pillar-band.blue {
+            background: linear-gradient(135deg, var(--obriy-dark) 0%, var(--obriy-dark-light) 100%);
+            color: var(--obriy-white);
+            position: relative;
+        }
+
+        .pillar-band.blue::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Pilier Réseau - Fond clair avec accent jaune subtil */
+        .pillar-band.yellow {
+            background: var(--obriy-bg);
+            color: var(--obriy-dark);
+            position: relative;
+        }
+
+        .pillar-band.yellow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 80% 50%, rgba(245, 158, 11, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Pilier Jeunesse - Teal (garde la couleur, pas trop intense) */
+        .pillar-band.teal {
+            background: var(--obriy-teal);
+            color: var(--obriy-white);
+        }
+
+        .pillar-icon-large {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            margin-bottom: 2rem;
+        }
+
+        .pillar-band.blue .pillar-icon-large {
+            background: rgba(37, 99, 235, 0.2);
+        }
+
+        .pillar-band.yellow .pillar-icon-large {
+            background: rgba(245, 158, 11, 0.15);
+        }
+
+        .pillar-band.teal .pillar-icon-large {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .pillar-icon-large i {
+            font-size: 3.5rem;
+        }
+
+        .pillar-band.blue .pillar-icon-large i {
+            color: var(--obriy-accent);
+        }
+
+        .pillar-band.yellow .pillar-icon-large i {
+            color: var(--obriy-yellow);
+        }
+
+        .pillar-band.teal .pillar-icon-large i {
+            color: var(--obriy-white);
+        }
+
+        .pillar-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .pillar-desc {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .pillar-band.yellow .pillar-desc {
+            color: var(--obriy-text);
+        }
+
+        .pillar-features {
+            list-style: none;
+        }
+
+        .pillar-features li {
+            font-size: 1.1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .pillar-band.yellow .pillar-features li {
+            border-bottom-color: var(--obriy-border);
+            color: var(--obriy-text);
+        }
+
+        .pillar-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pillar-features li i {
+            font-size: 1.25rem;
+            color: var(--obriy-yellow);
+        }
+
+        .pillar-band.blue .pillar-features li i {
+            color: var(--obriy-accent);
+        }
+
+        .pillar-band.teal .pillar-features li i {
+            color: var(--obriy-white);
+        }
+
+        .pillar-visual {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ================================
+           PILOT SECTION - Bleu accent doux
+           ================================ */
+        .pilot-section {
+            background: var(--obriy-accent);
+            color: var(--obriy-white);
+        }
+
+        .pilot-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .pilot-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .pilot-text h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .pilot-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .pilot-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .pilot-stat {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .pilot-stat .value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .pilot-stat .label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ================================
+           TESTIMONIALS - Style V3
+           ================================ */
+        .testimonials-section {
+            background: var(--obriy-dark);
+            color: var(--obriy-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-bg-quote {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(15rem, 40vw, 30rem);
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.03);
+            line-height: 1;
+            pointer-events: none;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--obriy-yellow);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .testimonial-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-slides {
+            position: relative;
+            min-height: 280px;
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-slides {
+                min-height: 400px;
+            }
+        }
+
+        .testimonial-slide {
+            text-align: center;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .testimonial-quote {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            position: absolute;
+            top: -0.5em;
+            left: -0.5em;
+            font-size: 4rem;
+            color: var(--obriy-yellow);
+            opacity: 0.4;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .testimonial-author strong {
+            color: var(--obriy-white);
+            font-weight: 600;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-nav button {
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--obriy-white);
+        }
+
+        .testimonial-nav button:hover {
+            background: var(--obriy-yellow);
+            border-color: var(--obriy-yellow);
+            color: var(--obriy-dark);
+        }
+
+        .testimonial-nav button i {
+            font-size: 1.5rem;
+        }
+
+        .testimonial-dots {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--obriy-yellow);
+            transform: scale(1.2);
+        }
+
+        /* ================================
+           ACTION SECTION
+           ================================ */
+        .action-section {
+            background: var(--obriy-white);
+            color: var(--obriy-text);
+        }
+
+        .action-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .action-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--obriy-dark);
+            margin-bottom: 1rem;
+        }
+
+        .action-header p {
+            font-size: 1.2rem;
+            color: var(--obriy-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .action-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .action-card {
+            background: var(--obriy-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .action-card .action-icon {
+            width: 56px;
+            height: 56px;
+            min-width: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--obriy-white);
+            border-radius: 14px;
+        }
+
+        .action-card .action-icon i {
+            font-size: 1.75rem;
+            color: var(--obriy-accent);
+        }
+
+        .action-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--obriy-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .action-card p {
+            font-size: 1rem;
+            color: var(--obriy-text-light);
+            line-height: 1.6;
+        }
+
+        /* ================================
+           TEAM SECTION
+           ================================ */
+        .team-section {
+            background: var(--obriy-cream);
+            color: var(--obriy-text);
+        }
+
+        .team-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--obriy-text-light);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 600px) {
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.25rem;
+            background: var(--obriy-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--obriy-white);
+        }
+
+        .team-member.yellow .team-avatar {
+            background: var(--obriy-yellow);
+            color: var(--obriy-dark);
+        }
+
+        .team-member.teal .team-avatar {
+            background: var(--obriy-teal);
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--obriy-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-bio {
+            font-size: 1rem;
+            color: var(--obriy-text-light);
+        }
+
+        /* ================================
+           CONTACT SECTION (was footer)
+           ================================ */
+        .contact-section {
+            background: var(--obriy-dark);
+            text-align: center;
+        }
+
+        .contact-logo {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--obriy-white);
+            margin-bottom: 2rem;
+        }
+
+        .contact-status {
+            display: inline-block;
+            padding: 0.6rem 1.25rem;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 100px;
+            font-size: 0.9rem;
+            color: var(--obriy-yellow);
+            margin-bottom: 2rem;
+        }
+
+        .contact-email {
+            font-size: 1.25rem;
+        }
+
+        .contact-email a {
+            color: var(--obriy-white);
+            text-decoration: none;
+            padding: 0.75rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-email a:hover {
+            background: var(--obriy-yellow);
+            border-color: var(--obriy-yellow);
+            color: var(--obriy-dark);
+        }
+
+        /* ================================
+           SECTION NAVIGATION (floating)
+           ================================ */
+        .section-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 90;
+        }
+
+        .nav-arrow {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(26, 39, 68, 0.7);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--obriy-white);
+        }
+
+        .nav-arrow:hover {
+            background: var(--obriy-yellow);
+            border-color: var(--obriy-yellow);
+            color: var(--obriy-dark);
+        }
+
+        .nav-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-arrow:disabled:hover {
+            background: rgba(26, 39, 68, 0.7);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: var(--obriy-white);
+        }
+
+        .nav-arrow i {
+            font-size: 1.25rem;
+        }
+
+        .nav-dots {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-dot.active {
+            background: var(--obriy-yellow);
+            transform: scale(1.3);
+        }
+
+        /* Light background sections need darker nav */
+        .section-nav.light-bg .nav-arrow {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: var(--obriy-border);
+            color: var(--obriy-dark);
+        }
+
+        .section-nav.light-bg .nav-arrow:hover {
+            background: var(--obriy-accent);
+            border-color: var(--obriy-accent);
+            color: var(--obriy-white);
+        }
+
+        .section-nav.light-bg .nav-dot {
+            background: rgba(26, 39, 68, 0.25);
+        }
+
+        .section-nav.light-bg .nav-dot:hover {
+            background: rgba(26, 39, 68, 0.5);
+        }
+
+        .section-nav.light-bg .nav-dot.active {
+            background: var(--obriy-accent);
+        }
+
+        /* Hide on mobile - swipe is enough */
+        @media (max-width: 768px) {
+            .section-nav {
+                display: none;
+            }
+        }
+
+        /* ================================
+           ANIMATIONS
+           ================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stagger-children.visible > *:nth-child(1) { transition-delay: 0s; }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.1s; }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.15s; }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.2s; }
+
+        .stagger-children.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================
+           RESPONSIVE
+           ================================ */
+
+        /* Tablettes - éviter les marges excessives */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .section-content,
+            .pillar-band-content {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Réduire les paddings de base */
+            .full-section {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .pillar-band {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .section-content,
+            .pillar-band-content {
+                max-width: 100%;
+                padding: 0 1rem;
+                gap: 1.5rem;
+            }
+
+            /* Réduire les espacements des icônes piliers */
+            .pillar-icon-large {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 1rem;
+            }
+
+            /* Réduire les espacements des titres et textes */
+            .pillar-title {
+                margin-bottom: 0.5rem;
+            }
+
+            .pillar-desc {
+                margin-bottom: 1rem;
+            }
+
+            /* Réduire les espacements des features */
+            .pillar-features li {
+                padding: 0.4rem 0;
+            }
+
+            /* Section Action - réduire espacements */
+            .action-header {
+                margin-bottom: 2rem;
+            }
+
+            .action-card {
+                padding: 1.25rem;
+                gap: 1rem;
+            }
+
+            .action-card .action-icon {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+            }
+
+            .action-card .action-icon i {
+                font-size: 1.5rem;
+            }
+
+            .action-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .action-card p {
+                font-size: 1rem;
+            }
+
+            .action-grid {
+                gap: 1rem;
+            }
+
+            /* Section Pilot (Déjà en action) - réduire espacements */
+            .pilot-content {
+                gap: 1.5rem;
+            }
+
+            .pilot-text h2 {
+                margin-bottom: 1rem;
+            }
+
+            .pilot-text p {
+                font-size: 1rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .pilot-stats {
+                gap: 1rem;
+            }
+
+            .pilot-stat {
+                padding: 1rem;
+            }
+
+            .pilot-stat .value {
+                font-size: 2rem;
+            }
+
+            /* Pillars icons - réduire sur mobile */
+            .pillars-icons {
+                gap: 1.5rem;
+            }
+
+            .pillar-icon-preview i {
+                font-size: 2rem;
+                padding: 1rem;
+            }
+
+            .pillar-icon-preview span {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ================================
+           ACCESSIBILITY
+           ================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .reveal, .reveal-left, .reveal-right,
+            .stagger-children > *,
+            .giant-stat .number {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body class="show-fr">
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="#" class="header-logo">OBRIY</a>
+            <div class="header-right">
+                <div class="lang-switcher">
+                    <button type="button" class="lang-btn active" data-lang="fr">FR</button>
+                    <button type="button" class="lang-btn" data-lang="en">EN</button>
+                    <button type="button" class="lang-btn" data-lang="ua">UA</button>
+                </div>
+                <a href="../2026-01-05_OBRIY.html" class="presentation-link" title="Présentation">
+                    <i class="ph ph-presentation-chart"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Navigation (floating, desktop only) -->
+    <nav class="section-nav" aria-label="Navigation entre sections">
+        <button type="button" class="nav-arrow nav-up" aria-label="Section précédente">
+            <i class="ph ph-caret-up"></i>
+        </button>
+        <div class="nav-dots"></div>
+        <button type="button" class="nav-arrow nav-down" aria-label="Section suivante">
+            <i class="ph ph-caret-down"></i>
+        </button>
+    </nav>
+
+    <!-- Hero - Full Screen with Horizon Line -->
+    <section class="full-section hero" id="accueil">
+        <div class="horizon-line"></div>
+        <div class="hero-content">
+            <div class="hero-meaning">
+                <span class="lang-fr">ОБРІЙ signifie « horizon » en ukrainien</span>
+                <span class="lang-en">ОБРІЙ means "horizon" in Ukrainian</span>
+                <span class="lang-ua">ОБРІЙ — це горизонт</span>
+            </div>
+            <div class="hero-logo">OBRIY</div>
+            <p class="hero-message">
+                <span class="lang-fr">Pour des milliers d'Ukrainiens au Canada, l'horizon semblait perdu. <strong>Ensemble, nous le reconstruisons.</strong></span>
+                <span class="lang-en">For thousands of Ukrainians in Canada, the horizon seemed lost. <strong>Together, we're rebuilding it.</strong></span>
+                <span class="lang-ua">Для тисяч українців у Канаді горизонт здавався втраченим. <strong>Разом ми його відбудовуємо.</strong></span>
+            </p>
+        </div>
+        <div class="scroll-indicator" onclick="document.getElementById('stats').scrollIntoView({behavior: 'smooth'})">
+            <span class="lang-fr">Découvrir</span>
+            <span class="lang-en">Discover</span>
+            <span class="lang-ua">Дізнатися</span>
+            <i class="ph ph-caret-down"></i>
+        </div>
+    </section>
+
+    <!-- Stats Section - Giant Numbers -->
+    <section class="full-section stats-section" id="stats">
+        <div class="section-content">
+            <div class="stats-intro reveal">
+                <h2>
+                    <span class="lang-fr">Depuis 2022, le Canada est le <span class="highlight">principal refuge hors d'Europe</span></span>
+                    <span class="lang-en">Since 2022, Canada is the <span class="highlight">main refuge outside Europe</span></span>
+                    <span class="lang-ua">З 2022 року Канада — <span class="highlight">головний притулок за межами Європи</span></span>
+                </h2>
+                <p>
+                    <span class="lang-fr">Pour les Ukrainiens fuyant la guerre.</span>
+                    <span class="lang-en">For Ukrainians fleeing war.</span>
+                    <span class="lang-ua">Для українців, що тікають від війни.</span>
+                </p>
+            </div>
+
+            <div class="giant-stats">
+                <div class="giant-stat">
+                    <div class="number">~5,7M</div>
+                    <div class="label">
+                        <span class="lang-fr">réfugiés dans le monde</span>
+                        <span class="lang-en">refugees worldwide</span>
+                        <span class="lang-ua">біженців у світі</span>
+                    </div>
+                </div>
+                <div class="giant-stat">
+                    <div class="number">304K+</div>
+                    <div class="label">
+                        <span class="lang-fr">arrivées au Canada</span>
+                        <span class="lang-en">arrivals in Canada</span>
+                        <span class="lang-ua">прибуттів до Канади</span>
+                    </div>
+                </div>
+                <div class="giant-stat">
+                    <div class="number">90%+</div>
+                    <div class="label">
+                        <span class="lang-fr">veulent rester</span>
+                        <span class="lang-en">want to stay</span>
+                        <span class="lang-ua">хочуть залишитися</span>
+                    </div>
+                </div>
+                <div class="giant-stat">
+                    <div class="number">37%</div>
+                    <div class="label">
+                        <span class="lang-fr">ont des enfants</span>
+                        <span class="lang-en">have children</span>
+                        <span class="lang-ua">мають дітей</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section - Dark -->
+    <section class="full-section story-section">
+        <div class="section-content section-narrow">
+            <!-- Version Desktop -->
+            <div class="story-content text-desktop">
+                <p class="story-lead reveal">
+                    <span class="lang-fr">Derrière les chiffres, il y a des familles séparées, des repères perdus, et une vie reconstruite dans l'incertitude. Pour des millions d'Ukrainiens, ce qui devait être une <span class="highlight">fuite temporaire</span> est devenu un exil prolongé.</span>
+                    <span class="lang-en">Behind the numbers are separated families, lost bearings, and lives rebuilt in uncertainty. For millions of Ukrainians, what was supposed to be a <span class="highlight">temporary escape</span> has become prolonged exile.</span>
+                    <span class="lang-ua">За цифрами — розлучені родини, втрачені орієнтири та життя, відбудоване в невизначеності. Для мільйонів українців те, що мало бути <span class="highlight">тимчасовою втечею</span>, стало тривалим вигнанням.</span>
+                </p>
+                <p class="story-text reveal">
+                    <span class="lang-fr"><strong>Mais accueillir n'est pas intégrer.</strong> Des parents qui cherchent du travail à la hauteur de leurs compétences. Des enfants qui jonglent entre deux systèmes scolaires. Des personnes qui portent le poids du trauma, de la perte, et de l'éloignement des proches restés en Ukraine.</span>
+                    <span class="lang-en"><strong>But welcoming is not integrating.</strong> Parents looking for work that matches their skills. Children juggling between two school systems. People carrying the weight of trauma, loss, and distance from loved ones still in Ukraine.</span>
+                    <span class="lang-ua"><strong>Але прийняти — це не інтегрувати.</strong> Батьки, які шукають роботу відповідно до своїх навичок. Діти, що балансують між двома шкільними системами. Люди, що несуть тягар травми, втрати та відстані від близьких, які залишилися в Україні.</span>
+                </p>
+            </div>
+            <!-- Version Mobile condensée -->
+            <div class="story-content text-mobile">
+                <p class="story-lead reveal">
+                    <span class="lang-fr">Derrière les chiffres, il y a des familles séparées et des vies reconstruites dans l'incertitude. Ce qui devait être une <span class="highlight">fuite temporaire</span> est devenu un exil prolongé.</span>
+                    <span class="lang-en">Behind the numbers are separated families and lives rebuilt in uncertainty. What was supposed to be a <span class="highlight">temporary escape</span> has become prolonged exile.</span>
+                    <span class="lang-ua">За цифрами — розлучені родини та життя в невизначеності. Те, що мало бути <span class="highlight">тимчасовою втечею</span>, стало тривалим вигнанням.</span>
+                </p>
+                <p class="story-text reveal">
+                    <span class="lang-fr"><strong>Mais accueillir n'est pas intégrer.</strong> Emploi, école, trauma — les défis de l'intégration sont immenses.</span>
+                    <span class="lang-en"><strong>But welcoming is not integrating.</strong> Jobs, school, trauma — the challenges of integration are immense.</span>
+                    <span class="lang-ua"><strong>Але прийняти — це не інтегрувати.</strong> Робота, школа, травма — виклики інтеграції величезні.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges Section - Dark avec accents jaunes -->
+    <section class="full-section challenges-section">
+        <div class="section-content">
+            <div class="challenges-header reveal">
+                <h2>
+                    <span class="lang-fr">Les défis de l'intégration</span>
+                    <span class="lang-en">Integration challenges</span>
+                    <span class="lang-ua">Виклики інтеграції</span>
+                </h2>
+                <p>
+                    <span class="lang-fr">Ce qui existe au Canada ne répond pas toujours aux besoins spécifiques de cette communauté.</span>
+                    <span class="lang-en">What exists in Canada doesn't always meet the specific needs of this community.</span>
+                    <span class="lang-ua">Те, що існує в Канаді, не завжди відповідає специфічним потребам цієї громади.</span>
+                </p>
+            </div>
+
+            <div class="challenges-grid stagger-children">
+                <div class="challenge-card">
+                    <h3>
+                        <i class="ph ph-heart"></i>
+                        <span class="lang-fr">Bien-être mental</span>
+                        <span class="lang-en">Mental well-being</span>
+                        <span class="lang-ua">Психічне здоров'я</span>
+                    </h3>
+                    <p>
+                        <span class="lang-fr">Aucun service de soutien psychosocial non clinique en ukrainien. Les barrières linguistiques et culturelles limitent l'accès aux soins.</span>
+                        <span class="lang-en">No non-clinical psychosocial support services in Ukrainian. Language and cultural barriers limit access to care.</span>
+                        <span class="lang-ua">Немає неклінічних психосоціальних послуг українською. Мовні та культурні бар'єри обмежують доступ до допомоги.</span>
+                    </p>
+                    <div class="stat-highlight">
+                        <span class="lang-fr">15-44% touchés par le TSPT</span>
+                        <span class="lang-en">15-44% affected by PTSD</span>
+                        <span class="lang-ua">15-44% страждають від ПТСР</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <h3>
+                        <i class="ph ph-briefcase"></i>
+                        <span class="lang-fr">Emploi qualifié</span>
+                        <span class="lang-en">Skilled employment</span>
+                        <span class="lang-ua">Кваліфікована робота</span>
+                    </h3>
+                    <p>
+                        <span class="lang-fr">Des ingénieurs livreurs, des médecins caissières. La reconnaissance des diplômes est coûteuse et longue.</span>
+                        <span class="lang-en">Engineers delivering food, doctors working as cashiers. Credential recognition is expensive and slow.</span>
+                        <span class="lang-ua">Інженери-кур'єри, лікарі-касири. Визнання дипломів дороге та повільне.</span>
+                    </p>
+                    <div class="stat-highlight">
+                        <span class="lang-fr">44% en sous-emploi</span>
+                        <span class="lang-en">44% underemployed</span>
+                        <span class="lang-ua">44% недозайняті</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <h3>
+                        <i class="ph ph-book-open"></i>
+                        <span class="lang-fr">Réussite scolaire</span>
+                        <span class="lang-en">Academic success</span>
+                        <span class="lang-ua">Навчальний успіх</span>
+                    </h3>
+                    <p>
+                        <span class="lang-fr">Les enfants jonglent entre l'école canadienne et l'école ukrainienne en ligne, souvent sans aide adaptée.</span>
+                        <span class="lang-en">Children juggle between Canadian school and online Ukrainian school, often without adapted support.</span>
+                        <span class="lang-ua">Діти балансують між канадською школою та українською онлайн-школою, часто без адаптованої підтримки.</span>
+                    </p>
+                    <div class="stat-highlight">
+                        <span class="lang-fr">~2 ans de retard en lecture</span>
+                        <span class="lang-en">~2 years behind in reading</span>
+                        <span class="lang-ua">~2 роки відставання в читанні</span>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <h3>
+                        <i class="ph ph-translate"></i>
+                        <span class="lang-fr">Barrière linguistique</span>
+                        <span class="lang-en">Language barrier</span>
+                        <span class="lang-ua">Мовний бар'єр</span>
+                    </h3>
+                    <p>
+                        <span class="lang-fr">Au Québec, la francisation est essentielle mais lente. La maîtrise du français reste un obstacle majeur.</span>
+                        <span class="lang-en">In Quebec, francization is essential but slow. French proficiency remains a major obstacle.</span>
+                        <span class="lang-ua">У Квебеку франсизація необхідна, але повільна. Володіння французькою залишається основною перешкодою.</span>
+                    </p>
+                    <div class="stat-highlight">
+                        <span class="lang-fr">5% parlent français</span>
+                        <span class="lang-en">5% speak French</span>
+                        <span class="lang-ua">5% володіють французькою</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pillars Section - Full Width Bands -->
+    <section class="pillars-section" id="piliers">
+        <div class="pillars-intro">
+            <div class="pillars-intro-content reveal">
+                <p class="pillars-statement">
+                    <span class="lang-fr">L'intégration réussie repose sur un <strong>équilibre</strong> entre le bien-être, le <strong>réseau</strong> communautaire et l'épanouissement de la <strong>jeunesse</strong>.</span>
+                    <span class="lang-en">Successful integration relies on a <strong>balance</strong> between well-being, community <strong>network</strong> and <strong>youth</strong> development.</span>
+                    <span class="lang-ua">Успішна інтеграція спирається на <strong>баланс</strong> між благополуччям, <strong>мережею</strong> громади та розвитком <strong>молоді</strong>.</span>
+                </p>
+                <div class="pillars-icons">
+                    <div class="pillar-icon-preview blue">
+                        <i class="ph ph-scales"></i>
+                        <span class="lang-fr">Équilibre</span>
+                        <span class="lang-en">Balance</span>
+                        <span class="lang-ua">Рівновага</span>
+                    </div>
+                    <div class="pillar-icon-preview yellow">
+                        <i class="ph ph-users"></i>
+                        <span class="lang-fr">Réseau</span>
+                        <span class="lang-en">Network</span>
+                        <span class="lang-ua">Мережа</span>
+                    </div>
+                    <div class="pillar-icon-preview teal">
+                        <i class="ph ph-graduation-cap"></i>
+                        <span class="lang-fr">Jeunesse</span>
+                        <span class="lang-en">Youth</span>
+                        <span class="lang-ua">Молодь</span>
+                    </div>
+                </div>
+                <h2>
+                    <span class="lang-fr">Trois piliers. Un horizon.</span>
+                    <span class="lang-en">Three pillars. One horizon.</span>
+                    <span class="lang-ua">Три напрями. Один горизонт.</span>
+                </h2>
+            </div>
+        </div>
+
+        <!-- Pilier 1: Équilibre - Fond dark avec accent bleu subtil -->
+        <div class="pillar-band blue">
+            <div class="pillar-band-content">
+                <div class="pillar-visual reveal-left">
+                    <div class="pillar-icon-large">
+                        <i class="ph ph-scales"></i>
+                    </div>
+                    <h3 class="pillar-title">
+                        <span class="lang-fr">Équilibre</span>
+                        <span class="lang-en">Balance</span>
+                        <span class="lang-ua">Рівновага</span>
+                    </h3>
+                    <p class="pillar-desc">
+                        <span class="lang-fr">Soutien psychosocial non clinique en ukrainien. Groupes d'entraide et ateliers pour retrouver la stabilité émotionnelle.</span>
+                        <span class="lang-en">Non-clinical psychosocial support in Ukrainian. Support groups and workshops to regain emotional stability.</span>
+                        <span class="lang-ua">Неклінічна психосоціальна підтримка українською. Групи взаємодопомоги та майстерні для відновлення емоційної стабільності.</span>
+                    </p>
+                </div>
+                <ul class="pillar-features reveal-right stagger-children">
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Cohortes de 10 séances structurées</span>
+                        <span class="lang-en">10-session structured cohorts</span>
+                        <span class="lang-ua">Структуровані когорти з 10 сесій</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Adultes, adolescents et enfants</span>
+                        <span class="lang-en">Adults, teens, and children</span>
+                        <span class="lang-ua">Дорослі, підлітки та діти</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Animé par des pairs formés</span>
+                        <span class="lang-en">Led by trained peers</span>
+                        <span class="lang-ua">Ведуть навчені однолітки</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Basé sur des approches validées</span>
+                        <span class="lang-en">Based on validated approaches</span>
+                        <span class="lang-ua">На основі перевірених підходів</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pilier 2: Réseau - Fond clair avec accent jaune subtil -->
+        <div class="pillar-band yellow">
+            <div class="pillar-band-content">
+                <div class="pillar-visual reveal-left">
+                    <div class="pillar-icon-large">
+                        <i class="ph ph-users"></i>
+                    </div>
+                    <h3 class="pillar-title">
+                        <span class="lang-fr">Réseau</span>
+                        <span class="lang-en">Network</span>
+                        <span class="lang-ua">Мережа</span>
+                    </h3>
+                    <p class="pillar-desc">
+                        <span class="lang-fr">Entraide communautaire. Connecter les talents, les besoins et les ressources de la diaspora ukrainienne.</span>
+                        <span class="lang-en">Community mutual aid. Connecting talents, needs, and resources within the Ukrainian diaspora.</span>
+                        <span class="lang-ua">Громадська взаємодопомога. Поєднання талантів, потреб і ресурсів української діаспори.</span>
+                    </p>
+                </div>
+                <ul class="pillar-features reveal-right stagger-children">
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Annuaire de services vérifié</span>
+                        <span class="lang-en">Verified service directory</span>
+                        <span class="lang-ua">Верифікований довідник послуг</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Système d'offres et demandes</span>
+                        <span class="lang-en">Offers and requests system</span>
+                        <span class="lang-ua">Система пропозицій та запитів</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Gratuit et sans publicité</span>
+                        <span class="lang-en">Free and ad-free</span>
+                        <span class="lang-ua">Безкоштовно і без реклами</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Modéré par la communauté</span>
+                        <span class="lang-en">Community moderated</span>
+                        <span class="lang-ua">Модерується громадою</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pilier 3: Jeunesse - Teal -->
+        <div class="pillar-band teal">
+            <div class="pillar-band-content">
+                <div class="pillar-visual reveal-left">
+                    <div class="pillar-icon-large">
+                        <i class="ph ph-graduation-cap"></i>
+                    </div>
+                    <h3 class="pillar-title">
+                        <span class="lang-fr">Jeunesse</span>
+                        <span class="lang-en">Youth</span>
+                        <span class="lang-ua">Молодь</span>
+                    </h3>
+                    <p class="pillar-desc">
+                        <span class="lang-fr">Tutorat et accompagnement scolaire pour les jeunes 4-17 ans, par des tuteurs qui comprennent leur parcours.</span>
+                        <span class="lang-en">Tutoring and academic support for youth 4-17, by tutors who understand their journey.</span>
+                        <span class="lang-ua">Репетиторство та навчальна підтримка для молоді 4-17 років від тих, хто розуміє їхній шлях.</span>
+                    </p>
+                </div>
+                <ul class="pillar-features reveal-right stagger-children">
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Tutorat 1:1 personnalisé</span>
+                        <span class="lang-en">Personalized 1:1 tutoring</span>
+                        <span class="lang-ua">Персоналізоване репетиторство 1:1</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Mathématiques, français, sciences</span>
+                        <span class="lang-en">Math, French, sciences</span>
+                        <span class="lang-ua">Математика, французька, науки</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Tuteurs ukrainophones formés</span>
+                        <span class="lang-en">Trained Ukrainian-speaking tutors</span>
+                        <span class="lang-ua">Навчені україномовні репетитори</span>
+                    </li>
+                    <li>
+                        <i class="ph ph-check-circle"></i>
+                        <span class="lang-fr">Suivi des progrès</span>
+                        <span class="lang-en">Progress tracking</span>
+                        <span class="lang-ua">Відстеження прогресу</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pilot Section - Bleu accent -->
+    <section class="full-section pilot-section">
+        <div class="section-content">
+            <div class="pilot-content">
+                <div class="pilot-text reveal-left">
+                    <h2>
+                        <span class="lang-fr">Déjà en action</span>
+                        <span class="lang-en">Already in action</span>
+                        <span class="lang-ua">Вже в дії</span>
+                    </h2>
+                    <!-- Version Desktop -->
+                    <div class="text-desktop">
+                        <p>
+                            <span class="lang-fr">Depuis octobre 2025, le pilier Équilibre est actif à Montréal. Deux groupes par semaine, animés en ukrainien, accompagnent des adultes dans leur parcours d'adaptation.</span>
+                            <span class="lang-en">Since October 2025, the Balance pillar has been active in Montreal. Two groups per week, facilitated in Ukrainian, support adults in their adaptation journey.</span>
+                            <span class="lang-ua">З жовтня 2025 року напрям Рівновага активний у Монреалі. Дві групи на тиждень, які ведуться українською, підтримують дорослих у їхньому шляху адаптації.</span>
+                        </p>
+                        <p>
+                            <span class="lang-fr">Les premiers résultats sont encourageants : réduction de l'isolement, création de liens, et un espace sécuritaire pour partager et avancer.</span>
+                            <span class="lang-en">Early results are encouraging: reduced isolation, new connections, and a safe space to share and move forward.</span>
+                            <span class="lang-ua">Перші результати обнадійливі: зменшення ізоляції, нові зв'язки та безпечний простір для обміну та руху вперед.</span>
+                        </p>
+                    </div>
+                    <!-- Version Mobile condensée -->
+                    <div class="text-mobile">
+                        <p>
+                            <span class="lang-fr">Depuis octobre 2025, le pilier Équilibre est actif à Montréal avec deux groupes par semaine. Résultats encourageants : moins d'isolement, nouveaux liens, espace sécuritaire.</span>
+                            <span class="lang-en">Since October 2025, the Balance pillar has been active in Montreal with two groups per week. Encouraging results: less isolation, new connections, safe space.</span>
+                            <span class="lang-ua">З жовтня 2025 року напрям Рівновага активний у Монреалі з двома групами на тиждень. Обнадійливі результати: менше ізоляції, нові зв'язки, безпечний простір.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="pilot-stats reveal-right stagger-children">
+                    <div class="pilot-stat">
+                        <div class="value">2</div>
+                        <div class="label">
+                            <span class="lang-fr">groupes/semaine</span>
+                            <span class="lang-en">groups/week</span>
+                            <span class="lang-ua">групи/тиждень</span>
+                        </div>
+                    </div>
+                    <div class="pilot-stat">
+                        <div class="value">18</div>
+                        <div class="label">
+                            <span class="lang-fr">participants actifs</span>
+                            <span class="lang-en">active participants</span>
+                            <span class="lang-ua">активних учасників</span>
+                        </div>
+                    </div>
+                    <div class="pilot-stat">
+                        <div class="value">10</div>
+                        <div class="label">
+                            <span class="lang-fr">séances/cohorte</span>
+                            <span class="lang-en">sessions/cohort</span>
+                            <span class="lang-ua">сесій/когорта</span>
+                        </div>
+                    </div>
+                    <div class="pilot-stat">
+                        <div class="value">2h30</div>
+                        <div class="label">
+                            <span class="lang-fr">par rencontre</span>
+                            <span class="lang-en">per session</span>
+                            <span class="lang-ua">за зустріч</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="full-section testimonials-section">
+        <div class="testimonial-bg-quote">"</div>
+        <div class="section-content section-narrow">
+            <div class="testimonial-label">
+                <span class="lang-fr">Témoignages</span>
+                <span class="lang-en">Testimonials</span>
+                <span class="lang-ua">Свідчення</span>
+            </div>
+
+            <div class="testimonial-carousel reveal">
+                <div class="testimonial-slides">
+                    <!-- Témoignage 1: Andriy L. -->
+                    <div class="testimonial-slide active">
+                        <p class="testimonial-quote">
+                            <span class="lang-fr">La participation au groupe m'a donné un sentiment d'unité. J'ai cessé de me sentir isolé dans mes problèmes d'adaptation. Les peurs et l'anxiété ont diminué, et j'ai de nouveau envie de vivre, les forces et l'inspiration reviennent.</span>
+                            <span class="lang-en">Participating in the group gave me a sense of unity. I stopped feeling isolated in my adaptation problems. Fears and anxiety decreased, and I want to live again, strength and inspiration are returning.</span>
+                            <span class="lang-ua">Участь у групі дала мені відчуття єдності. Я перестав почуватися ізольованим у своїх проблемах адаптації. Страхи та тривога зменшилися, і я знову хочу жити, сили та натхнення повертаються.</span>
+                        </p>
+                        <p class="testimonial-author">
+                            <strong>Andriy L.</strong> —
+                            <span class="lang-fr">participant, Équilibre</span>
+                            <span class="lang-en">participant, Balance</span>
+                            <span class="lang-ua">учасник, Рівновага</span>
+                        </p>
+                    </div>
+
+                    <!-- Témoignage 2: Nadiya D. -->
+                    <div class="testimonial-slide">
+                        <p class="testimonial-quote">
+                            <span class="lang-fr">Je suis très reconnaissante pour votre projet et ce que vous faites. Au cours de nos rencontres, j'ai compris que tout ce que je ressens et vis a sa place et c'est normal. C'était important pour moi d'être entendue et acceptée.</span>
+                            <span class="lang-en">I am very grateful for your project and what you do. During our meetings, I understood that everything I feel and experience has its place and it's normal. It was important for me to be heard and accepted.</span>
+                            <span class="lang-ua">Дуже вдячна за ваш проект i що робите. За час наших зустрiчей я зрозумiла, що все те, що я вiдчуваю та переживаю, має мicце бути i це нормально. Для мене важливо було бути почутою та прийнятою.</span>
+                        </p>
+                        <p class="testimonial-author">
+                            <strong>Nadiya D.</strong> —
+                            <span class="lang-fr">participante, Équilibre</span>
+                            <span class="lang-en">participant, Balance</span>
+                            <span class="lang-ua">учасниця, Рівновага</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="testimonial-nav">
+                    <button type="button" class="testimonial-prev" aria-label="Previous testimonial">
+                        <i class="ph ph-caret-left"></i>
+                    </button>
+                    <div class="testimonial-dots">
+                        <div class="testimonial-dot active" data-index="0"></div>
+                        <div class="testimonial-dot" data-index="1"></div>
+                    </div>
+                    <button type="button" class="testimonial-next" aria-label="Next testimonial">
+                        <i class="ph ph-caret-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Section -->
+    <section class="full-section action-section">
+        <div class="section-content">
+            <div class="action-header reveal">
+                <h2>
+                    <span class="lang-fr">Comment s'impliquer</span>
+                    <span class="lang-en">How to get involved</span>
+                    <span class="lang-ua">Як долучитися</span>
+                </h2>
+                <p>
+                    <span class="lang-fr">OBRIY se construit avec la communauté. Voici comment vous pouvez contribuer.</span>
+                    <span class="lang-en">OBRIY is built with the community. Here's how you can contribute.</span>
+                    <span class="lang-ua">OBRIY будується разом з громадою. Ось як ви можете долучитися.</span>
+                </p>
+            </div>
+
+            <div class="action-grid stagger-children">
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-hand-heart"></i>
+                    </div>
+                    <div>
+                        <h3>
+                            <span class="lang-fr">Devenir tuteur ou facilitateur</span>
+                            <span class="lang-en">Become a tutor or facilitator</span>
+                            <span class="lang-ua">Стати репетитором або фасилітатором</span>
+                        </h3>
+                        <p class="text-desktop">
+                            <span class="lang-fr">Vous parlez ukrainien et voulez aider? Rejoignez l'équipe de tuteurs ou de facilitateurs de groupes.</span>
+                            <span class="lang-en">You speak Ukrainian and want to help? Join the team of tutors or group facilitators.</span>
+                            <span class="lang-ua">Ви говорите українською і хочете допомогти? Приєднуйтесь до команди репетиторів або фасилітаторів груп.</span>
+                        </p>
+                        <p class="text-mobile">
+                            <span class="lang-fr">Vous parlez ukrainien? Rejoignez notre équipe de tuteurs ou facilitateurs.</span>
+                            <span class="lang-en">Speak Ukrainian? Join our team of tutors or facilitators.</span>
+                            <span class="lang-ua">Говорите українською? Приєднуйтесь до команди репетиторів або фасилітаторів.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-users-three"></i>
+                    </div>
+                    <div>
+                        <h3>
+                            <span class="lang-fr">Rejoindre un groupe Équilibre</span>
+                            <span class="lang-en">Join a Balance group</span>
+                            <span class="lang-ua">Приєднатися до групи Рівновага</span>
+                        </h3>
+                        <p class="text-desktop">
+                            <span class="lang-fr">Vous êtes ukrainien et cherchez un espace de soutien? Les inscriptions sont ouvertes pour les prochaines cohortes.</span>
+                            <span class="lang-en">You're Ukrainian and looking for a support space? Registration is open for upcoming cohorts.</span>
+                            <span class="lang-ua">Ви українець і шукаєте простір підтримки? Реєстрація відкрита для наступних когорт.</span>
+                        </p>
+                        <p class="text-mobile">
+                            <span class="lang-fr">Vous cherchez un espace de soutien? Les inscriptions sont ouvertes.</span>
+                            <span class="lang-en">Looking for a support space? Registration is open.</span>
+                            <span class="lang-ua">Шукаєте простір підтримки? Реєстрація відкрита.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-buildings"></i>
+                    </div>
+                    <div>
+                        <h3>
+                            <span class="lang-fr">Partenariats organisationnels</span>
+                            <span class="lang-en">Organizational partnerships</span>
+                            <span class="lang-ua">Організаційне партнерство</span>
+                        </h3>
+                        <p class="text-desktop">
+                            <span class="lang-fr">Vous travaillez avec des nouveaux arrivants? Nous cherchons des partenaires pour étendre notre impact.</span>
+                            <span class="lang-en">You work with newcomers? We're looking for partners to extend our impact.</span>
+                            <span class="lang-ua">Ви працюєте з новоприбулими? Ми шукаємо партнерів для розширення нашого впливу.</span>
+                        </p>
+                        <p class="text-mobile">
+                            <span class="lang-fr">Vous travaillez avec des nouveaux arrivants? Devenez partenaire.</span>
+                            <span class="lang-en">Work with newcomers? Become a partner.</span>
+                            <span class="lang-ua">Працюєте з новоприбулими? Станьте партнером.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="action-card">
+                    <div class="action-icon">
+                        <i class="ph ph-megaphone"></i>
+                    </div>
+                    <div>
+                        <h3>
+                            <span class="lang-fr">Faire connaître OBRIY</span>
+                            <span class="lang-en">Spread the word about OBRIY</span>
+                            <span class="lang-ua">Розповісти про OBRIY</span>
+                        </h3>
+                        <p class="text-desktop">
+                            <span class="lang-fr">Partagez notre mission avec votre réseau. Chaque voix compte pour rejoindre ceux qui ont besoin de soutien.</span>
+                            <span class="lang-en">Share our mission with your network. Every voice matters to reach those who need support.</span>
+                            <span class="lang-ua">Поділіться нашою місією зі своєю мережею. Кожен голос важливий, щоб досягти тих, хто потребує підтримки.</span>
+                        </p>
+                        <p class="text-mobile">
+                            <span class="lang-fr">Partagez notre mission avec votre réseau. Chaque voix compte.</span>
+                            <span class="lang-en">Share our mission with your network. Every voice counts.</span>
+                            <span class="lang-ua">Поділіться нашою місією зі своєю мережею. Кожен голос важливий.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="full-section team-section" id="equipe">
+        <div class="section-content section-narrow">
+            <div class="team-label reveal">
+                <span class="lang-fr">L'équipe</span>
+                <span class="lang-en">The team</span>
+                <span class="lang-ua">Команда</span>
+            </div>
+            <div class="team-grid stagger-children">
+                <div class="team-member">
+                    <div class="team-avatar">YM</div>
+                    <div class="team-name">Yuliia Mikhaylets</div>
+                    <div class="team-bio">
+                        <span class="lang-fr">Psychologue, formation jungienne</span>
+                        <span class="lang-en">Psychologist, Jungian training</span>
+                        <span class="lang-ua">Психологиня, юнгіанська підготовка</span>
+                    </div>
+                </div>
+
+                <div class="team-member yellow">
+                    <div class="team-avatar">RK</div>
+                    <div class="team-name">Rymma Klopova</div>
+                    <div class="team-bio">
+                        <span class="lang-fr">20+ ans en coordination</span>
+                        <span class="lang-en">20+ years in coordination</span>
+                        <span class="lang-ua">20+ років у координації</span>
+                    </div>
+                </div>
+
+                <div class="team-member teal">
+                    <div class="team-avatar">GB</div>
+                    <div class="team-name">Gabriel Boutin</div>
+                    <div class="team-bio">
+                        <span class="lang-fr">Entrepreneur tech & design</span>
+                        <span class="lang-en">Tech & design entrepreneur</span>
+                        <span class="lang-ua">Техпідприємець і дизайн</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="full-section contact-section" id="contact">
+        <div class="contact-logo">OBRIY</div>
+        <div class="contact-status">
+            <span class="lang-fr">En développement · Montréal</span>
+            <span class="lang-en">In development · Montreal</span>
+            <span class="lang-ua">В розробці · Монреаль</span>
+        </div>
+        <div class="contact-email">
+            <a href="mailto:info@obriy.ca">info@obriy.ca</a>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script>
+        // ================================
+        // Safari iOS - Fix address bar jump
+        // Capture la hauteur au début du scroll et la maintient fixe
+        // ================================
+        (function() {
+            // Détection iOS Safari
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            if (!isIOS) return;
+
+            const sections = document.querySelectorAll('.full-section, .pillars-intro, .pillar-band');
+            let isScrolling = false;
+            let scrollTimeout;
+            let fixedHeight;
+
+            // Au début du touch, fixer la hauteur
+            document.addEventListener('touchstart', function() {
+                if (!isScrolling) {
+                    fixedHeight = window.innerHeight;
+                    sections.forEach(section => {
+                        section.style.minHeight = fixedHeight + 'px';
+                    });
+                    isScrolling = true;
+                }
+            }, { passive: true });
+
+            // Après l'arrêt du scroll, permettre le recalcul
+            document.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(function() {
+                    isScrolling = false;
+                    // Optionnel: recalculer après 300ms d'inactivité
+                    sections.forEach(section => {
+                        section.style.minHeight = '';
+                    });
+                }, 300);
+            }, { passive: true });
+        })();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Language switcher
+            const langBtns = document.querySelectorAll('.lang-btn');
+
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+
+                    document.body.classList.remove('show-fr', 'show-en', 'show-ua');
+                    document.body.classList.add('show-' + lang);
+
+                    langBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
+                    localStorage.setItem('obriy-lang', lang);
+                });
+            });
+
+            const savedLang = localStorage.getItem('obriy-lang');
+            if (savedLang) {
+                const btn = document.querySelector(`[data-lang="${savedLang}"]`);
+                if (btn) btn.click();
+            }
+
+            // ================================
+            // SECTION NAVIGATION
+            // ================================
+            const sectionNav = document.querySelector('.section-nav');
+            const navUp = document.querySelector('.nav-up');
+            const navDown = document.querySelector('.nav-down');
+            const navDotsContainer = document.querySelector('.nav-dots');
+
+            // Collect all navigable sections
+            const sections = document.querySelectorAll('.full-section, .pillar-band, .pillars-intro');
+            let currentSectionIndex = 0;
+
+            // Light background sections (for nav styling)
+            const lightBgSelectors = ['.stats-section', '.pillars-intro', '.pillar-band.yellow', '.action-section', '.team-section'];
+
+            // Create navigation dots
+            sections.forEach((section, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot' + (index === 0 ? ' active' : '');
+                dot.dataset.index = index;
+                dot.addEventListener('click', () => scrollToSection(index));
+                navDotsContainer.appendChild(dot);
+            });
+
+            const navDots = document.querySelectorAll('.nav-dot');
+
+            function scrollToSection(index) {
+                if (index < 0 || index >= sections.length) return;
+                sections[index].scrollIntoView({ behavior: 'smooth' });
+            }
+
+            function updateNavState(index) {
+                currentSectionIndex = index;
+
+                // Update dots
+                navDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+
+                // Update arrow states
+                navUp.disabled = index === 0;
+                navDown.disabled = index === sections.length - 1;
+
+                // Check if current section has light background
+                const currentSection = sections[index];
+                const isLightBg = lightBgSelectors.some(selector => currentSection.matches(selector));
+                sectionNav.classList.toggle('light-bg', isLightBg);
+            }
+
+            // Navigation button handlers
+            navUp.addEventListener('click', () => {
+                if (currentSectionIndex > 0) {
+                    scrollToSection(currentSectionIndex - 1);
+                }
+            });
+
+            navDown.addEventListener('click', () => {
+                if (currentSectionIndex < sections.length - 1) {
+                    scrollToSection(currentSectionIndex + 1);
+                }
+            });
+
+            // Observe which section is in view
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                        const index = Array.from(sections).indexOf(entry.target);
+                        if (index !== -1) {
+                            updateNavState(index);
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            sections.forEach(section => sectionObserver.observe(section));
+
+            // Keyboard navigation (desktop only)
+            const isMobile = window.innerWidth <= 768;
+            if (!isMobile) {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                        e.preventDefault();
+                        if (currentSectionIndex < sections.length - 1) {
+                            scrollToSection(currentSectionIndex + 1);
+                        }
+                    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                        e.preventDefault();
+                        if (currentSectionIndex > 0) {
+                            scrollToSection(currentSectionIndex - 1);
+                        }
+                    }
+                });
+            }
+
+            // Initialize nav state
+            updateNavState(0);
+
+            // Scroll reveal animations
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger-children, .giant-stat');
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // Testimonial carousel
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const testimonialDots = document.querySelectorAll('.testimonial-dot');
+            const prevBtn = document.querySelector('.testimonial-prev');
+            const nextBtn = document.querySelector('.testimonial-next');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach(s => s.classList.remove('active'));
+                testimonialDots.forEach(d => d.classList.remove('active'));
+                slides[index].classList.add('active');
+                testimonialDots[index].classList.add('active');
+                currentSlide = index;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                const newIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+                showSlide(newIndex);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+                showSlide(newIndex);
+            });
+
+            testimonialDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    showSlide(parseInt(dot.dataset.index));
+                });
+            });
+
+            // Auto-advance every 8 seconds
+            setInterval(() => {
+                const newIndex = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+                showSlide(newIndex);
+            }, 8000);
+        });
+    </script>
+
+</body>
+</html>
