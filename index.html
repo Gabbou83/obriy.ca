@@ -1177,6 +1177,22 @@
             line-height: 1.6;
         }
 
+        /* Reset link styles for action cards */
+        a.action-card,
+        a.action-card:hover,
+        a.action-card:focus,
+        a.action-card:visited {
+            text-decoration: none !important;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        a.action-card *,
+        a.action-card:hover *,
+        a.action-card:focus * {
+            text-decoration: none !important;
+        }
+
         /* ================================
            TEAM SECTION
            ================================ */
