@@ -5675,23 +5675,65 @@
 
     <!-- Password Protection -->
     <div id="password-screen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#1a2744;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:99999;">
-        <div style="text-align:center;color:white;font-family:'Google Sans Flex',sans-serif;">
+        <div style="text-align:center;color:white;font-family:'Google Sans Flex',sans-serif;padding:1.5rem;">
             <h1 style="font-size:2.5rem;margin-bottom:2rem;font-weight:700;">OBRIY</h1>
-            <p style="margin-bottom:1.5rem;opacity:0.8;">Présentation protégée</p>
+            <p id="pwd-label" style="margin-bottom:1.5rem;opacity:0.8;">Présentation protégée</p>
             <input type="password" id="pwd-input" placeholder="Mot de passe" autofocus
                    style="padding:1rem 1.5rem;font-size:1rem;border:none;border-radius:8px;width:250px;margin-bottom:1rem;text-align:center;">
             <br>
-            <button onclick="checkPwd()"
+            <button id="pwd-btn" onclick="checkPwd()"
                     style="padding:1rem 2rem;font-size:1rem;background:#2563eb;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;">
                 Accéder
             </button>
             <p id="pwd-error" style="color:#ef4444;margin-top:1rem;display:none;">Mot de passe incorrect</p>
+            <!-- Language selector for password screen -->
+            <div style="margin-top:2rem;display:flex;justify-content:center;gap:0.5rem;">
+                <button onclick="setPwdLang('fr')" class="pwd-lang-btn" data-lang="fr" style="padding:0.5rem 1rem;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);color:white;border-radius:6px;cursor:pointer;font-size:0.85rem;">FR</button>
+                <button onclick="setPwdLang('en')" class="pwd-lang-btn" data-lang="en" style="padding:0.5rem 1rem;border:1px solid rgba(255,255,255,0.3);background:transparent;color:rgba(255,255,255,0.6);border-radius:6px;cursor:pointer;font-size:0.85rem;">EN</button>
+                <button onclick="setPwdLang('ua')" class="pwd-lang-btn" data-lang="ua" style="padding:0.5rem 1rem;border:1px solid rgba(255,255,255,0.3);background:transparent;color:rgba(255,255,255,0.6);border-radius:6px;cursor:pointer;font-size:0.85rem;">UA</button>
+            </div>
         </div>
     </div>
     <script>
+    const pwdTexts = {
+        fr: { label: 'Présentation protégée', placeholder: 'Mot de passe', button: 'Accéder', error: 'Mot de passe incorrect' },
+        en: { label: 'Protected presentation', placeholder: 'Password', button: 'Access', error: 'Incorrect password' },
+        ua: { label: 'Захищена презентація', placeholder: 'Пароль', button: 'Увійти', error: 'Невірний пароль' }
+    };
+    let currentPwdLang = 'fr';
+
+    function setPwdLang(lang) {
+        currentPwdLang = lang;
+        document.getElementById('pwd-label').textContent = pwdTexts[lang].label;
+        document.getElementById('pwd-input').placeholder = pwdTexts[lang].placeholder;
+        document.getElementById('pwd-btn').textContent = pwdTexts[lang].button;
+        document.getElementById('pwd-error').textContent = pwdTexts[lang].error;
+        // Update button styles
+        document.querySelectorAll('.pwd-lang-btn').forEach(btn => {
+            if(btn.dataset.lang === lang) {
+                btn.style.background = 'rgba(255,255,255,0.1)';
+                btn.style.color = 'white';
+            } else {
+                btn.style.background = 'transparent';
+                btn.style.color = 'rgba(255,255,255,0.6)';
+            }
+        });
+        // Store preference for main presentation
+        localStorage.setItem('obriy-lang', lang);
+    }
+
+    // Check if user already has a language preference
+    const savedLang = localStorage.getItem('obriy-lang');
+    if(savedLang && pwdTexts[savedLang]) {
+        setPwdLang(savedLang);
+    }
+
     function checkPwd() {
         if(document.getElementById('pwd-input').value === 'Obriy2025!') {
             document.getElementById('password-screen').style.display = 'none';
+            // Set the language for the presentation
+            document.body.classList.remove('show-fr', 'show-en', 'show-ua');
+            document.body.classList.add('show-' + currentPwdLang);
         } else {
             document.getElementById('pwd-error').style.display = 'block';
             document.getElementById('pwd-input').value = '';
