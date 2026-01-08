@@ -2564,6 +2564,85 @@
         </div>
     </section>
 
+    <!-- Contact Form Overlay -->
+    <div id="contact-overlay" class="contact-overlay">
+        <div class="contact-overlay-content">
+            <button type="button" class="contact-overlay-close" onclick="closeContactForm()">
+                <i class="ph ph-x"></i>
+            </button>
+
+            <h2>
+                <span class="lang-fr">Nous contacter</span>
+                <span class="lang-en">Contact us</span>
+                <span class="lang-ua">Зв'язатися з нами</span>
+            </h2>
+
+            <form id="contact-form" action="https://formspree.io/f/mnjneyke" method="POST">
+                <div class="form-group">
+                    <label for="contact-name">
+                        <span class="lang-fr">Votre nom</span>
+                        <span class="lang-en">Your name</span>
+                        <span class="lang-ua">Ваше ім'я</span>
+                    </label>
+                    <input type="text" id="contact-name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-email">
+                        <span class="lang-fr">Votre courriel</span>
+                        <span class="lang-en">Your email</span>
+                        <span class="lang-ua">Ваша електронна пошта</span>
+                    </label>
+                    <input type="email" id="contact-email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-subject">
+                        <span class="lang-fr">Sujet</span>
+                        <span class="lang-en">Subject</span>
+                        <span class="lang-ua">Тема</span>
+                    </label>
+                    <select id="contact-subject" name="subject">
+                        <option value="tuteur">Devenir tuteur ou facilitateur</option>
+                        <option value="groupe">Rejoindre un groupe Équilibre</option>
+                        <option value="partenariat">Partenariats organisationnels</option>
+                        <option value="promotion">Faire connaître OBRIY</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-message">
+                        <span class="lang-fr">Message</span>
+                        <span class="lang-en">Message</span>
+                        <span class="lang-ua">Повідомлення</span>
+                    </label>
+                    <textarea id="contact-message" name="message" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="contact-submit">
+                    <span class="lang-fr">Envoyer</span>
+                    <span class="lang-en">Send</span>
+                    <span class="lang-ua">Надіслати</span>
+                </button>
+            </form>
+
+            <div id="contact-success" class="contact-success" style="display: none;">
+                <i class="ph ph-check-circle"></i>
+                <h3>
+                    <span class="lang-fr">Message envoyé!</span>
+                    <span class="lang-en">Message sent!</span>
+                    <span class="lang-ua">Повідомлення надіслано!</span>
+                </h3>
+                <p>
+                    <span class="lang-fr">Nous vous répondrons bientôt.</span>
+                    <span class="lang-en">We'll get back to you soon.</span>
+                    <span class="lang-ua">Ми зв'яжемося з вами найближчим часом.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -2844,85 +2923,6 @@
             if (e.target === this) closeContactForm();
         });
     </script>
-
-    <!-- Contact Form Overlay -->
-    <div id="contact-overlay" class="contact-overlay">
-        <div class="contact-overlay-content">
-            <button type="button" class="contact-overlay-close" onclick="closeContactForm()">
-                <i class="ph ph-x"></i>
-            </button>
-
-            <h2>
-                <span class="lang-fr">Nous contacter</span>
-                <span class="lang-en">Contact us</span>
-                <span class="lang-ua">Зв'язатися з нами</span>
-            </h2>
-
-            <form id="contact-form" action="https://formspree.io/f/mnjneyke" method="POST">
-                <div class="form-group">
-                    <label for="contact-name">
-                        <span class="lang-fr">Votre nom</span>
-                        <span class="lang-en">Your name</span>
-                        <span class="lang-ua">Ваше ім'я</span>
-                    </label>
-                    <input type="text" id="contact-name" name="name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="contact-email">
-                        <span class="lang-fr">Votre courriel</span>
-                        <span class="lang-en">Your email</span>
-                        <span class="lang-ua">Ваша електронна пошта</span>
-                    </label>
-                    <input type="email" id="contact-email" name="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="contact-subject">
-                        <span class="lang-fr">Sujet</span>
-                        <span class="lang-en">Subject</span>
-                        <span class="lang-ua">Тема</span>
-                    </label>
-                    <select id="contact-subject" name="subject">
-                        <option value="tuteur">Devenir tuteur ou facilitateur</option>
-                        <option value="groupe">Rejoindre un groupe Équilibre</option>
-                        <option value="partenariat">Partenariats organisationnels</option>
-                        <option value="promotion">Faire connaître OBRIY</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="contact-message">
-                        <span class="lang-fr">Message</span>
-                        <span class="lang-en">Message</span>
-                        <span class="lang-ua">Повідомлення</span>
-                    </label>
-                    <textarea id="contact-message" name="message" rows="5" required></textarea>
-                </div>
-
-                <button type="submit" class="contact-submit">
-                    <span class="lang-fr">Envoyer</span>
-                    <span class="lang-en">Send</span>
-                    <span class="lang-ua">Надіслати</span>
-                </button>
-            </form>
-
-            <div id="contact-success" class="contact-success" style="display: none;">
-                <i class="ph ph-check-circle"></i>
-                <h3>
-                    <span class="lang-fr">Message envoyé!</span>
-                    <span class="lang-en">Message sent!</span>
-                    <span class="lang-ua">Повідомлення надіслано!</span>
-                </h3>
-                <p>
-                    <span class="lang-fr">Nous vous répondrons bientôt.</span>
-                    <span class="lang-en">We'll get back to you soon.</span>
-                    <span class="lang-ua">Ми зв'яжемося з вами найближчим часом.</span>
-                </p>
-            </div>
-        </div>
-    </div>
 
 </body>
 </html>
