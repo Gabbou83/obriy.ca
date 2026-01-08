@@ -19,7 +19,18 @@
             box-sizing: border-box;
         }
 
+        /* Transitions globales pour éléments interactifs */
+        a, button, .challenge-card, .action-card, .team-card, .pillar-band, .cta-button {
+            transition: color 0.2s ease,
+                        background-color 0.2s ease,
+                        border-color 0.2s ease,
+                        box-shadow 0.2s ease,
+                        transform 0.2s ease,
+                        opacity 0.2s ease;
+        }
+
         :root {
+            /* Primaires OBRIY */
             --obriy-white: #ffffff;
             --obriy-bg: #f7f8fa;
             --obriy-cream: #faf9f7;
@@ -31,6 +42,33 @@
             --obriy-text: #2d3748;
             --obriy-text-light: #64748b;
             --obriy-border: #e2e8f0;
+
+            /* Palette Ukraine étendue */
+            --ukraine-blue: #0057B7;
+            --ukraine-yellow: #FFD700;
+            --blue-hover: #004494;
+            --blue-soft: #E8F1FA;
+            --blue-muted: #0077E7;
+            --yellow-warm: #FFC700;
+            --yellow-soft: rgba(255, 215, 0, 0.2);
+
+            /* Neutres raffinés */
+            --neutral-50: #FAFBFC;
+            --neutral-100: #F5F8FC;
+            --neutral-400: #A0AEC0;
+            --neutral-600: #4A5568;
+            --neutral-800: #2D3748;
+            --neutral-900: #0A1628;
+
+            /* Système d'espacement */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+            --space-3xl: 80px;
+            --space-4xl: 120px;
         }
 
         html {
@@ -65,6 +103,32 @@
             /* Safari iOS - hauteur dynamique sans sauts */
             min-height: -webkit-fill-available;
             min-height: 100vh;
+        }
+
+        /* Typographie - Letter-spacing premium */
+        h1, h2, .hero-title, .stats-intro h2, .challenges-header h2,
+        .pillars-intro h2, .pilot-text h2, .action-header h2 {
+            letter-spacing: -0.02em;
+        }
+
+        h3, .pillar-title, .challenge-card h3, .action-card h3 {
+            letter-spacing: -0.01em;
+        }
+
+        /* Ombres teintées bleu Ukraine */
+        .shadow-sm {
+            box-shadow: 0 1px 2px rgba(0, 87, 183, 0.04),
+                        0 4px 8px rgba(0, 87, 183, 0.04);
+        }
+
+        .shadow-md {
+            box-shadow: 0 4px 8px rgba(0, 87, 183, 0.06),
+                        0 16px 32px rgba(0, 87, 183, 0.08);
+        }
+
+        .shadow-lg {
+            box-shadow: 0 8px 16px rgba(0, 87, 183, 0.08),
+                        0 32px 64px rgba(0, 87, 183, 0.12);
         }
 
         /* Language System */
@@ -397,7 +461,11 @@
         .giant-stat .number {
             font-size: clamp(3rem, 10vw, 5rem);
             font-weight: 800;
-            color: var(--obriy-accent);
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, var(--obriy-accent) 0%, var(--blue-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             line-height: 1;
             margin-bottom: 0.5rem;
             opacity: 0;
@@ -1047,7 +1115,8 @@
 
         .action-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 8px rgba(0, 87, 183, 0.08),
+                        0 16px 32px rgba(0, 87, 183, 0.12);
         }
 
         .action-card .action-icon {
