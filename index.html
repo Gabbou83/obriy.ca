@@ -327,6 +327,8 @@
             text-align: center;
             position: relative;
             z-index: 2;
+            will-change: transform, opacity;
+            transform-origin: center center;
         }
 
         .hero-meaning {
@@ -2313,6 +2315,41 @@
                 const btn = document.querySelector(`[data-lang="${savedLang}"]`);
                 if (btn) btn.click();
             }
+
+            // ================================
+            // HERO ZOOM EFFECT ON SCROLL
+            // ================================
+            const hero = document.querySelector('.hero');
+            const heroContent = document.querySelector('.hero-content');
+
+            function updateHeroZoom() {
+                const scrollY = window.scrollY;
+                const heroHeight = hero.offsetHeight;
+
+                // Ratio: 0 = top, 1 = hero complètement scrollé
+                const scrollRatio = Math.min(scrollY / heroHeight, 1);
+
+                // Scale: de 1 à 0.85 (15% de réduction max)
+                const scale = 1 - (scrollRatio * 0.15);
+
+                // Opacity: de 1 à 0.3 (fade progressif)
+                const opacity = 1 - (scrollRatio * 0.7);
+
+                heroContent.style.transform = `scale(${scale})`;
+                heroContent.style.opacity = opacity;
+            }
+
+            // Throttle avec requestAnimationFrame
+            let zoomTicking = false;
+            window.addEventListener('scroll', () => {
+                if (!zoomTicking) {
+                    requestAnimationFrame(() => {
+                        updateHeroZoom();
+                        zoomTicking = false;
+                    });
+                    zoomTicking = true;
+                }
+            });
 
             // ================================
             // SECTION NAVIGATION
