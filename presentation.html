@@ -9157,12 +9157,19 @@
             // Progress bar + sticky logo update
             deck.addEventListener('scroll', () => {
                 const scrollTop = deck.scrollTop;
-                const scrollHeight = deck.scrollHeight - deck.clientHeight;
-                const progress = (scrollTop / scrollHeight) * 100;
-                progressFill.style.width = progress + '%';
+                const viewportHeight = window.innerHeight;
+
+                // Calculate slide-based progress
+                const slideIndex = Math.min(
+                    Math.floor(scrollTop / viewportHeight),
+                    slides.length - 1
+                );
+                const slideProgress = (scrollTop % viewportHeight) / viewportHeight;
+                const progress = ((slideIndex + slideProgress) / (slides.length - 1)) * 100;
+                progressFill.style.width = Math.min(progress, 100) + '%';
 
                 // Show sticky logo after scrolling past hero
-                if (scrollTop > deck.clientHeight * 0.5) {
+                if (scrollTop > viewportHeight * 0.5) {
                     stickyLogo.classList.add('visible');
                 } else {
                     stickyLogo.classList.remove('visible');
@@ -9319,6 +9326,10 @@
                             lastVisibleIndex = idx;
                             currentSlideEl.textContent = idx + 1;
                             dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+
+                            // Force progress bar update when slide becomes visible (handles scroll-snap)
+                            const progress = (idx / (slides.length - 1)) * 100;
+                            progressFill.style.width = progress + '%';
 
                             // Show language selector only on cover slide (index 0)
                             const langSelector = document.querySelector('.lang-selector');
