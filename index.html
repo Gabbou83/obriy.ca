@@ -1367,23 +1367,14 @@
             width: 80px;
             height: 80px;
             margin: 0 auto 1.25rem;
-            background: var(--obriy-accent);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--obriy-white);
+            overflow: hidden;
         }
 
-        .team-member.yellow .team-avatar {
-            background: var(--obriy-yellow);
-            color: var(--obriy-dark);
-        }
-
-        .team-member.teal .team-avatar {
-            background: var(--obriy-teal);
+        .team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .team-name {
@@ -2500,7 +2491,9 @@
             </div>
             <div class="team-grid stagger-children">
                 <div class="team-member">
-                    <div class="team-avatar">YM</div>
+                    <div class="team-avatar">
+                        <img src="yuliia.jpg" alt="Yuliia Mikhaylets">
+                    </div>
                     <div class="team-name">Yuliia Mikhaylets</div>
                     <div class="team-bio">
                         <span class="lang-fr">Coach, Facilitatrice</span>
@@ -2509,18 +2502,10 @@
                     </div>
                 </div>
 
-                <div class="team-member yellow">
-                    <div class="team-avatar">RK</div>
-                    <div class="team-name">Rymma Klopova</div>
-                    <div class="team-bio">
-                        <span class="lang-fr">20+ ans en coordination</span>
-                        <span class="lang-en">20+ years in coordination</span>
-                        <span class="lang-ua">20+ років у координації</span>
+                <div class="team-member">
+                    <div class="team-avatar">
+                        <img src="gabriel.jpg" alt="Gabriel Boutin">
                     </div>
-                </div>
-
-                <div class="team-member teal">
-                    <div class="team-avatar">GB</div>
                     <div class="team-name">Gabriel Boutin</div>
                     <div class="team-bio">
                         <span class="lang-fr">Entrepreneur tech & design</span>
