@@ -56,67 +56,6 @@
         body.show-en span.lang-en { display: inline; }
         body.show-ua span.lang-ua { display: inline; }
 
-        /* Site Header (identique à index.html) */
-        .site-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100000;
-            padding: 1rem 1.5rem;
-            background: rgba(26, 39, 68, 0.15);
-            -webkit-backdrop-filter: blur(4px);
-            backdrop-filter: blur(4px);
-        }
-
-        .header-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: -0.02em;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .lang-switcher {
-            display: flex;
-            gap: 0.15rem;
-        }
-
-        .lang-btn {
-            padding: 0.35rem 0.5rem;
-            border: none;
-            background: transparent;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-
-        .lang-btn:hover {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .lang-btn.active {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
         /* Deck Container */
         .deck-container {
             width: 100vw;
@@ -3882,7 +3821,7 @@
             position: fixed;
             top: 1rem;
             right: 1rem;
-            z-index: 1000;
+            z-index: 100001; /* Above password-screen (99999) */
             opacity: 1;
             transition: opacity 0.4s ease;
         }
@@ -5734,20 +5673,6 @@
 </head>
 <body class="show-fr">
 
-    <!-- Header (identique à index.html) -->
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="index.html" class="header-logo">OBRIY</a>
-            <div class="header-right">
-                <div class="lang-switcher">
-                    <button type="button" class="lang-btn active" data-lang="fr">FR</button>
-                    <button type="button" class="lang-btn" data-lang="en">EN</button>
-                    <button type="button" class="lang-btn" data-lang="ua">UA</button>
-                </div>
-            </div>
-        </div>
-    </header>
-
     <!-- Password Protection -->
     <div id="password-screen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#1a2744;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:99999;">
         <div style="text-align:center;color:white;font-family:'Google Sans Flex',sans-serif;padding:1.5rem;">
@@ -5770,37 +5695,30 @@
         ua: { label: 'Захищена презентація', placeholder: 'Пароль', button: 'Увійти', error: 'Невірний пароль' }
     };
 
-    // Language switcher (identique à index.html)
-    const langBtns = document.querySelectorAll('.lang-btn');
-    langBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const lang = this.dataset.lang;
-
-            // Update UI language
-            document.body.classList.remove('show-fr', 'show-en', 'show-ua');
-            document.body.classList.add('show-' + lang);
-
-            // Update buttons
-            langBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-            // Update password screen texts
-            document.getElementById('pwd-label').textContent = pwdTexts[lang].label;
-            document.getElementById('pwd-input').placeholder = pwdTexts[lang].placeholder;
-            document.getElementById('pwd-btn').textContent = pwdTexts[lang].button;
-            document.getElementById('pwd-error').textContent = pwdTexts[lang].error;
-
-            // Store preference
-            localStorage.setItem('obriy-lang', lang);
-        });
-    });
-
-    // Load saved language
-    const savedLang = localStorage.getItem('obriy-lang');
-    if (savedLang) {
-        const btn = document.querySelector(`.lang-btn[data-lang="${savedLang}"]`);
-        if (btn) btn.click();
+    // Update password screen texts when language changes
+    function updatePwdScreenLang(lang) {
+        const texts = pwdTexts[lang];
+        if (texts) {
+            document.getElementById('pwd-label').textContent = texts.label;
+            document.getElementById('pwd-input').placeholder = texts.placeholder;
+            document.getElementById('pwd-btn').textContent = texts.button;
+            document.getElementById('pwd-error').textContent = texts.error;
+        }
     }
+
+    // Hook into existing lang-selector (will be connected after DOM loads)
+    document.addEventListener('DOMContentLoaded', function() {
+        const langOptions = document.querySelectorAll('.lang-option');
+        langOptions.forEach(opt => {
+            opt.addEventListener('click', function() {
+                updatePwdScreenLang(this.dataset.lang);
+            });
+        });
+
+        // Load saved language for password screen
+        const savedLang = localStorage.getItem('obriy-lang') || 'fr';
+        updatePwdScreenLang(savedLang);
+    });
 
     // Password check
     function checkPwd() {
