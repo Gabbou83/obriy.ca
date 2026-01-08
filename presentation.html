@@ -5726,12 +5726,19 @@
         langOptions.forEach(opt => {
             opt.classList.toggle('active', opt.dataset.lang === savedLang);
         });
+
+        // Hide lang-selector on password screen (language is already synced from index.html)
+        const langSelector = document.querySelector('.lang-selector');
+        if (langSelector) langSelector.style.display = 'none';
     });
 
     // Password check
     function checkPwd() {
         if(document.getElementById('pwd-input').value === 'Obriy2025!') {
             document.getElementById('password-screen').style.display = 'none';
+            // Show lang-selector after successful login
+            const langSelector = document.querySelector('.lang-selector');
+            if (langSelector) langSelector.style.display = '';
         } else {
             document.getElementById('pwd-error').style.display = 'block';
             document.getElementById('pwd-input').value = '';
