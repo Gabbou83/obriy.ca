@@ -97,7 +97,7 @@
             font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--obriy-dark);
             color: var(--obriy-white);
-            line-height: 1.6;
+            line-height: 1.65;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             /* Safari iOS - hauteur dynamique sans sauts */
@@ -129,6 +129,25 @@
         .shadow-lg {
             box-shadow: 0 8px 16px rgba(0, 87, 183, 0.08),
                         0 32px 64px rgba(0, 87, 183, 0.12);
+        }
+
+        /* Focus states - Accessibilité */
+        a:focus-visible,
+        button:focus-visible,
+        .lang-btn:focus-visible,
+        .presentation-link:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--ukraine-blue),
+                        0 0 0 4px rgba(0, 87, 183, 0.2);
+            border-radius: 4px;
+        }
+
+        .action-card:focus-within,
+        .challenge-card:focus-within {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--ukraine-blue),
+                        0 0 0 4px rgba(0, 87, 183, 0.2),
+                        0 8px 16px rgba(0, 87, 183, 0.1);
         }
 
         /* Language System */
