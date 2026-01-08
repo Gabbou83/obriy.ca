@@ -1194,81 +1194,137 @@
         }
 
         /* ================================
-           EMAIL LOADING OVERLAY
+           CONTACT FORM OVERLAY
            ================================ */
-        .email-overlay {
+        .contact-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 10000;
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
+            overflow-y: auto;
+            padding: 2rem;
         }
 
-        .email-overlay.active {
+        .contact-overlay.active {
             display: flex;
         }
 
-        .email-overlay-content {
-            text-align: center;
+        .contact-overlay-content {
+            background: white;
             padding: 3rem;
-            max-width: 400px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 87, 183, 0.15);
         }
 
-        .email-overlay-content .email-icon {
-            font-size: 4rem;
-            color: var(--obriy-accent);
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .email-overlay-content h3 {
+        .contact-overlay-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
             font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--obriy-text-light);
+            transition: color 0.3s;
+        }
+
+        .contact-overlay-close:hover {
+            color: var(--obriy-dark);
+        }
+
+        .contact-overlay-content h2 {
+            font-size: 1.75rem;
             font-weight: 700;
+            color: var(--obriy-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
             color: var(--obriy-dark);
             margin-bottom: 0.5rem;
         }
 
-        .email-overlay-content p {
-            color: var(--obriy-text-light);
-            margin-bottom: 2rem;
-        }
-
-        .email-overlay-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--obriy-bg);
-            border-top-color: var(--obriy-accent);
-            border-radius: 50%;
-            margin: 0 auto 2rem;
-            animation: email-spin 1s linear infinite;
-        }
-
-        @keyframes email-spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .email-overlay-close {
-            background: transparent;
-            border: 1px solid var(--obriy-text-light);
-            padding: 0.75rem 2rem;
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
-            cursor: pointer;
-            color: var(--obriy-text-light);
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        .email-overlay-close:hover {
-            background: var(--obriy-dark);
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--obriy-accent);
+            box-shadow: 0 0 0 3px rgba(0, 87, 183, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--obriy-accent);
             color: white;
-            border-color: var(--obriy-dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .contact-submit:hover {
+            background: var(--obriy-dark);
+            transform: translateY(-2px);
+        }
+
+        .contact-success {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .contact-success i {
+            font-size: 4rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .contact-success h3 {
+            font-size: 1.5rem;
+            color: var(--obriy-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-success p {
+            color: var(--obriy-text-light);
         }
 
         /* ================================
@@ -2498,27 +2554,12 @@
             </div>
 
             <div class="contact-cta">
-                <a href="mailto:info@obriy.ca" class="contact-cta-button">
+                <button type="button" class="contact-cta-button" onclick="openContactForm('autre')">
                     <i class="ph ph-envelope"></i>
                     <span class="lang-fr">Nous contacter</span>
                     <span class="lang-en">Contact us</span>
                     <span class="lang-ua">Зв'язатися з нами</span>
-                </a>
-            </div>
-
-            <div class="contact-links">
-                <a href="https://obriy.ca" class="contact-link">
-                    <i class="ph ph-globe"></i> obriy.ca
-                </a>
-                <a href="mailto:info@obriy.ca" class="contact-link">
-                    <i class="ph ph-envelope"></i> info@obriy.ca
-                </a>
-            </div>
-
-            <div class="contact-status">
-                <span class="lang-fr">Pilote en cours · Montréal</span>
-                <span class="lang-en">Pilot in progress · Montreal</span>
-                <span class="lang-ua">Пілот у процесі · Монреаль</span>
+                </button>
             </div>
         </div>
     </section>
@@ -2738,48 +2779,148 @@
             }, 8000);
         });
 
-        // Email overlay functions
-        function showEmailOverlay() {
-            document.getElementById('email-overlay').classList.add('active');
-            setTimeout(closeEmailOverlay, 3000);
+        // Contact form functions
+        function openContactForm(subject) {
+            document.getElementById('contact-overlay').classList.add('active');
+            document.getElementById('contact-form').style.display = 'block';
+            document.getElementById('contact-success').style.display = 'none';
+
+            if (subject) {
+                document.getElementById('contact-subject').value = subject;
+            }
+
+            document.body.style.overflow = 'hidden';
         }
 
-        function closeEmailOverlay() {
-            document.getElementById('email-overlay').classList.remove('active');
+        function closeContactForm() {
+            document.getElementById('contact-overlay').classList.remove('active');
+            document.body.style.overflow = '';
         }
 
-        // Attach to all action-card mailto links
-        document.querySelectorAll('a.action-card[href^="mailto:"]').forEach(card => {
+        // Handle form submission
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = this;
+            const data = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    form.style.display = 'none';
+                    document.getElementById('contact-success').style.display = 'block';
+                    form.reset();
+                    setTimeout(closeContactForm, 3000);
+                }
+            } catch (error) {
+                // Fallback to mailto
+                const subject = encodeURIComponent(document.getElementById('contact-subject').value);
+                const body = encodeURIComponent(document.getElementById('contact-message').value);
+                window.location.href = `mailto:info@obriy.ca?subject=${subject}&body=${body}`;
+            }
+        });
+
+        // Attach to action cards
+        document.querySelectorAll('a.action-card').forEach((card, index) => {
             card.addEventListener('click', function(e) {
                 e.preventDefault();
-                showEmailOverlay();
-                setTimeout(() => {
-                    window.location.href = this.href;
-                }, 500);
+                const subjects = ['tuteur', 'groupe', 'partenariat', 'promotion'];
+                openContactForm(subjects[index]);
             });
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeContactForm();
+        });
+
+        // Close on overlay click (outside form)
+        document.getElementById('contact-overlay').addEventListener('click', function(e) {
+            if (e.target === this) closeContactForm();
         });
     </script>
 
-    <!-- Email Loading Overlay -->
-    <div id="email-overlay" class="email-overlay">
-        <div class="email-overlay-content">
-            <i class="ph ph-envelope-simple email-icon"></i>
-            <h3>
-                <span class="lang-fr">Ouverture de votre client email...</span>
-                <span class="lang-en">Opening your email client...</span>
-                <span class="lang-ua">Відкриття вашого поштового клієнта...</span>
-            </h3>
-            <p>
-                <span class="lang-fr">Vous allez être redirigé vers info@obriy.ca</span>
-                <span class="lang-en">You will be redirected to info@obriy.ca</span>
-                <span class="lang-ua">Вас буде перенаправлено на info@obriy.ca</span>
-            </p>
-            <div class="email-overlay-spinner"></div>
-            <button type="button" class="email-overlay-close" onclick="closeEmailOverlay()">
-                <span class="lang-fr">Fermer</span>
-                <span class="lang-en">Close</span>
-                <span class="lang-ua">Закрити</span>
+    <!-- Contact Form Overlay -->
+    <div id="contact-overlay" class="contact-overlay">
+        <div class="contact-overlay-content">
+            <button type="button" class="contact-overlay-close" onclick="closeContactForm()">
+                <i class="ph ph-x"></i>
             </button>
+
+            <h2>
+                <span class="lang-fr">Nous contacter</span>
+                <span class="lang-en">Contact us</span>
+                <span class="lang-ua">Зв'язатися з нами</span>
+            </h2>
+
+            <form id="contact-form" action="https://formspree.io/f/VOTRE_ID" method="POST">
+                <div class="form-group">
+                    <label for="contact-name">
+                        <span class="lang-fr">Votre nom</span>
+                        <span class="lang-en">Your name</span>
+                        <span class="lang-ua">Ваше ім'я</span>
+                    </label>
+                    <input type="text" id="contact-name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-email">
+                        <span class="lang-fr">Votre courriel</span>
+                        <span class="lang-en">Your email</span>
+                        <span class="lang-ua">Ваша електронна пошта</span>
+                    </label>
+                    <input type="email" id="contact-email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-subject">
+                        <span class="lang-fr">Sujet</span>
+                        <span class="lang-en">Subject</span>
+                        <span class="lang-ua">Тема</span>
+                    </label>
+                    <select id="contact-subject" name="subject">
+                        <option value="tuteur">Devenir tuteur ou facilitateur</option>
+                        <option value="groupe">Rejoindre un groupe Équilibre</option>
+                        <option value="partenariat">Partenariats organisationnels</option>
+                        <option value="promotion">Faire connaître OBRIY</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-message">
+                        <span class="lang-fr">Message</span>
+                        <span class="lang-en">Message</span>
+                        <span class="lang-ua">Повідомлення</span>
+                    </label>
+                    <textarea id="contact-message" name="message" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="contact-submit">
+                    <span class="lang-fr">Envoyer</span>
+                    <span class="lang-en">Send</span>
+                    <span class="lang-ua">Надіслати</span>
+                </button>
+            </form>
+
+            <div id="contact-success" class="contact-success" style="display: none;">
+                <i class="ph ph-check-circle"></i>
+                <h3>
+                    <span class="lang-fr">Message envoyé!</span>
+                    <span class="lang-en">Message sent!</span>
+                    <span class="lang-ua">Повідомлення надіслано!</span>
+                </h3>
+                <p>
+                    <span class="lang-fr">Nous vous répondrons bientôt.</span>
+                    <span class="lang-en">We'll get back to you soon.</span>
+                    <span class="lang-ua">Ми зв'яжемося з вами найближчим часом.</span>
+                </p>
+            </div>
         </div>
     </div>
 
