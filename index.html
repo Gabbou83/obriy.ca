@@ -1346,29 +1346,26 @@
         }
 
         .team-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-            max-width: 900px;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            max-width: 600px;
             margin: 0 auto;
-        }
-
-        @media (min-width: 600px) {
-            .team-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
         }
 
         .team-member {
             text-align: center;
+            flex: 0 0 auto;
         }
 
         .team-avatar {
-            width: 80px;
-            height: 80px;
+            width: 120px;
+            height: 120px;
             margin: 0 auto 1.25rem;
             border-radius: 50%;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .team-avatar img {
