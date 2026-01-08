@@ -1249,7 +1249,7 @@
         }
 
         /* ================================
-           CONTACT SECTION (was footer)
+           CONTACT SECTION
            ================================ */
         .contact-section {
             background: var(--obriy-dark);
@@ -1257,40 +1257,128 @@
         }
 
         .contact-logo {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
             color: var(--obriy-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 2rem;
+        }
+
+        .contact-subtitle strong {
+            color: var(--obriy-yellow);
+        }
+
+        .contact-quote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+
+        .contact-hearts {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-heart-blue {
+            color: var(--obriy-primary);
+        }
+
+        .contact-heart-yellow {
+            color: var(--obriy-yellow);
+        }
+
+        .contact-cta {
+            margin-bottom: 2rem;
+        }
+
+        .contact-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            background: var(--obriy-primary);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .contact-cta-button:hover {
+            background: var(--obriy-yellow);
+            color: var(--obriy-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(234, 179, 8, 0.3);
+        }
+
+        .contact-cta-button i {
+            font-size: 1.25rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--obriy-white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--obriy-yellow);
+            color: var(--obriy-yellow);
+        }
+
+        .contact-link i {
+            font-size: 1.1rem;
         }
 
         .contact-status {
             display: inline-block;
-            padding: 0.6rem 1.25rem;
+            padding: 0.5rem 1rem;
             background: rgba(245, 158, 11, 0.15);
             border: 1px solid rgba(245, 158, 11, 0.3);
             border-radius: 100px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--obriy-yellow);
-            margin-bottom: 2rem;
         }
 
-        .contact-email {
-            font-size: 1.25rem;
-        }
-
-        .contact-email a {
-            color: var(--obriy-white);
-            text-decoration: none;
-            padding: 0.75rem 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 100px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-email a:hover {
-            background: var(--obriy-yellow);
-            border-color: var(--obriy-yellow);
-            color: var(--obriy-dark);
+        @media (max-width: 768px) {
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .contact-quote {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
         }
 
         /* ================================
@@ -2294,19 +2382,52 @@
         </div>
     </section>
 
-    <!-- Contact Section (désactivée temporairement)
+    <!-- Contact Section -->
     <section class="full-section contact-section" id="contact">
-        <div class="contact-logo">OBRIY</div>
-        <div class="contact-status">
-            <span class="lang-fr">En développement · Montréal</span>
-            <span class="lang-en">In development · Montreal</span>
-            <span class="lang-ua">В розробці · Монреаль</span>
-        </div>
-        <div class="contact-email">
-            <a href="mailto:info@obriy.ca">info@obriy.ca</a>
+        <div class="section-content">
+            <div class="contact-logo">OBRIY</div>
+            <div class="contact-subtitle">
+                <span class="lang-fr"><strong>Horizon</strong> Ukraine Canada</span>
+                <span class="lang-en"><strong>Horizon</strong> Ukraine Canada</span>
+                <span class="lang-ua"><strong>Горизонт</strong> Україна Канада</span>
+            </div>
+
+            <blockquote class="contact-quote">
+                <span class="lang-fr">« L'horizon n'est pas une limite. C'est une direction. »</span>
+                <span class="lang-en">"The horizon is not a limit. It's a direction."</span>
+                <span class="lang-ua">« Горизонт - це не межа. Це напрямок. »</span>
+            </blockquote>
+
+            <div class="contact-hearts">
+                <i class="ph-fill ph-heart contact-heart-blue"></i>
+                <i class="ph-fill ph-heart contact-heart-yellow"></i>
+            </div>
+
+            <div class="contact-cta">
+                <a href="mailto:info@obriy.ca" class="contact-cta-button">
+                    <i class="ph ph-envelope"></i>
+                    <span class="lang-fr">Nous contacter</span>
+                    <span class="lang-en">Contact us</span>
+                    <span class="lang-ua">Зв'язатися з нами</span>
+                </a>
+            </div>
+
+            <div class="contact-links">
+                <a href="https://obriy.ca" class="contact-link">
+                    <i class="ph ph-globe"></i> obriy.ca
+                </a>
+                <a href="mailto:info@obriy.ca" class="contact-link">
+                    <i class="ph ph-envelope"></i> info@obriy.ca
+                </a>
+            </div>
+
+            <div class="contact-status">
+                <span class="lang-fr">Pilote en cours · Montréal</span>
+                <span class="lang-en">Pilot in progress · Montreal</span>
+                <span class="lang-ua">Пілот у процесі · Монреаль</span>
+            </div>
         </div>
     </section>
-    -->
 
     <!-- Scripts -->
     <script>
