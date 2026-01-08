@@ -5715,9 +5715,17 @@
             });
         });
 
-        // Load saved language for password screen
+        // Load saved language from index.html (localStorage)
         const savedLang = localStorage.getItem('obriy-lang') || 'fr';
         updatePwdScreenLang(savedLang);
+
+        // Also sync body class, lang-selector visual, and active state
+        document.body.className = 'show-' + savedLang;
+        const langCurrent = document.getElementById('langCurrent');
+        if (langCurrent) langCurrent.textContent = savedLang.toUpperCase();
+        langOptions.forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.lang === savedLang);
+        });
     });
 
     // Password check
