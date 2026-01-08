@@ -9341,6 +9341,10 @@
 
             slides.forEach(s => observer.observe(s));
 
+            // Force initial state: first slide is active
+            dots.forEach((d, i) => d.classList.toggle('active', i === 0));
+            currentSlideEl.textContent = 1;
+
             // Language selector - tap to toggle for mobile
             const langSelector = document.querySelector('.lang-selector');
             if (langCurrent && langSelector) {
