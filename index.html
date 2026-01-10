@@ -542,6 +542,284 @@
         }
 
         /* ================================
+           PRESS SECTION - CARROUSEL MÉDIAS
+           ================================ */
+        .press-section {
+            background: var(--obriy-bg);
+            color: var(--obriy-dark);
+            min-height: 100vh;
+            min-height: 100svh;
+            padding: 5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .press-section .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .press-carousel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 1rem 0;
+            scroll-snap-type: x mandatory;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .press-card {
+            flex: 0 0 320px;
+            background: var(--obriy-white);
+            border-radius: 16px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-snap-align: start;
+            /* Ombres teintées bleu Ukraine comme action-cards */
+            box-shadow: 0 1px 2px rgba(0, 87, 183, 0.04),
+                        0 4px 8px rgba(0, 87, 183, 0.04),
+                        0 8px 16px rgba(0, 87, 183, 0.03);
+        }
+
+        .press-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 16px rgba(0, 87, 183, 0.1),
+                        0 24px 48px rgba(0, 87, 183, 0.15);
+        }
+
+        .press-thumbnail {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--obriy-dark-light) 0%, #1e3a5f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Accent jaune OBRIY sur le bord supérieur */
+            border-top: 3px solid var(--obriy-yellow);
+        }
+
+        .press-thumbnail-icon {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .press-thumbnail-branded {
+            background: linear-gradient(135deg, #c41230 0%, #8b0d24 100%);
+        }
+
+        .press-brand-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .press-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .press-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            background: var(--obriy-accent);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .press-card:hover .press-play-icon {
+            background: var(--ukraine-blue);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .press-info {
+            padding: 1.25rem;
+        }
+
+        .press-source {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--obriy-text-light);
+            font-weight: 500;
+        }
+
+        .press-source i {
+            font-size: 1rem;
+            color: var(--obriy-accent);
+        }
+
+        .press-title {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+            color: var(--obriy-dark);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .press-date {
+            font-size: 0.8rem;
+            color: var(--obriy-text-light);
+        }
+
+        .carousel-btn {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: var(--obriy-dark);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 1.25rem;
+        }
+
+        .carousel-btn:hover {
+            background: var(--obriy-accent);
+            border-color: var(--obriy-accent);
+        }
+
+        /* Cacher indicateur sur desktop */
+        .press-scroll-hint {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .press-section {
+                padding: 4rem 0;
+            }
+
+            .press-section .section-content {
+                padding: 0;
+                width: 100%;
+            }
+
+            .press-section .section-title {
+                padding: 0 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .press-carousel {
+                flex-direction: column;
+                gap: 0.75rem;
+                align-items: center;
+            }
+
+            .carousel-btn {
+                display: none;
+            }
+
+            .carousel-track {
+                display: flex;
+                justify-content: flex-start;
+                width: 100%;
+                padding: 0.5rem 0 1rem;
+                gap: 0;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .press-card {
+                flex: 0 0 100%;
+                width: 100%;
+                max-width: none;
+                scroll-snap-align: center;
+                padding: 0 2rem;
+                box-sizing: border-box;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+            }
+
+            .press-card > .press-thumbnail,
+            .press-card > .press-info {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .press-card > .press-thumbnail {
+                border-radius: 12px 12px 0 0;
+                overflow: hidden;
+            }
+
+            .press-card > .press-info {
+                background: var(--obriy-white);
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            }
+
+            .press-info {
+                padding: 1rem;
+            }
+
+            .press-title {
+                font-size: 0.95rem;
+                -webkit-line-clamp: 2;
+            }
+
+            /* Indicateur de scroll */
+            .press-scroll-hint {
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+                padding-top: 1rem;
+            }
+
+            .press-scroll-hint span {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: rgba(0, 0, 0, 0.2);
+                transition: background 0.2s ease;
+            }
+
+            .press-scroll-hint span.active {
+                background: var(--obriy-accent);
+            }
+        }
+
+        /* ================================
            CHALLENGES SECTION - DARK avec accents jaunes
            ================================ */
         .challenges-section {
@@ -1934,6 +2212,154 @@
         </div>
     </section>
 
+    <!-- Press Section - Carrousel médias -->
+    <section class="press-section" id="presse">
+        <div class="section-content">
+            <h2 class="section-title">
+                <span class="lang-fr">Dans les médias</span>
+                <span class="lang-en">In the Media</span>
+                <span class="lang-ua">У ЗМІ</span>
+            </h2>
+
+            <div class="press-carousel">
+                <button class="carousel-btn carousel-prev" aria-label="Previous">
+                    <i class="ph ph-caret-left"></i>
+                </button>
+
+                <div class="carousel-track">
+                    <!-- MSN/CTV - Janvier 2025 -->
+                    <a href="https://www.msn.com/en-ca/news/canada/like-many-ukrainians-she-fled-war-for-quebec-now-she-fears-they-can-t-stay/vi-AA1TLvMw" target="_blank" rel="noopener" class="press-card">
+                        <div class="press-thumbnail">
+                            <img src="inna.jpg" alt="Inna - CTV News" loading="lazy">
+                        </div>
+                        <div class="press-info">
+                            <div class="press-source">
+                                <i class="ph ph-television"></i>
+                                <span>CTV News / MSN</span>
+                            </div>
+                            <h3 class="press-title">
+                                <span class="lang-fr">Comme beaucoup d'Ukrainiens, elle a fui la guerre pour le Québec. Maintenant, elle craint de ne pas pouvoir rester</span>
+                                <span class="lang-en">Like many Ukrainians, she fled war for Quebec. Now she fears they can't stay</span>
+                                <span class="lang-ua">Як і багато українців, вона втекла від війни до Квебеку. Тепер боїться, що не зможе залишитися</span>
+                            </h3>
+                            <p class="press-date">
+                                <span class="lang-fr">Janvier 2025</span>
+                                <span class="lang-en">January 2025</span>
+                                <span class="lang-ua">Січень 2025</span>
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- CBC News - Décembre 2024 -->
+                    <a href="https://www.cbc.ca/news/canada/montreal/ukrainian-refugees-ramq-coverage-health-minister-1.7411116" target="_blank" rel="noopener" class="press-card">
+                        <div class="press-thumbnail">
+                            <img src="https://image.thum.io/get/width/400/https://www.cbc.ca/news/canada/montreal/ukrainian-refugees-ramq-coverage-health-minister-1.7411116" alt="CBC News" loading="lazy">
+                        </div>
+                        <div class="press-info">
+                            <div class="press-source">
+                                <i class="ph ph-newspaper"></i>
+                                <span>CBC News</span>
+                            </div>
+                            <h3 class="press-title">
+                                <span class="lang-fr">Le Québec prolonge la couverture santé pour les réfugiés ukrainiens</span>
+                                <span class="lang-en">Quebec extends health coverage for Ukrainian refugees</span>
+                                <span class="lang-ua">Квебек продовжує медичне страхування для українських біженців</span>
+                            </h3>
+                            <p class="press-date">
+                                <span class="lang-fr">15 décembre 2024</span>
+                                <span class="lang-en">December 15, 2024</span>
+                                <span class="lang-ua">15 грудня 2024</span>
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- Radio-Canada - Février 2024 -->
+                    <a href="https://ici.radio-canada.ca/info/long-format/2049602/guerre-ukraine-immigrantes-quebec" target="_blank" rel="noopener" class="press-card">
+                        <div class="press-thumbnail">
+                            <img src="https://image.thum.io/get/width/400/https://ici.radio-canada.ca/info/long-format/2049602/guerre-ukraine-immigrantes-quebec" alt="Radio-Canada" loading="lazy">
+                        </div>
+                        <div class="press-info">
+                            <div class="press-source">
+                                <i class="ph ph-newspaper"></i>
+                                <span>Radio-Canada</span>
+                            </div>
+                            <h3 class="press-title">
+                                <span class="lang-fr">Des femmes ukrainiennes coincées entre deux mondes</span>
+                                <span class="lang-en">Ukrainian women caught between two worlds</span>
+                                <span class="lang-ua">Українські жінки між двома світами</span>
+                            </h3>
+                            <p class="press-date">
+                                <span class="lang-fr">20 février 2024</span>
+                                <span class="lang-en">February 20, 2024</span>
+                                <span class="lang-ua">20 лютого 2024</span>
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- La Presse - Février 2024 -->
+                    <a href="https://www.lapresse.ca/actualites/refugies-ukrainiens-au-canada/vont-ils-pouvoir-rester/2024-02-18/ils-arrivent-en-plus-grand-nombre.php" target="_blank" rel="noopener" class="press-card">
+                        <div class="press-thumbnail">
+                            <img src="https://image.thum.io/get/width/400/https://www.lapresse.ca/actualites/refugies-ukrainiens-au-canada/vont-ils-pouvoir-rester/2024-02-18/ils-arrivent-en-plus-grand-nombre.php" alt="La Presse" loading="lazy">
+                        </div>
+                        <div class="press-info">
+                            <div class="press-source">
+                                <i class="ph ph-newspaper"></i>
+                                <span>La Presse</span>
+                            </div>
+                            <h3 class="press-title">
+                                <span class="lang-fr">Vont-ils pouvoir rester?</span>
+                                <span class="lang-en">Will they be able to stay?</span>
+                                <span class="lang-ua">Чи зможуть вони залишитися?</span>
+                            </h3>
+                            <p class="press-date">
+                                <span class="lang-fr">18 février 2024</span>
+                                <span class="lang-en">February 18, 2024</span>
+                                <span class="lang-ua">18 лютого 2024</span>
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- Radio-Canada Vidéo - Août 2022 -->
+                    <a href="https://ici.radio-canada.ca/info/videos/media-8608726/refugies-ukrainiens-au-quebec-se-trouver-travail-et-apprendre-francais" target="_blank" rel="noopener" class="press-card">
+                        <div class="press-thumbnail">
+                            <img src="https://image.thum.io/get/width/400/https://ici.radio-canada.ca/info/videos/media-8608726/refugies-ukrainiens-au-quebec-se-trouver-travail-et-apprendre-francais" alt="Radio-Canada" loading="lazy">
+                            <div class="press-play-icon"><i class="ph ph-play-fill"></i></div>
+                        </div>
+                        <div class="press-info">
+                            <div class="press-source">
+                                <i class="ph ph-television"></i>
+                                <span>Radio-Canada</span>
+                            </div>
+                            <h3 class="press-title">
+                                <span class="lang-fr">Réfugiés ukrainiens au Québec : se trouver du travail et apprendre le français</span>
+                                <span class="lang-en">Ukrainian refugees in Quebec: finding work and learning French</span>
+                                <span class="lang-ua">Українські біженці в Квебеку: пошук роботи та вивчення французької</span>
+                            </h3>
+                            <p class="press-date">
+                                <span class="lang-fr">Août 2022</span>
+                                <span class="lang-en">August 2022</span>
+                                <span class="lang-ua">Серпень 2022</span>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+                <button class="carousel-btn carousel-next" aria-label="Next">
+                    <i class="ph ph-caret-right"></i>
+                </button>
+            </div>
+
+            <!-- Indicateur mobile -->
+            <div class="press-scroll-hint" aria-hidden="true">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </section>
+
     <!-- Challenges Section - Dark avec accents jaunes -->
     <section class="full-section challenges-section">
         <div class="section-content">
@@ -2668,11 +3094,11 @@
             const navDotsContainer = document.querySelector('.nav-dots');
 
             // Collect all navigable sections
-            const sections = document.querySelectorAll('.full-section, .pillar-band, .pillars-intro');
+            const sections = document.querySelectorAll('.full-section, .pillar-band, .pillars-intro, .press-section');
             let currentSectionIndex = 0;
 
             // Light background sections (for nav styling)
-            const lightBgSelectors = ['.stats-section', '.pillars-intro', '.pillar-band.yellow', '.action-section', '.team-section'];
+            const lightBgSelectors = ['.stats-section', '.pillars-intro', '.pillar-band.yellow', '.action-section', '.team-section', '.press-section'];
 
             // Create navigation dots
             sections.forEach((section, index) => {
@@ -2757,6 +3183,42 @@
 
             // Initialize nav state
             updateNavState(0);
+
+            // ================================
+            // PRESS CAROUSEL
+            // ================================
+            const pressTrack = document.querySelector('.carousel-track');
+            const pressPrevBtn = document.querySelector('.carousel-prev');
+            const pressNextBtn = document.querySelector('.carousel-next');
+
+            if (pressTrack && pressPrevBtn && pressNextBtn) {
+                const scrollAmount = 340; // Card width + gap
+
+                pressPrevBtn.addEventListener('click', () => {
+                    pressTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+
+                pressNextBtn.addEventListener('click', () => {
+                    pressTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+
+                // Indicateur de scroll mobile
+                const scrollHint = document.querySelector('.press-scroll-hint');
+                const dots = scrollHint ? scrollHint.querySelectorAll('span') : [];
+                const cards = pressTrack.querySelectorAll('.press-card');
+
+                if (dots.length > 0 && cards.length > 0) {
+                    pressTrack.addEventListener('scroll', () => {
+                        const scrollLeft = pressTrack.scrollLeft;
+                        const cardWidth = cards[0].offsetWidth + 16; // card + gap
+                        const activeIndex = Math.round(scrollLeft / cardWidth);
+
+                        dots.forEach((dot, i) => {
+                            dot.classList.toggle('active', i === activeIndex);
+                        });
+                    });
+                }
+            }
 
             // Scroll reveal animations
             const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .stagger-children, .giant-stat');
