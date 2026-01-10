@@ -37,7 +37,7 @@
             --obriy-dark: #1a2744;
             --obriy-dark-light: #243656;
             --obriy-accent: #2563eb;
-            --obriy-yellow: #f59e0b;
+            --obriy-yellow: #FFCC00;
             --obriy-teal: #0d9488;
             --obriy-text: #2d3748;
             --obriy-text-light: #64748b;
@@ -90,6 +90,12 @@
             .pillars-intro,
             .pillar-band {
                 min-height: 100svh;
+            }
+
+            /* Hero couvre tout l'écran incluant la zone de la home bar */
+            .hero {
+                min-height: 100vh; /* Fallback */
+                min-height: -webkit-fill-available; /* Safari iOS */
             }
         }
 
