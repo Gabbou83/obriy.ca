@@ -3,7 +3,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>OBRIY - Presentation</title>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
@@ -4027,10 +4027,10 @@
             pointer-events: auto;
         }
 
-        /* Progress Bar - En bas */
+        /* Progress Bar - En haut */
         .progress-bar {
             position: fixed;
-            bottom: 0;
+            top: 0;
             left: 0;
             width: 100%;
             height: 3px;
@@ -5736,97 +5736,6 @@
 </head>
 <body class="show-fr">
 
-    <!-- Header (identique à index.html, sans bouton présentation) -->
-    <header class="site-header" id="pwd-header">
-        <div class="header-inner">
-            <a href="index.html" class="header-logo">OBRIY</a>
-            <div class="header-right">
-                <div class="lang-switcher">
-                    <button type="button" class="lang-btn active" data-lang="fr">FR</button>
-                    <button type="button" class="lang-btn" data-lang="en">EN</button>
-                    <button type="button" class="lang-btn" data-lang="ua">UA</button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Password Protection -->
-    <div id="password-screen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#1a2744;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:99999;">
-        <div style="text-align:center;color:white;font-family:'Google Sans Flex',sans-serif;padding:1.5rem;">
-            <h1 style="font-size:2.5rem;margin-bottom:2rem;font-weight:700;">OBRIY</h1>
-            <p id="pwd-label" style="margin-bottom:1.5rem;opacity:0.8;">Présentation protégée</p>
-            <input type="password" id="pwd-input" placeholder="Mot de passe" autofocus
-                   style="padding:1rem 1.5rem;font-size:1rem;border:none;border-radius:8px;width:250px;margin-bottom:1rem;text-align:center;">
-            <br>
-            <button id="pwd-btn" onclick="checkPwd()"
-                    style="padding:1rem 2rem;font-size:1rem;background:#2563eb;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;">
-                Accéder
-            </button>
-            <p id="pwd-error" style="color:#ef4444;margin-top:1rem;display:none;">Mot de passe incorrect</p>
-        </div>
-    </div>
-    <script>
-    const pwdTexts = {
-        fr: { label: 'Présentation protégée', placeholder: 'Mot de passe', button: 'Accéder', error: 'Mot de passe incorrect' },
-        en: { label: 'Protected presentation', placeholder: 'Password', button: 'Access', error: 'Incorrect password' },
-        ua: { label: 'Захищена презентація', placeholder: 'Пароль', button: 'Увійти', error: 'Невірний пароль' }
-    };
-
-    // Update password screen texts when language changes
-    function updatePwdScreenLang(lang) {
-        const texts = pwdTexts[lang];
-        if (texts) {
-            document.getElementById('pwd-label').textContent = texts.label;
-            document.getElementById('pwd-input').placeholder = texts.placeholder;
-            document.getElementById('pwd-btn').textContent = texts.button;
-            document.getElementById('pwd-error').textContent = texts.error;
-        }
-    }
-
-    // Language switcher in header (same as index.html)
-    document.addEventListener('DOMContentLoaded', function() {
-        const langBtns = document.querySelectorAll('.lang-btn');
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const lang = this.dataset.lang;
-                // Update body class
-                document.body.className = 'show-' + lang;
-                // Update buttons
-                langBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                // Update password screen texts
-                updatePwdScreenLang(lang);
-                // Store preference
-                localStorage.setItem('obriy-lang', lang);
-            });
-        });
-
-        // Load saved language from localStorage
-        const savedLang = localStorage.getItem('obriy-lang') || 'fr';
-        updatePwdScreenLang(savedLang);
-        document.body.className = 'show-' + savedLang;
-        // Mark correct button as active
-        langBtns.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === savedLang);
-        });
-    });
-
-    // Password check
-    function checkPwd() {
-        if(document.getElementById('pwd-input').value === 'Obriy2025!') {
-            document.getElementById('password-screen').style.display = 'none';
-            // Hide the header after login (presentation has no lang selector)
-            document.getElementById('pwd-header').style.display = 'none';
-        } else {
-            document.getElementById('pwd-error').style.display = 'block';
-            document.getElementById('pwd-input').value = '';
-        }
-    }
-
-    document.getElementById('pwd-input').addEventListener('keypress', function(e) {
-        if(e.key === 'Enter') checkPwd();
-    });
-    </script>
 
     <!-- Sticky Logo -->
     <div class="sticky-logo" id="stickyLogo">OBRIY</div>
@@ -9157,16 +9066,13 @@
             // Progress bar + sticky logo update
             deck.addEventListener('scroll', () => {
                 const scrollTop = deck.scrollTop;
-                const viewportHeight = window.innerHeight;
+                const scrollHeight = deck.scrollHeight - deck.clientHeight;
 
-                // Calculate slide-based progress
-                const slideIndex = Math.min(
-                    Math.floor(scrollTop / viewportHeight),
-                    slides.length - 1
-                );
-                const slideProgress = (scrollTop % viewportHeight) / viewportHeight;
-                const progress = ((slideIndex + slideProgress) / (slides.length - 1)) * 100;
+                // Calculate progress based on actual scroll position
+                const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
                 progressFill.style.width = Math.min(progress, 100) + '%';
+
+                const viewportHeight = window.innerHeight;
 
                 // Show sticky logo after scrolling past hero
                 if (scrollTop > viewportHeight * 0.5) {
@@ -9179,11 +9085,9 @@
             // Force progress bar sync after scroll-snap completes
             deck.addEventListener('scrollend', () => {
                 const scrollTop = deck.scrollTop;
-                const viewportHeight = window.innerHeight;
-                const slideIndex = Math.round(scrollTop / viewportHeight);
-                const clampedIndex = Math.min(Math.max(slideIndex, 0), slides.length - 1);
-                const progress = (clampedIndex / (slides.length - 1)) * 100;
-                progressFill.style.width = progress + '%';
+                const scrollHeight = deck.scrollHeight - deck.clientHeight;
+                const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+                progressFill.style.width = Math.min(progress, 100) + '%';
             });
 
             // Create nav dots

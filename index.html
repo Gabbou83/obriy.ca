@@ -103,6 +103,8 @@
             /* Safari iOS - hauteur dynamique sans sauts */
             min-height: -webkit-fill-available;
             min-height: 100vh;
+            /* iOS safe area pour home bar */
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         /* Typographie - Letter-spacing premium */
@@ -198,15 +200,13 @@
            HEADER
            ================================ */
         .site-header {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
             padding: 1rem 1.5rem;
-            background: rgba(26, 39, 68, 0.15);
-            -webkit-backdrop-filter: blur(4px);
-            backdrop-filter: blur(4px);
+            background: transparent;
         }
 
         .header-inner {
@@ -1801,7 +1801,7 @@
                     <button type="button" class="lang-btn" data-lang="en">EN</button>
                     <button type="button" class="lang-btn" data-lang="ua">UA</button>
                 </div>
-                <a href="presentation.html" class="presentation-link" title="Présentation">
+                <a href="password.html" class="presentation-link" title="Présentation">
                     <i class="ph ph-presentation-chart"></i>
                 </a>
             </div>
