@@ -9054,11 +9054,18 @@
             const langOptions = document.querySelectorAll('.lang-option');
             const langCurrent = document.getElementById('langCurrent');
             const stickyLogo = document.getElementById('stickyLogo');
-            let currentLang = 'fr';
+            let currentLang = localStorage.getItem('obriy-lang') || 'fr';
 
-            // Set initial French placeholders
+            // Apply saved language on load
+            document.body.className = 'show-' + currentLang;
+            document.documentElement.lang = currentLang === 'ua' ? 'uk' : currentLang;
+            langOptions.forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
+            if (langCurrent) langCurrent.textContent = currentLang.toUpperCase();
+
+            // Set initial placeholders for current language
             document.querySelectorAll('[data-placeholder-fr]').forEach(el => {
-                el.placeholder = el.getAttribute('data-placeholder-fr');
+                const placeholder = el.getAttribute(`data-placeholder-${currentLang}`) || el.getAttribute('data-placeholder-fr');
+                if (placeholder) el.placeholder = placeholder;
             });
 
             totalSlidesEl.textContent = slides.length;
@@ -9265,6 +9272,26 @@
             dots.forEach((d, i) => d.classList.toggle('active', i === 0));
             currentSlideEl.textContent = 1;
 
+            // Initialize tooltips for saved language
+            if (currentLang !== 'fr') {
+                Object.keys(tooltipTranslations).forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && tooltipTranslations[id][currentLang]) {
+                        el.setAttribute('data-tooltip', tooltipTranslations[id][currentLang]);
+                    }
+                });
+                // Update pie chart labels for saved language
+                if (typeof ageChart !== 'undefined' && ageChart) {
+                    ageChart.data.labels = ageLabels[currentLang];
+                    ageChart.update();
+                }
+                if (typeof genderChart !== 'undefined' && genderChart) {
+                    genderChart.data.labels = genderLabels[currentLang];
+                    genderChart.update();
+                }
+                updateNavDotLabels();
+            }
+
             // Language selector - tap to toggle for mobile
             const langSelector = document.querySelector('.lang-selector');
             if (langCurrent && langSelector) {
@@ -9284,6 +9311,7 @@
                 btn.onclick = (e) => {
                     e.stopPropagation();
                     currentLang = btn.dataset.lang;
+                    localStorage.setItem('obriy-lang', currentLang);
                     document.body.className = 'show-' + currentLang;
                     document.documentElement.lang = currentLang === 'ua' ? 'uk' : currentLang;
                     langOptions.forEach(b => b.classList.toggle('active', b === btn));
