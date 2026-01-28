@@ -2257,6 +2257,140 @@
                 scroll-behavior: auto;
             }
         }
+
+        /* ================================
+           OBRIY APP MODAL (En construction)
+           ================================ */
+        .obriy-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 39, 68, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .obriy-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .obriy-modal {
+            background: linear-gradient(135deg, var(--obriy-dark) 0%, #243352 100%);
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            border-radius: 16px;
+            padding: 3rem 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .obriy-modal-overlay.active .obriy-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .obriy-modal-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: rgba(255, 204, 0, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .obriy-modal-icon i {
+            font-size: 2.5rem;
+            color: var(--obriy-yellow);
+        }
+
+        .obriy-modal h3 {
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--obriy-white);
+            line-height: 1.3;
+        }
+
+        .obriy-modal p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .obriy-modal-actions {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .obriy-modal-btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .obriy-modal-btn.primary {
+            background: var(--obriy-yellow);
+            color: var(--obriy-dark);
+            border-color: var(--obriy-yellow);
+        }
+
+        .obriy-modal-btn.primary:hover {
+            background: rgba(255, 204, 0, 0.9);
+            box-shadow: 0 4px 12px rgba(255, 204, 0, 0.3);
+        }
+
+        .obriy-modal-btn.secondary {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.9);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .obriy-modal-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            .obriy-modal {
+                padding: 2rem 1.5rem;
+            }
+
+            .obriy-modal h3 {
+                font-size: 1.4rem;
+            }
+
+            .obriy-modal p {
+                font-size: 0.95rem;
+            }
+        }
     </style>
 </head>
 <body class="show-fr">
@@ -3264,6 +3398,32 @@
         </div>
     </section>
 
+    <!-- OBRIY App Modal (En construction) -->
+    <div id="obriy-modal" class="obriy-modal-overlay">
+        <div class="obriy-modal">
+            <div class="obriy-modal-icon">
+                <i class="ph ph-wrench"></i>
+            </div>
+            <h3>
+                <span class="lang-fr">Plateforme en construction</span>
+                <span class="lang-en">Platform under construction</span>
+                <span class="lang-ua">Платформа в розробці</span>
+            </h3>
+            <p>
+                <span class="lang-fr">La plateforme OBRIY est actuellement en développement. Revenez bientôt pour découvrir nos programmes de bien-être, de réseautage et de tutorat.</span>
+                <span class="lang-en">The OBRIY platform is currently under development. Come back soon to discover our well-being, networking, and tutoring programs.</span>
+                <span class="lang-ua">Платформа OBRIY зараз у розробці. Повертайтесь незабаром, щоб дізнатися про наші програми добробуту, нетворкінгу та навчання.</span>
+            </p>
+            <div class="obriy-modal-actions">
+                <button type="button" class="obriy-modal-btn primary" onclick="closeObriyModal()">
+                    <span class="lang-fr">Revenir sur le site</span>
+                    <span class="lang-en">Back to website</span>
+                    <span class="lang-ua">Повернутися на сайт</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Contact Form Overlay -->
     <div id="contact-overlay" class="contact-overlay">
         <div class="contact-overlay-content">
@@ -3668,14 +3828,56 @@
             });
         });
 
-        // Close on escape key
+        // Close on escape key (contact form only)
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeContactForm();
+            if (e.key === 'Escape' && document.getElementById('contact-overlay').classList.contains('active')) {
+                closeContactForm();
+            }
         });
 
         // Close on overlay click (outside form)
         document.getElementById('contact-overlay').addEventListener('click', function(e) {
             if (e.target === this) closeContactForm();
+        });
+
+        // ================================
+        // OBRIY APP MODAL (EN CONSTRUCTION)
+        // ================================
+        function openObriyModal() {
+            document.getElementById('obriy-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeObriyModal() {
+            document.getElementById('obriy-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Intercept all links to app.obriy.ca
+        document.addEventListener('DOMContentLoaded', function() {
+            const obriyLinks = document.querySelectorAll('a[href*="app.obriy.ca"]');
+
+            obriyLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Only prevent default if not explicitly marked to skip modal
+                    if (!this.hasAttribute('data-skip-modal')) {
+                        e.preventDefault();
+                        openObriyModal();
+                    }
+                });
+            });
+
+            // Close on Escape key (OBRIY modal only)
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById('obriy-modal').classList.contains('active')) {
+                    closeObriyModal();
+                }
+            });
+
+            // Close on overlay click (outside modal)
+            document.getElementById('obriy-modal').addEventListener('click', function(e) {
+                if (e.target === this) closeObriyModal();
+            });
         });
     </script>
 
