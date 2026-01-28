@@ -323,14 +323,15 @@
         }
 
         .hero-meaning {
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-size: clamp(0.8rem, 1.8vw, 0.95rem);
             font-weight: 500;
             color: var(--obriy-yellow);
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 0;
             opacity: 0;
-            animation: fadeInUp 1s ease forwards 0.3s;
+            animation: fadeInUp 1s ease forwards 1.3s;
         }
 
         .hero-logo {
@@ -348,20 +349,87 @@
             color: var(--obriy-yellow);
         }
 
+        .hero-tagline {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.7s;
+        }
+
         .hero-message {
             font-size: clamp(1.25rem, 3.5vw, 1.75rem);
             font-weight: 400;
             color: rgba(255, 255, 255, 0.9);
             max-width: 700px;
-            margin: 0 auto 3rem;
+            margin: 0 auto;
             line-height: 1.6;
             opacity: 0;
-            animation: fadeInUp 1s ease forwards 0.7s;
+            animation: fadeInUp 1s ease forwards 0.9s;
         }
 
         .hero-message strong {
             color: var(--obriy-yellow);
             font-weight: 600;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 1.1s;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .hero-cta i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta.primary {
+            background: var(--obriy-yellow);
+            color: var(--obriy-dark);
+            border: 2px solid var(--obriy-yellow);
+        }
+
+        .hero-cta.primary:hover {
+            background: transparent;
+            color: var(--obriy-yellow);
+            transform: translateY(-2px);
+        }
+
+        .hero-cta.primary:hover i {
+            transform: translateX(4px);
+        }
+
+        .hero-cta.secondary {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-cta.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
         }
 
         @keyframes fadeInUp {
@@ -405,6 +473,19 @@
         @keyframes bounceDown {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(10px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-ctas {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .hero-cta {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
         }
 
         /* ================================
@@ -2176,17 +2257,35 @@
     <!-- Hero - Full Screen -->
     <section class="full-section hero" id="accueil">
         <div class="hero-content">
-            <div class="hero-meaning">
-                <span class="lang-fr">ОБРІЙ (OBRIY) signifie « horizon » en ukrainien</span>
-                <span class="lang-en">ОБРІЙ (OBRIY) means "horizon" in Ukrainian</span>
-                <span class="lang-ua">ОБРІЙ — це горизонт українською</span>
-            </div>
             <div class="hero-logo"><span class="highlight">Horizon</span><br>Ukraine Canada</div>
+            <div class="hero-tagline">
+                <span class="lang-fr">Bien-être • Communauté • Avenir</span>
+                <span class="lang-en">Well-being • Community • Future</span>
+                <span class="lang-ua">Добробут • Громада • Майбутнє</span>
+            </div>
             <p class="hero-message">
                 <span class="lang-fr">Pour des milliers d'Ukrainiens au Canada, l'horizon semblait perdu. <strong>Ensemble, nous le reconstruisons.</strong></span>
                 <span class="lang-en">For thousands of Ukrainians in Canada, the horizon seemed lost. <strong>Together, we're rebuilding it.</strong></span>
                 <span class="lang-ua">Для тисяч українців у Канаді горизонт здавався втраченим. <strong>Разом ми його відбудовуємо.</strong></span>
             </p>
+            <div class="hero-ctas">
+                <a href="https://app.obriy.ca" target="_blank" rel="noopener" class="hero-cta primary">
+                    <span class="lang-fr">Découvrir OBRIY</span>
+                    <span class="lang-en">Discover OBRIY</span>
+                    <span class="lang-ua">Відкрити OBRIY</span>
+                    <i class="ph ph-arrow-right"></i>
+                </a>
+                <a href="#action" class="hero-cta secondary">
+                    <span class="lang-fr">Nous soutenir</span>
+                    <span class="lang-en">Support us</span>
+                    <span class="lang-ua">Підтримати нас</span>
+                </a>
+            </div>
+            <div class="hero-meaning">
+                <span class="lang-fr">ОБРІЙ (OBRIY) signifie « horizon » en ukrainien</span>
+                <span class="lang-en">ОБРІЙ (OBRIY) means "horizon" in Ukrainian</span>
+                <span class="lang-ua">ОБРІЙ — це горизонт українською</span>
+            </div>
         </div>
         <div class="scroll-indicator" onclick="document.getElementById('stats').scrollIntoView({behavior: 'smooth'})">
             <span class="lang-fr">Découvrir</span>
