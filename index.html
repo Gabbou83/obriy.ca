@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OBRIY</title>
-    <meta name="description" content="Un nouvel horizon pour les Ukrainiens au Canada. Bien-être, intégration et cohésion communautaire.">
+    <title>Horizon Ukraine Canada</title>
+    <meta name="description" content="Horizon Ukraine Canada — OBNL dédiée au bien-être, à l'intégration et à la cohésion communautaire des Ukrainiens au Canada.">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Phosphor Icons -->
     <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
 
     <style>
         * {
@@ -39,6 +40,10 @@
             --obriy-accent: #2563eb;
             --obriy-yellow: #FFCC00;
             --obriy-teal: #0d9488;
+            --obriy-green: #10B981;
+            --obriy-amber: #F59E0B;
+            --obriy-amber-light: #FEF3C7;
+            --obriy-amber-deep: #B45309;
             --obriy-text: #2d3748;
             --obriy-text-light: #64748b;
             --obriy-border: #e2e8f0;
@@ -224,12 +229,18 @@
         }
 
         .header-logo {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--obriy-white);
             text-decoration: none;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
             opacity: 0.9;
+        }
+
+        @media (max-width: 480px) {
+            .header-logo {
+                font-size: 0.9rem;
+            }
         }
 
         .header-right {
@@ -355,10 +366,10 @@
         }
 
         .hero-logo {
-            font-size: clamp(5rem, 18vw, 12rem);
+            font-size: clamp(3rem, 12vw, 7rem);
             font-weight: 700;
-            letter-spacing: 0.02em;
-            line-height: 0.9;
+            letter-spacing: -0.01em;
+            line-height: 1.0;
             margin-bottom: 2.5rem;
             background: linear-gradient(135deg, var(--obriy-white) 0%, rgba(255,255,255,0.7) 100%);
             -webkit-background-clip: text;
@@ -956,6 +967,23 @@
             margin: 0 auto;
         }
 
+        .pillars-platform-intro {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: var(--obriy-text-light);
+            margin-top: 1.5rem;
+        }
+
+        .pillars-platform-intro a {
+            color: var(--obriy-accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .pillars-platform-intro a:hover {
+            border-bottom-color: var(--obriy-accent);
+        }
+
         .pillars-icons {
             display: flex;
             justify-content: center;
@@ -977,18 +1005,18 @@
         }
 
         .pillar-icon-preview.blue i {
-            color: var(--obriy-accent);
-            background: rgba(59, 130, 246, 0.1);
+            color: var(--ukraine-blue);
+            background: rgba(0, 87, 183, 0.1);
         }
 
-        .pillar-icon-preview.yellow i {
-            color: var(--obriy-yellow);
+        .pillar-icon-preview.green i {
+            color: var(--obriy-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .pillar-icon-preview.amber i {
+            color: var(--obriy-amber);
             background: rgba(245, 158, 11, 0.1);
-        }
-
-        .pillar-icon-preview.teal i {
-            color: var(--obriy-teal);
-            background: rgba(13, 148, 136, 0.1);
         }
 
         .pillar-icon-preview span {
@@ -1032,10 +1060,10 @@
             color: var(--obriy-dark);
         }
 
-        /* Pilier Jeunesse - Teal uni */
+        /* Pilier Jeunesse - Ambre clair */
         .pillar-band.teal {
-            background: var(--obriy-teal);
-            color: var(--obriy-white);
+            background: var(--obriy-amber-light);
+            color: var(--obriy-dark);
         }
 
         .pillar-icon-large {
@@ -1049,15 +1077,15 @@
         }
 
         .pillar-band.blue .pillar-icon-large {
-            background: rgba(37, 99, 235, 0.2);
+            background: rgba(0, 87, 183, 0.2);
         }
 
         .pillar-band.yellow .pillar-icon-large {
-            background: rgba(245, 158, 11, 0.15);
+            background: rgba(16, 185, 129, 0.15);
         }
 
         .pillar-band.teal .pillar-icon-large {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(245, 158, 11, 0.25);
         }
 
         .pillar-icon-large i {
@@ -1065,15 +1093,15 @@
         }
 
         .pillar-band.blue .pillar-icon-large i {
-            color: var(--obriy-accent);
+            color: var(--ukraine-blue);
         }
 
         .pillar-band.yellow .pillar-icon-large i {
-            color: var(--obriy-yellow);
+            color: var(--obriy-green);
         }
 
         .pillar-band.teal .pillar-icon-large i {
-            color: var(--obriy-white);
+            color: var(--obriy-amber);
         }
 
         .pillar-title {
@@ -1117,20 +1145,70 @@
 
         .pillar-features li i {
             font-size: 1.25rem;
-            color: var(--obriy-yellow);
+            color: var(--obriy-green);
         }
 
         .pillar-band.blue .pillar-features li i {
-            color: var(--obriy-accent);
+            color: var(--ukraine-blue);
         }
 
         .pillar-band.teal .pillar-features li i {
-            color: var(--obriy-white);
+            color: var(--obriy-amber);
+        }
+
+        .pillar-band.teal .pillar-desc {
+            color: var(--obriy-text);
+        }
+
+        .pillar-band.teal .pillar-features li {
+            border-bottom-color: var(--obriy-border);
+            color: var(--obriy-text);
         }
 
         .pillar-visual {
             position: relative;
             z-index: 1;
+        }
+
+        .pillar-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .pillar-cta:hover {
+            color: var(--obriy-white);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateX(4px);
+        }
+
+        .pillar-band.yellow .pillar-cta {
+            color: var(--obriy-dark);
+            border-color: rgba(26, 39, 68, 0.2);
+        }
+
+        .pillar-band.yellow .pillar-cta:hover {
+            color: var(--obriy-dark);
+            border-color: rgba(26, 39, 68, 0.5);
+        }
+
+        .pillar-band.teal .pillar-cta {
+            color: var(--obriy-dark);
+            border-color: rgba(26, 39, 68, 0.2);
+        }
+
+        .pillar-band.teal .pillar-cta:hover {
+            color: var(--obriy-dark);
+            border-color: rgba(26, 39, 68, 0.5);
         }
 
         /* ================================
@@ -1647,11 +1725,17 @@
         }
 
         .contact-logo {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--obriy-white);
             margin-bottom: 0.5rem;
-            letter-spacing: 0.02em;
+            letter-spacing: -0.01em;
+        }
+
+        @media (max-width: 480px) {
+            .contact-logo {
+                font-size: 1.8rem;
+            }
         }
 
         .contact-subtitle {
@@ -1662,6 +1746,17 @@
 
         .contact-subtitle strong {
             color: var(--obriy-yellow);
+        }
+
+        .contact-subtitle a {
+            color: var(--obriy-yellow);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 204, 0, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .contact-subtitle a:hover {
+            border-bottom-color: var(--obriy-yellow);
         }
 
         .contact-quote {
@@ -2081,13 +2176,16 @@
     <!-- Header -->
     <header class="site-header">
         <div class="header-inner">
-            <a href="#" class="header-logo">OBRIY</a>
+            <a href="#" class="header-logo">Horizon Ukraine Canada</a>
             <div class="header-right">
                 <div class="lang-switcher">
                     <button type="button" class="lang-btn active" data-lang="fr">FR</button>
                     <button type="button" class="lang-btn" data-lang="en">EN</button>
                     <button type="button" class="lang-btn" data-lang="ua">UA</button>
                 </div>
+                <a href="https://app.obriy.ca" target="_blank" rel="noopener" class="presentation-link" title="Plateforme OBRIY">
+                    <i class="ph ph-arrow-square-out"></i>
+                </a>
                 <a href="password.html" class="presentation-link" title="Présentation">
                     <i class="ph ph-presentation-chart"></i>
                 </a>
@@ -2111,11 +2209,11 @@
         <div class="horizon-line"></div>
         <div class="hero-content">
             <div class="hero-meaning">
-                <span class="lang-fr">ОБРІЙ signifie « horizon » en ukrainien</span>
-                <span class="lang-en">ОБРІЙ means "horizon" in Ukrainian</span>
-                <span class="lang-ua">ОБРІЙ - це горизонт</span>
+                <span class="lang-fr">ОБРІЙ (OBRIY) signifie « horizon » en ukrainien</span>
+                <span class="lang-en">ОБРІЙ (OBRIY) means "horizon" in Ukrainian</span>
+                <span class="lang-ua">ОБРІЙ — це горизонт українською</span>
             </div>
-            <div class="hero-logo">OBRIY</div>
+            <div class="hero-logo">Horizon<br>Ukraine Canada</div>
             <p class="hero-message">
                 <span class="lang-fr">Pour des milliers d'Ukrainiens au Canada, l'horizon semblait perdu. <strong>Ensemble, nous le reconstruisons.</strong></span>
                 <span class="lang-en">For thousands of Ukrainians in Canada, the horizon seemed lost. <strong>Together, we're rebuilding it.</strong></span>
@@ -2541,19 +2639,19 @@
                 </p>
                 <div class="pillars-icons">
                     <div class="pillar-icon-preview blue">
-                        <i class="ph ph-scales"></i>
+                        <i class="ph-fill ph-heart"></i>
                         <span class="lang-fr">Équilibre</span>
                         <span class="lang-en">Balance</span>
                         <span class="lang-ua">Рівновага</span>
                     </div>
-                    <div class="pillar-icon-preview yellow">
-                        <i class="ph ph-users"></i>
+                    <div class="pillar-icon-preview green">
+                        <i class="ph-fill ph-users-three"></i>
                         <span class="lang-fr">Réseau</span>
                         <span class="lang-en">Network</span>
                         <span class="lang-ua">Мережа</span>
                     </div>
-                    <div class="pillar-icon-preview teal">
-                        <i class="ph ph-graduation-cap"></i>
+                    <div class="pillar-icon-preview amber">
+                        <i class="ph-fill ph-student"></i>
                         <span class="lang-fr">Jeunesse</span>
                         <span class="lang-en">Youth</span>
                         <span class="lang-ua">Молодь</span>
@@ -2564,6 +2662,11 @@
                     <span class="lang-en">Three pillars. One horizon.</span>
                     <span class="lang-ua">Три напрями. Один горизонт.</span>
                 </h2>
+                <p class="pillars-platform-intro">
+                    <span class="lang-fr">Nos programmes sont accessibles via <a href="https://app.obriy.ca" target="_blank" rel="noopener"><strong>OBRIY</strong></a>, notre plateforme numérique.</span>
+                    <span class="lang-en">Our programs are accessible through <a href="https://app.obriy.ca" target="_blank" rel="noopener"><strong>OBRIY</strong></a>, our digital platform.</span>
+                    <span class="lang-ua">Наші програми доступні через <a href="https://app.obriy.ca" target="_blank" rel="noopener"><strong>OBRIY</strong></a>, нашу цифрову платформу.</span>
+                </p>
             </div>
         </div>
 
@@ -2572,7 +2675,7 @@
             <div class="pillar-band-content">
                 <div class="pillar-visual reveal-left">
                     <div class="pillar-icon-large">
-                        <i class="ph ph-scales"></i>
+                        <i class="ph-fill ph-heart"></i>
                     </div>
                     <h3 class="pillar-title">
                         <span class="lang-fr">Équilibre</span>
@@ -2588,29 +2691,35 @@
                 <ul class="pillar-features reveal-right stagger-children">
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Cohortes de 10 séances structurées</span>
-                        <span class="lang-en">10-session structured cohorts</span>
-                        <span class="lang-ua">Структуровані когорти з 10 сесій</span>
+                        <span class="lang-fr">Retrouver la stabilité après le déracinement</span>
+                        <span class="lang-en">Regaining stability after displacement</span>
+                        <span class="lang-ua">Відновлення стабільності після переміщення</span>
                     </li>
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Adultes, adolescents et enfants</span>
-                        <span class="lang-en">Adults, teens, and children</span>
-                        <span class="lang-ua">Дорослі, підлітки та діти</span>
+                        <span class="lang-fr">Un accompagnement en ukrainien, dans la langue du cœur</span>
+                        <span class="lang-en">Support in Ukrainian, in the language of the heart</span>
+                        <span class="lang-ua">Підтримка українською — мовою серця</span>
                     </li>
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Animé par des pairs formés</span>
-                        <span class="lang-en">Led by trained peers</span>
-                        <span class="lang-ua">Ведуть навчені однолітки</span>
+                        <span class="lang-fr">Des pairs qui comprennent le parcours</span>
+                        <span class="lang-en">Peers who understand the journey</span>
+                        <span class="lang-ua">Однолітки, які розуміють цей шлях</span>
                     </li>
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Basé sur des approches validées</span>
-                        <span class="lang-en">Based on validated approaches</span>
-                        <span class="lang-ua">На основі перевірених підходів</span>
+                        <span class="lang-fr">La guérison commence en communauté</span>
+                        <span class="lang-en">Healing begins in community</span>
+                        <span class="lang-ua">Зцілення починається в громаді</span>
                     </li>
                 </ul>
+                <a href="https://app.obriy.ca/fr" target="_blank" rel="noopener" class="pillar-cta">
+                    <span class="lang-fr">Rejoindre un groupe sur OBRIY</span>
+                    <span class="lang-en">Join a group on OBRIY</span>
+                    <span class="lang-ua">Приєднатися до групи на OBRIY</span>
+                    <i class="ph ph-arrow-right"></i>
+                </a>
             </div>
         </div>
 
@@ -2619,7 +2728,7 @@
             <div class="pillar-band-content">
                 <div class="pillar-visual reveal-left">
                     <div class="pillar-icon-large">
-                        <i class="ph ph-users"></i>
+                        <i class="ph-fill ph-users-three"></i>
                     </div>
                     <h3 class="pillar-title">
                         <span class="lang-fr">Réseau</span>
@@ -2635,29 +2744,35 @@
                 <ul class="pillar-features reveal-right stagger-children">
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Annuaire de services vérifié</span>
-                        <span class="lang-en">Verified service directory</span>
-                        <span class="lang-ua">Верифікований довідник послуг</span>
+                        <span class="lang-fr">Briser l'isolement de l'arrivée</span>
+                        <span class="lang-en">Breaking the isolation of arrival</span>
+                        <span class="lang-ua">Подолання ізоляції після прибуття</span>
                     </li>
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Système d'offres et demandes</span>
-                        <span class="lang-en">Offers and requests system</span>
-                        <span class="lang-ua">Система пропозицій та запитів</span>
+                        <span class="lang-fr">Connecter les talents et les besoins de la diaspora</span>
+                        <span class="lang-en">Connecting the diaspora's talents and needs</span>
+                        <span class="lang-ua">Поєднання талантів і потреб діаспори</span>
                     </li>
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Gratuit et sans publicité</span>
-                        <span class="lang-en">Free and ad-free</span>
-                        <span class="lang-ua">Безкоштовно і без реклами</span>
+                        <span class="lang-fr">L'entraide comme filet de sécurité</span>
+                        <span class="lang-en">Mutual aid as a safety net</span>
+                        <span class="lang-ua">Взаємодопомога як мережа підтримки</span>
                     </li>
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Modéré par la communauté</span>
-                        <span class="lang-en">Community moderated</span>
-                        <span class="lang-ua">Модерується громадою</span>
+                        <span class="lang-fr">Une communauté qui se retrouve et se renforce</span>
+                        <span class="lang-en">A community finding and strengthening each other</span>
+                        <span class="lang-ua">Громада, яка об'єднується і зміцнюється</span>
                     </li>
                 </ul>
+                <a href="https://app.obriy.ca/fr" target="_blank" rel="noopener" class="pillar-cta">
+                    <span class="lang-fr">Explorer le réseau sur OBRIY</span>
+                    <span class="lang-en">Explore the network on OBRIY</span>
+                    <span class="lang-ua">Досліджуйте мережу на OBRIY</span>
+                    <i class="ph ph-arrow-right"></i>
+                </a>
             </div>
         </div>
 
@@ -2666,7 +2781,7 @@
             <div class="pillar-band-content">
                 <div class="pillar-visual reveal-left">
                     <div class="pillar-icon-large">
-                        <i class="ph ph-graduation-cap"></i>
+                        <i class="ph-fill ph-student"></i>
                     </div>
                     <h3 class="pillar-title">
                         <span class="lang-fr">Jeunesse</span>
@@ -2682,29 +2797,35 @@
                 <ul class="pillar-features reveal-right stagger-children">
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Tutorat 1:1 personnalisé</span>
-                        <span class="lang-en">Personalized 1:1 tutoring</span>
-                        <span class="lang-ua">Персоналізоване репетиторство 1:1</span>
+                        <span class="lang-fr">Chaque enfant mérite une chance égale de réussir</span>
+                        <span class="lang-en">Every child deserves an equal chance to succeed</span>
+                        <span class="lang-ua">Кожна дитина заслуговує рівних шансів на успіх</span>
                     </li>
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Mathématiques, français, sciences</span>
-                        <span class="lang-en">Math, French, sciences</span>
-                        <span class="lang-ua">Математика, французька, науки</span>
+                        <span class="lang-fr">Un tutorat adapté au parcours migratoire</span>
+                        <span class="lang-en">Tutoring adapted to the migration journey</span>
+                        <span class="lang-ua">Репетиторство, адаптоване до міграційного шляху</span>
                     </li>
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Tuteurs ukrainophones formés</span>
-                        <span class="lang-en">Trained Ukrainian-speaking tutors</span>
-                        <span class="lang-ua">Навчені україномовні репетитори</span>
+                        <span class="lang-fr">Apprendre avec quelqu'un qui comprend ton histoire</span>
+                        <span class="lang-en">Learning with someone who understands your story</span>
+                        <span class="lang-ua">Навчатися з тим, хто розуміє твою історію</span>
                     </li>
                     <li>
                         <i class="ph ph-check-circle"></i>
-                        <span class="lang-fr">Suivi des progrès</span>
-                        <span class="lang-en">Progress tracking</span>
-                        <span class="lang-ua">Відстеження прогресу</span>
+                        <span class="lang-fr">Investir dans la jeunesse, c'est bâtir l'avenir</span>
+                        <span class="lang-en">Investing in youth is building the future</span>
+                        <span class="lang-ua">Інвестувати в молодь — це будувати майбутнє</span>
                     </li>
                 </ul>
+                <a href="https://app.obriy.ca/fr" target="_blank" rel="noopener" class="pillar-cta">
+                    <span class="lang-fr">Trouver un tuteur sur OBRIY</span>
+                    <span class="lang-en">Find a tutor on OBRIY</span>
+                    <span class="lang-ua">Знайти репетитора на OBRIY</span>
+                    <i class="ph ph-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -2864,9 +2985,9 @@
                     <span class="lang-ua">Як долучитися</span>
                 </h2>
                 <p>
-                    <span class="lang-fr">OBRIY se construit avec la communauté. Voici comment vous pouvez contribuer.</span>
-                    <span class="lang-en">OBRIY is built with the community. Here's how you can contribute.</span>
-                    <span class="lang-ua">OBRIY будується разом з громадою. Ось як ви можете долучитися.</span>
+                    <span class="lang-fr">Horizon Ukraine Canada se construit avec la communauté. Voici comment vous pouvez contribuer.</span>
+                    <span class="lang-en">Horizon Ukraine Canada is built with the community. Here's how you can contribute.</span>
+                    <span class="lang-ua">Horizon Ukraine Canada будується разом з громадою. Ось як ви можете долучитися.</span>
                 </p>
             </div>
 
@@ -2946,9 +3067,9 @@
                     </div>
                     <div>
                         <h3>
-                            <span class="lang-fr">Faire connaître OBRIY</span>
-                            <span class="lang-en">Spread the word about OBRIY</span>
-                            <span class="lang-ua">Розповісти про OBRIY</span>
+                            <span class="lang-fr">Faire connaître notre mission</span>
+                            <span class="lang-en">Spread the word about our mission</span>
+                            <span class="lang-ua">Розповісти про нашу місію</span>
                         </h3>
                         <p class="text-desktop">
                             <span class="lang-fr">Partagez notre mission avec votre réseau. Chaque voix compte pour rejoindre ceux qui ont besoin de soutien.</span>
@@ -3005,11 +3126,15 @@
     <!-- Contact Section -->
     <section class="full-section contact-section" id="contact">
         <div class="section-content">
-            <div class="contact-logo">OBRIY</div>
+            <div class="contact-logo">
+                <span class="lang-fr">Horizon Ukraine Canada</span>
+                <span class="lang-en">Horizon Ukraine Canada</span>
+                <span class="lang-ua">Горизонт Україна Канада</span>
+            </div>
             <div class="contact-subtitle">
-                <span class="lang-fr"><strong>Horizon</strong> Ukraine Canada</span>
-                <span class="lang-en"><strong>Horizon</strong> Ukraine Canada</span>
-                <span class="lang-ua"><strong>Горизонт</strong> Україна Канада</span>
+                <span class="lang-fr">Créateurs de la plateforme <a href="https://app.obriy.ca" target="_blank" rel="noopener"><strong>OBRIY</strong></a></span>
+                <span class="lang-en">Creators of the <a href="https://app.obriy.ca" target="_blank" rel="noopener"><strong>OBRIY</strong></a> platform</span>
+                <span class="lang-ua">Творці платформи <a href="https://app.obriy.ca" target="_blank" rel="noopener"><strong>OBRIY</strong></a></span>
             </div>
 
             <blockquote class="contact-quote">
@@ -3076,7 +3201,7 @@
                         <option value="tuteur">Devenir tuteur ou facilitateur</option>
                         <option value="groupe">Rejoindre un groupe Équilibre</option>
                         <option value="partenariat">Partenariats organisationnels</option>
-                        <option value="promotion">Faire connaître OBRIY</option>
+                        <option value="promotion">Faire connaître notre mission</option>
                         <option value="autre">Autre</option>
                     </select>
                 </div>
@@ -3130,11 +3255,11 @@
                     this.classList.add('active');
 
                     document.documentElement.lang = lang === 'ua' ? 'uk' : lang;
-                    localStorage.setItem('obriy-lang', lang);
+                    localStorage.setItem('horizon-lang', lang);
                 });
             });
 
-            const savedLang = localStorage.getItem('obriy-lang');
+            const savedLang = localStorage.getItem('horizon-lang') || localStorage.getItem('obriy-lang');
             if (savedLang) {
                 const btn = document.querySelector(`[data-lang="${savedLang}"]`);
                 if (btn) btn.click();
@@ -3406,7 +3531,7 @@
                 // Fallback to mailto
                 const subject = encodeURIComponent(document.getElementById('contact-subject').value);
                 const body = encodeURIComponent(document.getElementById('contact-message').value);
-                window.location.href = `mailto:info@obriy.ca?subject=${subject}&body=${body}`;
+                window.location.href = `mailto:info@horizonukraine.ca?subject=${subject}&body=${body}`;
             }
         });
 
